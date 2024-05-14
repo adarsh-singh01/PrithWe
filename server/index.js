@@ -20,7 +20,8 @@ const MemoryStore = memorystore(session);
 
 
 const app = express();
-const port = 3001;
+//const port = 3001;
+const port = process.env.PORT || 3001;
 
 //env.config();
 
