@@ -13,7 +13,7 @@
   "scripts": {
   
     
-  "build": "npm i && cd client && npm i && npm run build",
+  "build": "npm i && cd client && npm i --include=dev && npm run build",
   
     
   "start": "node --env-file=.env server/index.js",
