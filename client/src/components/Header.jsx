@@ -200,7 +200,7 @@ function Header() {
                 </li>
               </Link>
               <Link to="/register">
-                <li className="btn bg-white px-3 py-2 font-Rubik rounded-full hover:bg-black hover:text-white">
+                <li className="btn bg-white hidden md:flex px-3 py-2 font-Rubik rounded-full hover:bg-black hover:text-white">
                   Sign Up
                 </li>
               </Link>
