@@ -1,6 +1,6 @@
 import express, { request, response } from 'express';
 import bodyParser from 'body-parser';
-import pg from 'pg';
+//import pg from 'pg';
 import bcrypt from 'bcrypt';
 import session from 'express-session';
 import passport from 'passport';
@@ -8,7 +8,7 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import cors from 'cors'; // Import cors module
 import env from "dotenv";
 import cookieParser from 'cookie-parser'; // Import cookie-parser module
-//import { query } from './db.js';
+import { query } from './db.js';
 import memorystore from 'memorystore';
 const MemoryStore = memorystore(session);
 
@@ -56,14 +56,14 @@ app.use(passport.session());
 //app.use(routes)
 
 // PostgreSQL database connection
-const db = new pg.Client({
+/*const db = new pg.Client({
   user: process.env.PG_USER,
   host: process.env.PG_HOST,
   database: process.env.PG_DATABASE,
   password: process.env.PG_PASSWORD,
   port: process.env.PG_PORT,
 });
-db.connect();
+db.connect();*/
 
 
 // Register endpoint
@@ -71,9 +71,9 @@ router.post('/register', async (req, res) => {
   const { name,email, password,type } = req.body;
 
   try {
-    const checkResult = await db.query('SELECT * FROM users WHERE email = $1', [
+    const checkResult = await query('SELECT * FROM users WHERE email = $1', [
       email,
-    ]);
+    ]);//db.query
 
     if (checkResult.rows.length > 0) {
       res.status(400).send('User already exists');
