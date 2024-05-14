@@ -83,7 +83,7 @@ router.post('/register', async (req, res) => {
           console.error('Error hashing password:', err);
           res.status(500).send('Error registering user');
         } else {
-          const result = await db.query(
+          const result = await query(
             'INSERT INTO users (name,email, password,type) VALUES ($1, $2, $3,$4) RETURNING *',
             [name,email, hash,type]
           );
@@ -178,7 +178,7 @@ passport.use(
         console.log('Email:', email); // Log the email
         console.log('Password:', password); // Log the password
 
-        const result = await db.query('SELECT * FROM users WHERE email = $1', [email]);
+        const result = await query('SELECT * FROM users WHERE email = $1', [email]);
 
         console.log('Query Result:', result.rows); // Log the query result
 
@@ -229,7 +229,7 @@ passport.deserializeUser(async (id, done) => {
   try {
     console.log("deserializeUser inside i am")
     console.log(id)
-    const result = await db.query('SELECT * FROM users WHERE id = $1', [id]);
+    const result = await query('SELECT * FROM users WHERE id = $1', [id]);
     const user = result.rows[0];
     done(null, user);
   } catch (err) {
