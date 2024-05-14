@@ -9,6 +9,7 @@ const db = new pg.Client({
   database: process.env.PG_DATABASE,
   password: process.env.PG_PASSWORD,
   port: process.env.PG_PORT,
+  ssl: true
 
   //connectionString:"postgres://prithwe_user:zPhSA5iPMDVZf90eIkUqwB148H7Qvujq@dpg-cotpivdjm4es73a833f0-a.oregon-postgres.render.com/prithwe"
 });
