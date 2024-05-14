@@ -1,0 +1,31 @@
+{
+	"name": "@canvasjs/react-charts",
+	"version": "1.0.2",
+	"description": "CanvasJS React Charts - Official",
+	"main": "canvasjs.react.jsx",
+	"keywords": [
+		"react",
+		"charts",
+		"react graphs",
+		"react charting library",
+		"react chart library",
+		"react charts",
+		"html5 charts",
+		"graphs",
+		"dataviz",
+		"canvasjs",
+		"canvas",
+		"high performance charts",
+		"line charts",
+		"area charts",
+		"bar charts",
+		"pie charts"
+	],
+	"author": "fenopix",
+	"license": "MIT",
+	"homepage": "https://canvasjs.com/react-charts/",
+	"peerDependencies": {
+		"react": ">=16.0.0",
+		"@canvasjs/charts": "^3.7.5"
+	}
+}

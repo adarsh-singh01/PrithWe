@@ -1,0 +1,29 @@
+{
+	"name": "@canvasjs/charts",
+	"version": "3.8.5",
+	"description": "CanvasJS JavaScript Charts - Official",
+	"main": "canvasjs.min.js",
+	"keywords": [
+		"javascript",
+		"charts",
+		"javascript graphs",
+		"javascript charting library",
+		"javascript chart library",
+		"javascript charts",
+		"html5 charts",
+		"charts",
+		"graphs",
+		"dataviz",
+		"js charts",
+		"canvasjs",
+		"canvas",
+		"high performance charts",
+		"line charts",
+		"area charts",
+		"bar charts",
+		"pie charts"
+	],
+	"author": "fenopix",
+	"license": "SEE LICENSE IN <LICENSE>",
+	"homepage": "https://canvasjs.com/"
+}
