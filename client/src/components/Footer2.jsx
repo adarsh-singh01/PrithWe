@@ -20,9 +20,11 @@ const Footer2 = () =>{
               <a href="#" className="hover:underline me-4 md:me-6">About</a>
             </li>
             </Link>
+            <Link to="/calculator">
             <li>
-              <a href="#" className="hover:underline me-4 md:me-6">Privacy Policy</a>
+              <a href="#" className="hover:underline me-4 md:me-6">Calculator</a>
             </li>
+            </Link>
             <Link to="/information">
             <li>
               <a href="#" className="hover:underline me-4 md:me-6">Information</a>
