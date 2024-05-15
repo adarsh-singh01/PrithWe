@@ -29,7 +29,7 @@ function ContactUsForm() {
     }
 
     try {
-      await axios.post("http://localhost:3001/api/contact/contact", {
+      await axios.post("/api/contact/contact", {
         name,
         email,
         message,
