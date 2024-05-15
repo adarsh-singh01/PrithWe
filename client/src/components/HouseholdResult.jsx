@@ -7,8 +7,8 @@ const HouseholdResult = ({ totalCarbonFootprint, contributions }) => {
     <div className="mt-4 mb-16 space-y-16">
       {totalCarbonFootprint !== null && (
         <div className="mt-4 flex flex-col justify-center items-center ">
-          <h3 className="text-xl  font-medium mb-2">Total Carbon Footprint</h3>
-          <p className='text-6xl font-medium '>{Math.round(totalCarbonFootprint*100)/100} 
+          <h3 className="text-lg md:text-xl  font-medium mb-2 mx-4">Total Carbon Footprint</h3>
+          <p className='mx-4 text-3xl md:text-6xl font-medium '>{Math.round(totalCarbonFootprint*100)/100} 
           <span className='font-thin'>KgCO<sub>2</sub></span></p>
         </div>
       )}

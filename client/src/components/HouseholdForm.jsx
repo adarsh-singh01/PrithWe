@@ -423,7 +423,7 @@ const calculateContributions = (formData, familyData,totalCarbonFootprint) => {
         </div>
       </form>
       
-      )};
+      )}
       
       {/*{!showChart && (<div className="mt-2 mb-8  grid grid-cols-1 md:grid-cols-3 gap-4  ">
         
