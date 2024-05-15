@@ -169,7 +169,7 @@ function BusinessForm() {
   }; 
 
   return (
-    <div className="p-8 px-12 mx-auto mt-10">
+    <div className="p-4  m-2 mt-10">
       <ToastContainer autoClose={4000} position="top-center" newestOnTop/>
 
       {/* Render the result component only if showChart state is true */}
@@ -178,11 +178,12 @@ function BusinessForm() {
       )}
 
       {!showChart && (
-        <form onSubmit={handleCalculateCF} className="mx-auto p-4 w-fit bg-gray-200 rounded-lg shadow-lg">
+        <form onSubmit={handleCalculateCF} className="mx-auto p-2 md:p-4 w-fit bg-gray-200 rounded-lg shadow-lg">
           {/* Form fields */}
-          <div className="text-4xl flex justify-center p-4">
+          <div className='text-3xl md:text-4xl flex flex-col items-center justify-center p-4'>
             <p>Business Form</p>
-          </div>
+            <p className='text-base md:text-lg font-thin'>Note : Fill your monthly data</p>
+        </div>
           <div className="flex flex-col items-center justify-center">
           {Object.keys(formData).map((key, index) => (
   <div key={index} className="mb-4">

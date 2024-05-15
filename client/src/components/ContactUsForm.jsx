@@ -60,12 +60,12 @@ function ContactUsForm() {
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
-          <div className="contact  flex justify-center items-center space-x-2 my-16">
-            <div className="contactBox flex flex-col bg-gray-200 p-10 space-y-3 rounded-lg justify-center items-center">
-              <h1 className=" text-xl">Send us a message</h1>
+          <div className="contact mx-3 flex justify-center items-center space-x-2 my-16">
+            <div className="contactBox flex flex-col  bg-gray-200 p-7 md:p-10 space-y-3 rounded-lg justify-center items-center">
+              <h1 className="text-lg md:text-xl">Send us a message</h1>
               <div className="inputs flex flex-col space-y-2 ">
                 <input
-                  className="name rounded-lg px-4 p-3 "
+                  className="name rounded-lg px-2 md:px-4 p-2 md:p-3 "
                   placeholder="Enter Your Name"
                   type="text"
                   value={name}
@@ -73,7 +73,7 @@ function ContactUsForm() {
                   required
                 />
                 <input
-                  className="email rounded-lg px-4 p-3 "
+                  className="email rounded-lg px-2 md:px-4 p-2 md:p-3 "
                   placeholder="Enter Your Email"
                   type="email"
                   value={email}
@@ -81,7 +81,7 @@ function ContactUsForm() {
                   required
                 />
                 <textarea
-                  className="message rounded-lg p-4"
+                  className="message rounded-lg p-2 md:p-4"
                   placeholder="Enter Message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
@@ -89,7 +89,7 @@ function ContactUsForm() {
                 ></textarea>
               </div>
               <button
-                className="btn w-full p-3 px-6 rounded-full bg-green-500  hover:bg-green-600"
+                className="btn w-full p-2 md:py-3 px-3 rounded-full bg-green-500  hover:bg-green-600"
                 type="submit"
               >
                 Submit

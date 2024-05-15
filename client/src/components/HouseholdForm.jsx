@@ -269,7 +269,7 @@ const calculateContributions = (formData, familyData,totalCarbonFootprint) => {
 
 
   return (
-    <div className="p-8 px-12 mx-auto mt-10">
+    <div className="p-4  m-2 mt-10">
     <ToastContainer autoClose={4000} position="top-center" newestOnTop/>
     {/* Render the doughnut chart only if showChart state is true */}
     {showChart && (
@@ -279,10 +279,11 @@ const calculateContributions = (formData, familyData,totalCarbonFootprint) => {
     {/*<PieChart contributions={contributions} />*/} {/* Pass contributions as props */}
     {/*<PieChart contributions={contributions} />*/} {/* Pass contributions as props */}
     {/*<DoughnutChart contributions={contributions}/>*/}
-      {!showChart && (<form onSubmit={handleCalculateCF} className=" mx-auto p-4 w-fit bg-gray-200 rounded-lg shadow-lg">
+      {!showChart && (<form onSubmit={handleCalculateCF} className=" mx-auto p-2 md:p-4 w-fit bg-gray-200 rounded-lg shadow-lg">
         {/* Form fields */}
-        <div className='text-4xl flex justify-center p-4'>
+        <div className='text-3xl md:text-4xl flex flex-col items-center justify-center p-4'>
             <p>Household Form</p>
+            <p className='text-base md:text-lg font-thin'>Note : Fill your monthly data</p>
         </div>
         <div className=' flex flex-col items-center justify-center '>
         <div className="mb-4">
@@ -364,7 +365,7 @@ const calculateContributions = (formData, familyData,totalCarbonFootprint) => {
                 placeholder="Enter Name"
                 className="mt-1 p-2 block w-full shadow-sm border border-gray-300 rounded-md"
               />
-              <label className=" text-sm font-medium text-gray-700 flex items-center">Transportation :<p className='ml-1 text-xs'>Enter Distance Travelled in Km</p></label>
+              <label className=" text-sm font-medium text-gray-700 flex items-center"><p className='ml-1 text-xs'>Enter Distance Travelled in Km via :</p></label>
               <div className="flex space-x-4">
                 <input
                   type="text"
@@ -388,7 +389,7 @@ const calculateContributions = (formData, familyData,totalCarbonFootprint) => {
                   className="mt-1 p-2 block w-full shadow-sm border border-gray-300 rounded-md"
                 />
               </div>
-              <label className="flex items-center text-sm font-medium text-gray-700">Food :<p className='text-xs ml-1'>Enter No. of Meals</p></label>
+              <label className="flex items-center text-sm font-medium text-gray-700"><p className='text-xs ml-1'>Enter No. of Meals :</p></label>
               <div className="flex space-x-4">
                 <input
                   type="text"

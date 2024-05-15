@@ -152,8 +152,8 @@ function Header() {
       <ToastContainer autoClose={2000} position="top-center" newestOnTop />
       <div className="navbar  list-none  flex justify-between items-center p-2 bg-blue-500 font-medium">
         <div className="logo flex space-x-2 items-center ">
-          <img className="h-12" src={leaf} />
-          <img className="h-7" src={logo} />
+          <a href="#"><img className="h-12" src={leaf} /></a>
+          <a href="#"><img className="h-7" src={logo} /></a>
         </div>
         <div className="options hidden md:flex md:space-x-4">
           <Link to="/">

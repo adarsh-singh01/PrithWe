@@ -65,13 +65,13 @@ function RegisterForm() {
   return (
     <div>
       <ToastContainer autoClose={4000} position="top-center" newestOnTop/>
-      <div className="login flex justify-center items-center space-x-2 my-16">
-        <div className="loginBox flex flex-col bg-gray-200 p-10 space-y-3 rounded-lg justify-center">
-        <p className="text-center font-medium text-2xl py-4">Signup Form</p>
+      <div className="login m-4 flex justify-center items-center space-x-2 my-16">
+        <div className="loginBox flex flex-col bg-gray-200 p-5 md:p-10 space-y-3 rounded-lg justify-center">
+        <p className="text-center font-medium text-xl md:text-2xl py-4">Signup Form</p>
           <div className="inputs flex flex-col space-y-2 ">
             <input
               type="text"
-              className="username rounded-lg px-4 p-3"
+              className="username rounded-lg px-3 p-2 md:px-4 md:p-3"
               placeholder="Enter Your Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -80,7 +80,7 @@ function RegisterForm() {
 
             <input
               type="email"
-              className="username rounded-lg px-4 p-3"
+              className="username rounded-lg px-3 p-2 md:px-4 md:p-3"
               placeholder="Enter Your Email ID"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -89,7 +89,7 @@ function RegisterForm() {
 
             <input
               type="password"
-              className="password rounded-lg px-4 p-3 "
+              className="password rounded-lg px-3 p-2 md:px-4 md:p-3 "
               placeholder="Create a Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -98,7 +98,7 @@ function RegisterForm() {
 
             <input
               type="password"
-              className="password rounded-lg px-4 p-3 "
+              className="password rounded-lg px-3 p-2 md:px-4 md:p-3 "
               placeholder="Confirm Password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}

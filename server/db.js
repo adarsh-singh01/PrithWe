@@ -4,17 +4,17 @@ import env from "dotenv";
 env.config();
 
 const db = new pg.Client({
-  /*user: process.env.PG_USER,
+  user: process.env.PG_USER,
   host: process.env.PG_HOST,
   database: process.env.PG_DATABASE,
   password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT,*/
-  connectionString:process.env.CON_STRING,
-  ssl: {
+  port: process.env.PG_PORT,
+  //connectionString:process.env.CON_STRING,
+  /*ssl: {
     rejectUnauthorized: false,
-  },
+  },*/
 
-  //connectionString:"postgres://prithwe_user:zPhSA5iPMDVZf90eIkUqwB148H7Qvujq@dpg-cotpivdjm4es73a833f0-a.oregon-postgres.render.com/prithwe"
+  
 });
 
 await db.connect();
