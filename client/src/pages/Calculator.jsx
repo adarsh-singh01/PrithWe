@@ -12,7 +12,7 @@ function Calculator() {
     // Fetch user type upon login
     const fetchUserType = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/auth/user-type', { withCredentials: true });
+        const response = await axios.get('/api/auth/user-type', { withCredentials: true });
         console.log('User type response:', response.data.type);
         setUserType(response.data.type); // Set userType with response.data.type
       } catch (error) {
