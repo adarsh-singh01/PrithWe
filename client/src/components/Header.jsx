@@ -110,7 +110,7 @@ function Header() {
     const checkLoginStatus = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/api/auth/login/status",
+          "/api/auth/login/status",//http://localhost:3001/api/auth/login/status
           { withCredentials: true }
         );
         if (response.status === 200) {
@@ -128,7 +128,7 @@ function Header() {
   const handleLogout = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/auth/logout",
+        "/api/auth/logout",
         {},
         { withCredentials: true }
       );
