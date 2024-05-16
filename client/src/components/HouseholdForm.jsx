@@ -357,7 +357,7 @@ const calculateContributions = (formData, familyData,totalCarbonFootprint) => {
             <h2 className="text-2xl font-bold mb-4">Member : {member.name ? member.name : index + 1}</h2>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Name</label>
+              <label className="block text-sm font-medium text-gray-700">Name<span className='font-thin'> (Optional) </span></label>
               <input
                 type="text"
                 value={member.name}
