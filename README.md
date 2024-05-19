@@ -10,7 +10,6 @@ PrithWe is a full-stack web application built on the PERN stack (PostgreSQL, Exp
 - [Installation](#installation)
 - [Usage](#usage)
 - [Motivation](#motivation)
-- [Acknowledgments](#acknowledgments)
 - [License](#license)
 
 ## Introduction
