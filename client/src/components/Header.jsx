@@ -234,7 +234,7 @@ function Header() {
           <div className={`w-full md:flex md:w-auto ${showMenu ? 'block' : 'hidden'}`} id="navbar-default">
             <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-blue-500 bg-blue-600 dark:border-blue-700">
               <li>
-                <Link to="/" className="block py-2 px-3 text-white  rounded md:bg-transparent  md:p-0 md:hover:text-black hover:bg-gray-700 dark:text-white " aria-current="page">Home</Link>
+                <Link to="/" className="block py-2 px-3 text-white  rounded md:bg-transparent  md:p-0 md:hover:text-black  dark:text-white " aria-current="page">Home</Link>
               </li>
               <li>
                 <Link to="/contactUs" className="block py-2 px-3 md:p-0 rounded md:hover:bg-transparent md:border-0  text-white md:hover:text-black hover:bg-gray-700 ">Contact Us</Link>
