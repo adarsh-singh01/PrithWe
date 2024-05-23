@@ -96,8 +96,7 @@ Follow these steps to set up the project locally:
 4. View the calculated carbon footprint and suggestions for reducing emissions.
 
 ## Motivation
-
-The motivation behind PrithWe is to provide a tool that helps individuals and businesses become more aware of their environmental impact. By understanding their carbon footprint, users can take actionable steps towards reducing their emissions and contributing to a healthier planet.
+It was a college project and the motivation behind PrithWe is to provide a tool that helps individuals and businesses become more aware of their environmental impact. By understanding their carbon footprint, users can take actionable steps towards reducing their emissions and contributing to a healthier planet.
 
 ## License
 
