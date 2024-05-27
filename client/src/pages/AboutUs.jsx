@@ -24,7 +24,7 @@ const AboutUs = () => {
                     <img src={adarsh} className="w-24 h-22 rounded-full" alt="Adarsh Singh" />
                     <div className="ml-4">
                         <h3 className="text-xl font-semibold">Adarsh Singh</h3>
-                        <p className="text-gray-700">Co-founder</p>
+                        <p className="text-gray-700">Founder</p>
                     </div>
                 </div>
                 <div className="flex items-center">
