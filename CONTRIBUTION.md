@@ -21,7 +21,7 @@ To acheive this task we need to follow these steps.
 5. Make sure you do not change someone else file.
 6. Plagiarism is big no and doing so may result in lost of ranks and ban from repo.
 7. Based on efforts levels will be given
-8. If any issue contact me on tusharamd#5800 on discord
+8. If any issue contact Project Admin
 
 <br>
 
