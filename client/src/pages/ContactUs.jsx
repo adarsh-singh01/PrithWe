@@ -3,7 +3,7 @@ import ContactUsForm from '../components/ContactUsForm';
 
 function ContactUs() {
   return (
-    <div className='flex-grow'>
+    <div className='flex-grow mt-20'>
         <ContactUsForm />
     </div>
   )
