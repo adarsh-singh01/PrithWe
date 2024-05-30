@@ -17,14 +17,6 @@ function NewFooter() {
               className="mx-4 text-sm text-gray-300 transition-colors duration-300 hover:text-[#16A349] dark:text-gray-300 dark:hover:text-blue-400"
               aria-label="Reddit"
             >
-              Home
-            </Link>
-
-            <Link
-              href="#"
-              className="mx-4 text-sm text-gray-300 transition-colors duration-300 hover:text-[#16A349] dark:text-gray-300 dark:hover:text-blue-400"
-              aria-label="Reddit"
-            >
               About
             </Link>
 
@@ -33,7 +25,7 @@ function NewFooter() {
               className="mx-4 text-sm text-gray-300 transition-colors duration-300 hover:text-[#16A349] dark:text-gray-300 dark:hover:text-blue-400"
               aria-label="Reddit"
             >
-              Teams
+              Calculator
             </Link>
 
             <Link
@@ -41,7 +33,7 @@ function NewFooter() {
               className="mx-4 text-sm text-gray-300 transition-colors duration-300 hover:text-[#16A349] dark:text-gray-300 dark:hover:text-blue-400"
               aria-label="Reddit"
             >
-              Privacy
+              Information
             </Link>
 
             <Link
@@ -49,7 +41,7 @@ function NewFooter() {
               className="mx-4 text-sm text-gray-300 transition-colors duration-300 hover:text-[#16A349] dark:text-gray-300 dark:hover:text-blue-400"
               aria-label="Reddit"
             >
-              Cookies
+              Contact
             </Link>
           </div>
         </div>
