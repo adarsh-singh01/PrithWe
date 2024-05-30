@@ -17,7 +17,7 @@ import React from 'react';
 
 function FeatureCard({ heading, description }) {
   return (
-    <div className=" bg-opacity- bg-gray-200 text-center rounded-md px-4 py-6 md:py-12 max-w-sm shadow-md">
+    <div className=" bg-opacity- bg-gray-200 text-center rounded-md px-4 py-6 md:py-12 max-w-sm shadow-md hover:-translate-y-4 transition ease-in-out hover:shadow-green-500/40 hover:border-2 border-green-500/40">
       <h2 className="text-lg md:text-xl text-green-600 font-semibold mb-2 font-Rubik">{heading}</h2>
       <p className="text-slate-600 text-sm md:text-base font-Rubik">{description}</p>
     </div>
@@ -28,7 +28,7 @@ function InfoCard() {
   return (
     <div>
     <p className='text-center font-Rubik pt-12 md:pt-16 text-2xl md:text-4xl'>Why Choose Us?</p>
-    <div className="flex flex-col items-center sm:items-stretch space-y-4 sm:space-y-0 sm:flex-row  sm:justify-around p-4 md:p-8 ">
+    <div className="flex flex-col items-center sm:items-stretch space-y-4 sm:space-y-0 sm:flex-row  sm:justify-around p-4 md:p-8">
     
       <FeatureCard
         heading="Easy to use"
@@ -38,7 +38,7 @@ function InfoCard() {
         heading="Accurate Results"
         description="We provide precise calculations, ensuring that you receive accurate insights into your environmental impact."
       />
-      <FeatureCard
+      <FeatureCard 
         heading="Chart representation"
         description="Visualize your carbon footprint breakdown through interactive pie charts, allowing for easy interpretation of data."
       />
