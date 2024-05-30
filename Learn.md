@@ -33,7 +33,7 @@ Visit the live application [here](https://prithwe.onrender.com).
 
 ## Contributing 📝
 Raise and issue; Get assigned and then work on fixing the issue.
-We welcome contributions to College.ai! Follow these steps to contribute:
+We welcome contributions to PrithWe! Follow these steps to contribute:
 
 1. **Fork the Repository**: Create your own copy of the repository on your GitHub account.
 ![image](https://github.com/debangi29/PrithWe/assets/117537653/90772c71-9062-4941-972b-2f3c5cc49cd6)
@@ -173,5 +173,5 @@ Follow these steps to set up the project locally:
 ## Motivation 🏆
 It was a college project and the motivation behind PrithWe is to provide a tool that helps individuals and businesses become more aware of their environmental impact. By understanding their carbon footprint, users can take actionable steps towards reducing their emissions and contributing to a healthier planet.
 
-Thank you for contributing to College.ai! Together, we can make a significant impact. Happy coding! 🚀
+Thank you for contributing to PrithWe! Together, we can make a significant impact. Happy coding! 🚀
 ## Don't forget to ⭐ the repository!
