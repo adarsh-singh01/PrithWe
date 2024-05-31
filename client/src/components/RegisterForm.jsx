@@ -25,8 +25,8 @@ function RegisterForm() {
 
       console.log("Registered user:", response.data);
       toast.success("Sign up successful!");
-      toast.success("Redirecting to Login Page")
-      setTimeout(() => navigate("/login"), 4000);
+      toast.success("Redirecting to Verification Page")
+      setTimeout(() => navigate("/verifyEmail"), 4000);
     } catch (error) {
       console.error("Error registering user:", error);
       toast.error("Error registering user");

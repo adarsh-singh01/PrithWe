@@ -10,6 +10,7 @@ import AboutUs from './pages/AboutUs';
 import Information from './pages/Information';
 import axios from 'axios';
 import Footer2 from './components/Footer2';
+import VerifyEmail from './pages/VerifyEmail';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         <Route path="/information" element={<Information />} />
         <Route path='/aboutUs' element={<AboutUs />} />
         <Route path='/logout' element={<Home />} />
+        <Route path='/verifyEmail' element={ <VerifyEmail/>} />
         <Route
           path="/calculator"
           element={loggedIn ? <Calculator /> : <Navigate to="/login" />}
