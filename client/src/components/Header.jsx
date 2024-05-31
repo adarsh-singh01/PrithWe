@@ -212,15 +212,11 @@ function Header({ setLoggedIn }) {
       </div>
     </div>
     <div>*/}
-        <nav className=" border-gray-200 bg-blue-500 fixed top-0 w-full">
+        <nav className=" border-gray-200 bg-blue-500">
           <div className=" flex flex-wrap items-center justify-between  p-2">
             <div className="logo flex space-x-2 items-center ">
-              <a href="#">
-                <img className="h-12" src={leaf} />
-              </a>
-              <a href="#">
-                <img className="h-7" src={logo} />
-              </a>
+              <a href="#"><img className="h-12" src={leaf} /></a>
+              <a href="#"><img className="h-7" src={logo} /></a>
             </div>
             <button
               onClick={handleToggleMenu}
