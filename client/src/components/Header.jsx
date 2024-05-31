@@ -212,137 +212,95 @@ function Header({ setLoggedIn }) {
       </div>
     </div>
     <div>*/}
-        <nav className=" border-gray-200 bg-blue-500">
-          <div className=" flex flex-wrap items-center justify-between  p-2">
-            <div className="logo flex space-x-2 items-center ">
-              <a href="#"><img className="h-12" src={leaf} /></a>
-              <a href="#"><img className="h-7" src={logo} /></a>
-            </div>
-            <button
-              onClick={handleToggleMenu}
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none focus:ring-2 focus:ring-white dark:text-gray-400 hover:bg-blue-600 "
-              aria-expanded={showMenu}
-            >
-              <span className="sr-only">Open main menu</span>
-              <svg
-                className="w-5 h-5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 17 14"
-              >
-                <path
-                  stroke="white"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M1 1h15M1 7h15M1 13h15"
-                />
-              </svg>
-            </button>
-            <div
-              className={`w-full md:flex md:w-auto ${
-                showMenu ? "block" : "hidden"
-              }`}
-              id="navbar-default"
-            >
-              <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-blue-500 bg-blue-600 dark:border-blue-700">
+      <nav className=" border-gray-200 bg-blue-500">
+        <div className=" flex flex-wrap items-center justify-between  p-2">
+        <div className="logo flex space-x-2 items-center ">
+          <a href="#"><img className="h-12" src={leaf} /></a>
+          <a href="#"><img className="h-7" src={logo} /></a>
+        </div>
+          <button
+            onClick={handleToggleMenu}
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none focus:ring-2 focus:ring-white dark:text-gray-400 hover:bg-blue-600 "
+            aria-expanded={showMenu}
+          >
+            <span className="sr-only">Open main menu</span>
+            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+              <path stroke="white" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
+            </svg>
+          </button>
+          <div className={`w-full md:flex md:w-auto ${showMenu ? 'block' : 'hidden'}`} id="navbar-default">
+            <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-blue-500 bg-blue-600 dark:border-blue-700">
+              <li>
+                <Link to="/" className="block py-2 px-3 text-white  rounded md:hover:bg-transparent  md:p-0 md:hover:text-black hover:bg-gray-700 dark:text-white " aria-current="page">Home</Link>
+              </li>
+              <li>
+                <Link to="/contactUs" className="block py-2 px-3 md:p-0 rounded md:hover:bg-transparent md:border-0  text-white md:hover:text-black hover:bg-gray-700 ">Contact Us</Link>
+              </li>
+              {logIn && (
                 <li>
-                  <Link
-                    to="/"
-                    className="block py-2 px-3 text-white  rounded md:hover:bg-transparent  md:p-0 md:hover:text-black hover:bg-gray-700 dark:text-white "
-                    aria-current="page"
-                  >
-                    Home
-                  </Link>
+                  <Link to="/calculator" className="block py-2 px-3 md:p-0 rounded md:hover:bg-transparent md:border-0  text-white md:hover:text-black hover:bg-gray-700 ">Calculator</Link>
                 </li>
-                <li>
-                  <Link
-                    to="/contactUs"
-                    className="block py-2 px-3 md:p-0 rounded md:hover:bg-transparent md:border-0  text-white md:hover:text-black hover:bg-gray-700 "
-                  >
-                    Contact Us
-                  </Link>
-                </li>
-                {logIn && (
-                  <li>
-                    <Link
-                      to="/calculator"
-                      className="block py-2 px-3 md:p-0 rounded md:hover:bg-transparent md:border-0  text-white md:hover:text-black hover:bg-gray-700 "
-                    >
-                      Calculator
-                    </Link>
-                  </li>
-                )}
-                <li>
-                  <Link
-                    to="/information"
-                    className="block py-2 px-3 md:p-0 rounded md:hover:bg-transparent md:border-0  text-white md:hover:text-black hover:bg-gray-700 "
-                  >
-                    Information
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/aboutUs"
-                    className="block py-2 px-3 md:p-0 rounded md:hover:bg-transparent md:border-0  text-white md:hover:text-black hover:bg-gray-700 "
-                  >
-                    About Us
-                  </Link>
-                </li>
-
-                <div className="btns md:hidden ">
-                  {logIn ? (
-                    <button
-                      onClick={handleLogout}
-                      className="btn w-full text-start bg-white mt-3 px-3 py-2 font-Rubik rounded-full hover:bg-black hover:text-white"
-                    >
-                      Logout
-                    </button>
-                  ) : (
-                    <>
-                      <Link to="/login">
-                        <li className="btn bg-white px-3 py-1 mb-2 mt-3 font-Rubik rounded-full hover:bg-black hover:text-white">
-                          Login
-                        </li>
-                      </Link>
-                      <Link to="/register">
-                        <li className="btn bg-white flex px-3 py-1 font-Rubik rounded-full hover:bg-black hover:text-white">
-                          Sign Up
-                        </li>
-                      </Link>
-                    </>
-                  )}
-                </div>
-              </ul>
-            </div>
-            <div className="btns hidden font-medium md:flex space-x-2">
-              {logIn ? (
-                <button
-                  onClick={handleLogout}
-                  className="btn bg-white px-3 py-2 font-Rubik rounded-full hover:bg-black hover:text-white"
-                >
-                  Logout
-                </button>
-              ) : (
-                <>
-                  <Link to="/login">
-                    <li className="btn list-none bg-white px-3 py-2 font-Rubik rounded-full hover:bg-black hover:text-white">
-                      Login
-                    </li>
-                  </Link>
-                  <Link to="/register">
-                    <li className="btn bg-white flex px-3 py-2 font-Rubik rounded-full hover:bg-black hover:text-white">
-                      Sign Up
-                    </li>
-                  </Link>
-                </>
               )}
-            </div>
+              <li>
+                <Link to="/information" className="block py-2 px-3 md:p-0 rounded md:hover:bg-transparent md:border-0  text-white md:hover:text-black hover:bg-gray-700 ">Information</Link>
+              </li>
+              <li>
+                <Link to="/aboutUs" className="block py-2 px-3 md:p-0 rounded md:hover:bg-transparent md:border-0  text-white md:hover:text-black hover:bg-gray-700 ">About Us</Link>
+              </li>
+              
+              <div className="btns md:hidden ">
+          {logIn ? (
+            <button
+              onClick={handleLogout}
+              className="btn w-full text-start bg-white mt-3 px-3 py-2 font-Rubik rounded-full hover:bg-black hover:text-white"
+            >
+              Logout
+            </button>
+          ) : (
+            <>
+              <Link to="/login">
+                <li className="btn bg-white px-3 py-1 mb-2 mt-3 font-Rubik rounded-full hover:bg-black hover:text-white">
+                  Login
+                </li>
+              </Link>
+              <Link to="/register">
+                <li className="btn bg-white flex px-3 py-1 font-Rubik rounded-full hover:bg-black hover:text-white">
+                  Sign Up
+                </li>
+              </Link>
+            </>
+          )}
+        </div>
+              
+            </ul>
+            
           </div>
-        </nav>
-      </div>
-    </div>
+          <div className="btns hidden font-medium md:flex space-x-2">
+          {logIn ? (
+            <button
+              onClick={handleLogout}
+              className="btn bg-white px-3 py-2 font-Rubik rounded-full hover:bg-black hover:text-white"
+            >
+              Logout
+            </button>
+          ) : (
+            <>
+              <Link to="/login">
+                <li className="btn list-none bg-white px-3 py-2 font-Rubik rounded-full hover:bg-black hover:text-white">
+                  Login
+                </li>
+              </Link>
+              <Link to="/register">
+                <li className="btn bg-white flex px-3 py-2 font-Rubik rounded-full hover:bg-black hover:text-white">
+                  Sign Up
+                </li>
+              </Link>
+            </>
+          )}
+        </div>
+        </div>
+      </nav>
+    </div></div>
   );
 }
 
