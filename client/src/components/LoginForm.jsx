@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import {  toast } from "react-toastify";
 
 function LoginForm({ setLoggedIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+    
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -28,44 +33,60 @@ function LoginForm({ setLoggedIn }) {
   };
 
   return (
-    <div>
-      <div className="login m-4 flex-grow flex justify-center items-center space-x-2 my-16 ">
-        <div className="loginBox flex flex-col bg-gray-200 p-5 md:p-10 space-y-3 rounded-lg justify-center">
-        <p className="text-center font-medium text-xl md:text-2xl py-4">Login Form</p>
-          <div className="inputs flex flex-col space-y-2 ">
-            <input
-              type="email"
-              className="username rounded-lg px-3 p-2 md:px-4 md:p-3 "
-              placeholder="Enter Your Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+      <div>
+          <ToastContainer autoClose={4000} position="top-center" newestOnTop />
+          <div className="login m-4 flex-grow flex justify-center items-center space-x-2 my-16 ">
+              <div className="loginBox flex flex-col bg-gray-200 p-5 md:p-10 space-y-3 rounded-lg justify-center">
+                  <p className="text-center font-medium text-xl md:text-2xl py-4">
+                      Login Form
+                  </p>
+                  <div className="inputs flex flex-col space-y-2 ">
+                      <input
+                          type="email"
+                          className="username rounded-lg px-3 p-2 md:px-4 md:p-3 "
+                          placeholder="Enter Your Email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                      />
 
-            <input
-              type="password"
-              className="password rounded-lg px-3 p-2 md:px-4 md:p-3 "
-              placeholder="Enter Password"
-              value={password}
-              name="password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <button
-            className="btn  p-2 rounded-full bg-green-500  hover:bg-green-600"
-            onClick={handleLogin}
-          >
-            Login
-          </button>
+                      <label className=" relative">
+                          <input
+                              type={showPassword ? "text" : "password"}
+                              className="w-full password rounded-lg px-3 p-2 md:px-4 md:p-3 "
+                              placeholder="Enter Password"
+                              value={password}
+                              name="password"
+                              onChange={(e) => setPassword(e.target.value)}
+                          />
+                          <span
+                              onClick={() => setShowPassword(!showPassword)}
+                              className="absolute right-3 top-3 cursor-pointer ">
+                              {showPassword ? (
+                                  <AiOutlineEyeInvisible
+                                      fontSize={24}
+                                      fill="#AFB2BF"
+                                  />
+                              ) : (
+                                  <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+                              )}
+                          </span>
+                      </label>
+                  </div>
+                  <button
+                      className="btn  p-2 rounded-full bg-green-500  hover:bg-green-600"
+                      onClick={handleLogin}>
+                      Login
+                  </button>
 
-          <div className="signUp ">
-            Don't have an account? Create one by{" "}
-            <Link to="/register" className="text-blue-700 hover:underline">
-              Clicking here
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
+                  <div className="signUp ">
+                      Don't have an account? Create one by{" "}
+                      <Link
+                          to="/register"
+                          className="text-blue-700 hover:underline">
+                          Clicking here
+                      </Link>
+                  </div>
+              </div>
   );
 }
 
