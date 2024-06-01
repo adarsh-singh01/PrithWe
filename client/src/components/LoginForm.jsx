@@ -105,9 +105,9 @@ export default LoginForm;
     } catch (error) {
       console.error("Error logging in user:", error);
     }
-  };*/
+  };
 
-/*const handleLogin = async () => {
+const handleLogin = async () => {
     try {
       const response = await axios.post("http://localhost:3001/login", {
         email,
@@ -118,9 +118,9 @@ export default LoginForm;
     } catch (error) {
       console.error("Error logging in user:", error);
     }
-  };*/
+  };
 
-  /*const handleLogin = async () => {
+  const handleLogin = async () => {
     try {
       const response = await axios.post("http://localhost:3001/login", {
         email,
@@ -137,8 +137,8 @@ export default LoginForm;
     } catch (error) {
       console.error("Error logging in user:", error);
     }
-  };*/
-/*import React, { useState } from 'react';
+  };
+import React, { useState } from 'react';
 import axios from 'axios';
 
 function Login() {
@@ -181,11 +181,11 @@ function Login() {
       
     </div>
   );
-}*/
+}
 
 //export default Login;
 
-            {/*const handleLogin = async () => {
+const handleLogin = async () => {
     try {
       const response = await axios.post('http://localhost:3001/login', {
         email,
