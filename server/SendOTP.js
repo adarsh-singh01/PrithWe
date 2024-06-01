@@ -13,12 +13,15 @@ const wrapAsync = (fn) => {
   
  
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.MAIL,
-    pass: process.env.APP_PASSWORD,
-  },
+let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // true for 587, false for other ports
+    requireTLS: true,
+    auth: {
+      user: process.env.MAIL,
+      pass: process.env.APP_PASSWORD 
+    },
 });
 
 export function generateSixDigitOTP() {
@@ -32,7 +35,7 @@ export function generateSixDigitOTP() {
 export const sendOTP = wrapAsync(async (email,otp) => {
   try { 
     const mailOptions = {
-      from: "maileroereview@gmail.com",
+      from: process.env.MAIL,
       to: email,
       subject: "Email Verification OTP",
       text: `Your OTP for email verification is: ${otp}`
