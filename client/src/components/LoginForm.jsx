@@ -87,6 +87,9 @@ function LoginForm({ setLoggedIn }) {
                       </Link>
                   </div>
               </div>
+            </div>
+        </div>
+  
   );
 }
 
@@ -198,3 +201,4 @@ const handleLogin = async () => {
       setError('Failed to login. Please check your credentials.');
     }
   };*/}
+
