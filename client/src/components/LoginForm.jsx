@@ -22,8 +22,15 @@ function LoginForm({ setLoggedIn }) {
         setLoggedIn(true);
       }
     } catch (error) {
-      console.error("Error logging in user:", error);
-      toast.error("Error logging in. Please check your credentials.");
+      if(error.response.status==402){
+        toast.error("Verify Your Email First.");
+        setTimeout(()=>{
+          navigate("/verifyEmail")
+        },2000)
+      }
+      else{
+        toast.error("Error logging in. Please check your credentials.");
+      }
     }
   };
 

@@ -10,8 +10,11 @@ import AboutUs from './pages/AboutUs';
 import Information from './pages/Information';
 import axios from 'axios';
 import Footer2 from './components/Footer2';
+import VerifyEmail from './pages/VerifyEmail';
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -51,8 +54,10 @@ function App() {
         />
         <Route path="/register" element={<Register />} />
         <Route path="/information" element={<Information />} />
-        <Route path="/aboutUs" element={<AboutUs />} />
-        <Route path="/logout" element={<Home />} />
+        <Route path='/aboutUs' element={<AboutUs />} />
+        <Route path='/logout' element={<Home />} />
+        <Route path='/verifyEmail' element={ <VerifyEmail/>} />
+
         <Route
           path="/calculator"
           element={loggedIn ? <Calculator /> : <Navigate to="/login" />}
