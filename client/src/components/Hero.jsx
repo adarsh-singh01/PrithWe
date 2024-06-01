@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Hero() {
   return (
-    <div>
+    <div >
       <div className="hero m-3 flex justify-center items-center space-x-2 my-12 md:my-32">
         <div className="card bg-gray-200 max-w-sm rounded-lg p-6 space-y-4 md:space-y-8">
           <div className="heading  font-medium font-Rubik text-2xl md:text-4xl">

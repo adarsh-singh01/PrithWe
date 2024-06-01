@@ -67,7 +67,7 @@ function RegisterForm() {
       <ToastContainer autoClose={4000} position="top-center" newestOnTop/>
       <div className="login m-4 flex justify-center items-center space-x-2 my-16">
         <div className="loginBox flex flex-col bg-gray-200 p-5 md:p-10 space-y-3 rounded-lg justify-center">
-        <p className="text-center font-medium text-xl md:text-2xl py-4">Signup Form</p>
+        <h1 className="text-center font-medium text-xl md:text-2xl py-4">Signup Form</h1>
           <div className="inputs flex flex-col space-y-2 ">
             <input
               type="text"
