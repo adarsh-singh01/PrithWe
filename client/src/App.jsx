@@ -12,6 +12,7 @@ import axios from 'axios';
 import Footer2 from './components/Footer2';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import VerifyEmail from './pages/VerifyEmail';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -57,6 +58,7 @@ function App() {
           path="/calculator"
           element={loggedIn ? <Calculator /> : <Navigate to="/login" />}
         />
+        <Route path='/verifyEmail' element={ <VerifyEmail/>} />
       </Routes>
       <Footer2 />
     </Router>
