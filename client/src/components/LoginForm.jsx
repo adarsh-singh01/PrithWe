@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import {  toast } from "react-toastify";
 
-function LoginForm() {
+function LoginForm({ setLoggedIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -21,13 +22,10 @@ function LoginForm() {
       }, { withCredentials: true });
 
       console.log("Logged in user:", response.data);
-      toast.success("Login successful!");
-      
-      setTimeout(() => {
-        //navigate("/calculator");
-        window.location.reload();
-      }, 2000); // Redirect after 4 seconds
-
+      if (response) {
+        toast.success("Login successful!");
+        setLoggedIn(true);
+      }
     } catch (error) {
       console.error("Error logging in user:", error);
       toast.error("Error logging in. Please check your credentials.");
@@ -89,8 +87,6 @@ function LoginForm() {
                       </Link>
                   </div>
               </div>
-          </div>
-      </div>
   );
 }
 
