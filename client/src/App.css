@@ -1,4 +1,4 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -39,4 +39,28 @@
 
 .read-the-docs {
   color: #888;
+} */
+
+/* ------Custom Scrollbar------ */
+
+::-webkit-scrollbar{
+  width: 10px;
+  height: 60px;
 }
+
+::-webkit-scrollbar-track{
+  background-color: #111827;
+}
+
+::-webkit-scrollbar-thumb{
+  background: rgb(34,197,77);
+  background: linear-gradient(180deg, rgba(34,197,77,1) 0%, rgba(65,255,0,1) 100%);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background-color: #9652d2;
+  cursor: pointer;
+}
+
+/* ------Custom Scrollbar------ */

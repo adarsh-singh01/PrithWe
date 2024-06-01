@@ -12,6 +12,7 @@ import axios from 'axios';
 import Footer2 from './components/Footer2';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import './App.css';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
