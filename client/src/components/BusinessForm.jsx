@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import HouseholdResult from './HouseholdResult';  
 
 
@@ -170,7 +169,6 @@ function BusinessForm() {
 
   return (
     <div className="p-4  m-2 mt-10">
-      <ToastContainer autoClose={4000} position="top-center" newestOnTop/>
 
       {/* Render the result component only if showChart state is true */}
       {showChart && (

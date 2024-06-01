@@ -12,6 +12,9 @@ import axios from 'axios';
 import Footer2 from './components/Footer2';
 import VerifyEmail from './pages/VerifyEmail';
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -30,25 +33,37 @@ function App() {
     };
 
     checkLoginStatus();
-  }, []);
+  },[loggedIn]);
   return (
     <Router>
-    <Header />
+      <ToastContainer autoClose={2000} position="top-center" newestOnTop />
+
+      <Header setLoggedIn={setLoggedIn} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contactUs" element={<ContactUs />} />
-        <Route path="/login" element={loggedIn ? <Navigate to="/calculator" /> : <Login />} />
+        <Route
+          path="/login"
+          element={
+            loggedIn ? (
+              <Navigate to="/calculator" />
+            ) : (
+              <Login setLoggedIn={setLoggedIn} />
+            )
+          }
+        />
         <Route path="/register" element={<Register />} />
         <Route path="/information" element={<Information />} />
         <Route path='/aboutUs' element={<AboutUs />} />
         <Route path='/logout' element={<Home />} />
         <Route path='/verifyEmail' element={ <VerifyEmail/>} />
+
         <Route
           path="/calculator"
           element={loggedIn ? <Calculator /> : <Navigate to="/login" />}
         />
       </Routes>
-    <Footer2 />
+      <Footer2 />
     </Router>
   );
 }

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 function RegisterForm() {
   const [name, setName] = useState("");
@@ -64,7 +63,6 @@ function RegisterForm() {
 
   return (
     <div>
-      <ToastContainer autoClose={4000} position="top-center" newestOnTop/>
       <div className="login m-4 flex justify-center items-center space-x-2 my-16">
         <div className="loginBox flex flex-col bg-gray-200 p-5 md:p-10 space-y-3 rounded-lg justify-center">
         <p className="text-center font-medium text-xl md:text-2xl py-4">Signup Form</p>
