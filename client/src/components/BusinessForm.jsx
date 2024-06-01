@@ -124,7 +124,6 @@ function BusinessForm() {
 
   return (
     <div className="p-4 m-2 mt-10">
-      <ToastContainer autoClose={4000} position="top-center" newestOnTop/>
 
       {showChart && <HouseholdResult totalCarbonFootprint={totalCarbonFootprint} contributions={contributions} />}
 
