@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
-import {  toast } from "react-toastify";
+//import {  toast } from "react-toastify";
 
 function LoginForm({ setLoggedIn }) {
   const [email, setEmail] = useState("");
@@ -94,7 +94,7 @@ export default LoginForm;
 
 
 
-/*const handleLogin = async () => {
+            {/*const handleLogin = async () => {
     try {
       const response = await axios.post("http://localhost:3001/login", {
         email,
