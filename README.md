@@ -74,7 +74,7 @@ Follow these steps to set up the project locally:
    PG_PASSWORD=your_password
    PG_PORT=5432
    SESSION_SECRET=your_secret
-    MAIL=tour_mail
+    MAIL=your_mail
     APP_PASSWORD=your_app_password
     
     
