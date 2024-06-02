@@ -146,8 +146,9 @@ router.post('/login', (req, res, next) => {
 router.post('/sendOTP', async (req, res) => {
   try {
     const email = req.body.email;
+    const subject=req.body.subject; 
     const otp = generateSixDigitOTP();
-    await sendOTP(email, otp);
+    await sendOTP(email, otp, subject);
 
     // Update OTP in the database for the user with the specified email
     const result = await query(
@@ -199,6 +200,29 @@ router.post('/verifyOTP', async (req, res) => {
   } catch (error) {
     console.error('Error verifying OTP:', error);
     res.status(500).json({ success: false, message: "Failed to verify OTP" });
+  }
+});
+
+
+router.post('/resetPassword', async (req, res) => {
+  const { email,newPassword } = req.body; 
+  try {
+      bcrypt.hash(newPassword, saltRounds, async (err, hash) => {
+        if (err) {
+          console.error('Error hashing password:', err);
+          res.status(500).send('Error Reseting Password');
+        } else { 
+          const result = await query(
+            'UPDATE users SET password = $1 WHERE email = $2 RETURNING *',
+            [hash, email]
+          );
+          const user = result.rows[0]; 
+          res.status(201).send(user);
+        }
+      });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error Reseting Password');
   }
 });
 

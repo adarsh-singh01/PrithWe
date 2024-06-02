@@ -11,8 +11,9 @@ const VerifyEmail = () => {
   const navigate = useNavigate();
 
   const handleSendOtp = async () => {
+    const subject = "Email Verification OTP"; 
     try {
-      const response = await axios.post('/api/auth/sendOTP', { email });
+      const response = await axios.post('/api/auth/sendOTP', { email,subject });
       if (response.data.success) {
         setOtpSent(true);
         setMessage('OTP sent to your email address');

@@ -13,6 +13,7 @@ import Footer2 from './components/Footer2';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import VerifyEmail from './pages/VerifyEmail';
+import ResetPassword from './pages/ResetPassword';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -60,6 +61,7 @@ function App() {
           element={loggedIn ? <Calculator /> : <Navigate to="/login" />}
         />
         <Route path='/verifyEmail' element={ <VerifyEmail/>} />
+        <Route path='/resetPassword' element={ <ResetPassword/>} />
       </Routes>
       <Footer2 />
     </Router>

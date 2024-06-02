@@ -83,6 +83,14 @@ function LoginForm({ setLoggedIn }) {
                       Login
                   </button>
 
+                  <div className="signUp">
+                      Forgot Password?{" "}
+                      <Link
+                          to="/resetPassword"
+                          className="text-blue-700 hover:underline">
+                          Reset Password
+                      </Link>
+                  </div>
                   <div className="signUp ">
                       Don't have an account? Create one by{" "}
                       <Link
