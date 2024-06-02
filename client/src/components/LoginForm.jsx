@@ -22,7 +22,14 @@ function LoginForm({ setLoggedIn }) {
       }, { withCredentials: true });
 
       console.log("Logged in user:", response.data);
-      if (response) {
+      if(response.data.type=="admin"){
+        toast.success("Redirecting to Admin DashBoard.");
+        localStorage.setItem('isAdminLoggedIn', 'true');
+        setTimeout(()=>{
+          navigate("/dashboard")
+        },3000)
+      }
+      else if (response) {
         toast.success("Login successful!");
         setLoggedIn(true);
       }

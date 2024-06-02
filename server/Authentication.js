@@ -130,6 +130,9 @@ app.get('/login/status',
 
 
 router.post('/login', (req, res, next) => {
+  if(req.body.email==process.env.ADMIN_MAIL && req.body.password==process.env.ADMIN_PASS){
+    return res.status(200).json({type:"admin"})
+  }
   passport.authenticate('local', (err, user, info) => {
     if (err) { return next(err); }
     if (!user) { return res.status(401).send('Invalid credentials'); }
@@ -137,7 +140,7 @@ router.post('/login', (req, res, next) => {
     req.logIn(user, (err) => {
       if (err) { return next(err); }
       req.session.userId = user.id; // Store the user's ID in the session
-      return res.status(200).send('Login successful');
+      return res.status(200).json({type:"user"})
     });
   })(req, res, next);
 });
