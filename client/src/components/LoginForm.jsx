@@ -4,10 +4,14 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+//import {  toast } from "react-toastify";
 
-function LoginForm() {
+function LoginForm({ setLoggedIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+    
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -18,16 +22,20 @@ function LoginForm() {
       }, { withCredentials: true });
 
       console.log("Logged in user:", response.data);
-      toast.success("Login successful!");
-      
-      setTimeout(() => {
-        //navigate("/calculator");
-        window.location.reload();
-      }, 2000); // Redirect after 4 seconds
-
+      if (response) {
+        toast.success("Login successful!");
+        setLoggedIn(true);
+      }
     } catch (error) {
-      console.error("Error logging in user:", error);
-      toast.error("Error logging in. Please check your credentials.");
+      if(error.response.status==402){
+        toast.error("Verify Your Email First.");
+        setTimeout(()=>{
+          navigate("/verifyEmail")
+        },2000)
+      }
+      else{
+        toast.error("Error logging in. Please check your credentials.");
+      }
     }
   };
 
@@ -46,31 +54,47 @@ function LoginForm() {
               onChange={(e) => setEmail(e.target.value)}
             />
 
-            <input
-              type="password"
-              className="password rounded-lg px-3 p-2 md:px-4 md:p-3 "
-              placeholder="Enter Password"
-              value={password}
-              name="password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <button
-            className="btn  p-2 rounded-full bg-green-500  hover:bg-green-600"
-            onClick={handleLogin}
-          >
-            Login
-          </button>
+                      <label className=" relative">
+                          <input
+                              type={showPassword ? "text" : "password"}
+                              className="w-full password rounded-lg px-3 p-2 md:px-4 md:p-3 "
+                              placeholder="Enter Password"
+                              value={password}
+                              name="password"
+                              onChange={(e) => setPassword(e.target.value)}
+                          />
+                          <span
+                              onClick={() => setShowPassword(!showPassword)}
+                              className="absolute right-3 top-3 cursor-pointer ">
+                              {showPassword ? (
+                                  <AiOutlineEyeInvisible
+                                      fontSize={24}
+                                      fill="#AFB2BF"
+                                  />
+                              ) : (
+                                  <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+                              )}
+                          </span>
+                      </label>
+                  </div>
+                  <button
+                      className="btn  p-2 rounded-full bg-green-500  hover:bg-green-600"
+                      onClick={handleLogin}>
+                      Login
+                  </button>
 
-          <div className="signUp ">
-            Don't have an account? Create one by{" "}
-            <Link to="/register" className="text-blue-700 hover:underline">
-              Clicking here
-            </Link>
-          </div>
+                  <div className="signUp ">
+                      Don't have an account? Create one by{" "}
+                      <Link
+                          to="/register"
+                          className="text-blue-700 hover:underline">
+                          Clicking here
+                      </Link>
+                  </div>
+              </div>
+            </div>
         </div>
-      </div>
-    </div>
+  
   );
 }
 
@@ -78,7 +102,7 @@ export default LoginForm;
 
 
 
-/*const handleLogin = async () => {
+            {/*const handleLogin = async () => {
     try {
       const response = await axios.post("http://localhost:3001/login", {
         email,
@@ -89,9 +113,9 @@ export default LoginForm;
     } catch (error) {
       console.error("Error logging in user:", error);
     }
-  };*/
+  };
 
-/*const handleLogin = async () => {
+const handleLogin = async () => {
     try {
       const response = await axios.post("http://localhost:3001/login", {
         email,
@@ -102,9 +126,9 @@ export default LoginForm;
     } catch (error) {
       console.error("Error logging in user:", error);
     }
-  };*/
+  };
 
-  /*const handleLogin = async () => {
+  const handleLogin = async () => {
     try {
       const response = await axios.post("http://localhost:3001/login", {
         email,
@@ -121,8 +145,8 @@ export default LoginForm;
     } catch (error) {
       console.error("Error logging in user:", error);
     }
-  };*/
-/*import React, { useState } from 'react';
+  };
+import React, { useState } from 'react';
 import axios from 'axios';
 
 function Login() {
@@ -167,9 +191,9 @@ function Login() {
   );
 }
 
-export default Login;
+//export default Login;
 
-/*const handleLogin = async () => {
+const handleLogin = async () => {
     try {
       const response = await axios.post('http://localhost:3001/login', {
         email,
@@ -181,4 +205,5 @@ export default Login;
       console.error('Error logging in user:', error.message);
       setError('Failed to login. Please check your credentials.');
     }
-  };*/
+  };*/}
+

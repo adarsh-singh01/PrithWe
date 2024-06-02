@@ -68,8 +68,16 @@ Follow these steps to set up the project locally:
     Create a `.env` file in the `server` directory and add your database details:
 
     ```env
-    DATABASE_URL=your_postgresql_database_url
-    JWT_SECRET=your_jwt_secret
+   PG_USER=your_user_name 
+   PG_HOST=your_host_name 
+   PG_DATABASE=your_database_name 
+   PG_PASSWORD=your_password
+   PG_PORT=5432
+   SESSION_SECRET=your_secret
+    MAIL=your_mail
+    APP_PASSWORD=your_app_password
+    
+    
     ```
 
 6. Start the backend server:

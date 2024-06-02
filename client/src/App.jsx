@@ -10,7 +10,9 @@ import AboutUs from './pages/AboutUs';
 import Information from './pages/Information';
 import axios from 'axios';
 import Footer2 from './components/Footer2';
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import VerifyEmail from './pages/VerifyEmail';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -29,25 +31,37 @@ function App() {
     };
 
     checkLoginStatus();
-  }, []);
+  },[loggedIn]);
   return (
 
     <Router>
-    <Header />
+      <ToastContainer autoClose={2000} position="top-center" newestOnTop />
+
+      <Header setLoggedIn={setLoggedIn} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contactUs" element={<ContactUs />} />
-        <Route path="/login" element={loggedIn ? <Navigate to="/calculator" /> : <Login />} />
+        <Route
+          path="/login"
+          element={
+            loggedIn ? (
+              <Navigate to="/calculator" />
+            ) : (
+              <Login setLoggedIn={setLoggedIn} />
+            )
+          }
+        />
         <Route path="/register" element={<Register />} />
         <Route path="/information" element={<Information />} />
-        <Route path='/aboutUs' element={<AboutUs />} />
-        <Route path='/logout' element={<Home />} />
+        <Route path="/aboutUs" element={<AboutUs />} />
+        <Route path="/logout" element={<Home />} />
         <Route
           path="/calculator"
           element={loggedIn ? <Calculator /> : <Navigate to="/login" />}
         />
+        <Route path='/verifyEmail' element={ <VerifyEmail/>} />
       </Routes>
-    <Footer2 />
+      <Footer2 />
     </Router>
   );
 }

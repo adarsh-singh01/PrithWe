@@ -7,7 +7,7 @@ import logo from '../assets/headerlogo.png';
 import leaf from '../assets/leaf.png';
 
 function Header() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [logIn, setLogIn] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
 
@@ -16,10 +16,10 @@ function Header() {
       try {
         const response = await axios.get('http://localhost:3001/api/auth/login/status', { withCredentials: true });
         if (response.status === 200) {
-          setLoggedIn(true);
+          setLogIn(true);
         }
       } catch (error) {
-        setLoggedIn(false);
+        setLogIn(false);
         console.error('Error checking login status:', error);
       }
     };
@@ -31,7 +31,7 @@ function Header() {
     try {
       const response = await axios.post('http://localhost:3001/api/auth/logout', {}, { withCredentials: true });
       if (response.status === 200) {
-        setLoggedIn(false);
+        setLogIn(false);
         toast.success('Logout successful!');
         setTimeout(() => {
           navigate('/logout');
@@ -55,7 +55,7 @@ function Header() {
         <div className="hidden md:flex space-x-4">
           <Link to="/"><li className="navItem hover:text-black text-white font-Rubik cursor-pointer">Home</li></Link>
           <Link to="/contactUs"><li className="navItem hover:text-black text-white font-Rubik cursor-pointer">Contact Us</li></Link>
-          {loggedIn && <Link to="/calculator"><li className="navItem hover:text-black text-white font-Rubik cursor-pointer">Calculator</li></Link>}
+          {logIn && <Link to="/calculator"><li className="navItem hover:text-black text-white font-Rubik cursor-pointer">Calculator</li></Link>}
           <Link to="/information"><li className="navItem hover:text-black text-white font-Rubik cursor-pointer">Information</li></Link>
           <Link to="/aboutUs"><li className="navItem hover:text-black text-white font-Rubik cursor-pointer">About Us</li></Link>
         </div>
@@ -73,12 +73,12 @@ function Header() {
         <div className={`${showMenu ? 'flex flex-col' : 'hidden'} md:hidden space-y-2`}>
           <Link to="/"><li className="block px-4 py-2 text-white font-Rubik cursor-pointer">Home</li></Link>
           <Link to="/contactUs"><li className="block px-4 py-2 text-white font-Rubik cursor-pointer">Contact Us</li></Link>
-          {loggedIn && <Link to="/calculator"><li className="block px-4 py-2 text-white font-Rubik cursor-pointer">Calculator</li></Link>}
+          {logIn && <Link to="/calculator"><li className="block px-4 py-2 text-white font-Rubik cursor-pointer">Calculator</li></Link>}
           <Link to="/information"><li className="block px-4 py-2 text-white font-Rubik cursor-pointer">Information</li></Link>
           <Link to="/aboutUs"><li className="block px-4 py-2 text-white font-Rubik cursor-pointer">About Us</li></Link>
         </div>
         <div className="hidden md:flex space-x-2">
-          {loggedIn ? (
+          {logIn ? (
             <button onClick={handleLogout} className="btn bg-white px-3 py-2 font-Rubik rounded-full hover:bg-black hover:text-white">Logout</button>
           ) : (
             <>
@@ -104,8 +104,8 @@ import leaf from "../assets/leaf.png";
 import sun from "../assets/sun.png";
 import moon from "../assets/moon.png"
 
-function Header() {
-  const [loggedIn, setLoggedIn] = useState(false);
+function Header({ setLoggedIn }) {
+  const [loggedIn, setLogIn] = useState(false);
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const [theme, setTheme] = useState("light");
@@ -133,7 +133,7 @@ function Header() {
     };
 
     checkLoginStatus();
-  }, []);
+});
 
 
   const handleLogout = async () => {
@@ -144,13 +144,11 @@ function Header() {
         { withCredentials: true }
       );
       if (response.status === 200) {
+        setLogIn(false);
         setLoggedIn(false);
         //checkLoginStatus();
         toast.success("Logout successful!");
-        setTimeout(() => {
-          navigate("/logout");
-          window.location.reload(); // here i am reloading the page bcoz its not showing the calculator and logout buttons instantly.
-        }, 1000); // redirecting to home page after 2 seconds
+        navigate("/logout");
       }
     } catch (error) {
       console.error("Error logging out:", error);
@@ -191,7 +189,7 @@ function Header() {
               Contact Us
             </li>
           </Link>
-          {loggedIn && (
+          {logIn && (
             <Link to="/calculator">
               <li className="navItem hover:text-black text-white font-Rubik hover:cursor-pointer">
                 Calculator
@@ -210,7 +208,7 @@ function Header() {
           </Link>
         </div>
         <div className="btns flex space-x-2">
-          {loggedIn ? (
+          {logIn ? (
             <button
               onClick={handleLogout}
               className="btn bg-white px-3 py-2 font-Rubik rounded-full hover:bg-black hover:text-white"
@@ -238,7 +236,7 @@ function Header() {
         <nav
           className={`border-gray-200 ${
             theme === "dark" ? "bg-black " : "bg-blue-500 "
-          } fixed top-0 w-full`}
+          } `}
         >
           <div
             className={` flex flex-wrap items-center justify-between  p-2 `}
@@ -251,6 +249,12 @@ function Header() {
                 <img className="h-7" src={logo} />
               </a>
             </div>
+
+            <div className="flex items-center justify-center">
+            <button onClick={toggleTheme} className=" md:hidden theme-toggle-btn p-2 rounded-full hover:bg-blue-500">
+            <img src={theme === "light" ? moon : sun} alt="Toggle Theme" className="w-10 h-10" />
+          </button>
+            
             <button
               onClick={handleToggleMenu}
               className={`inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none focus:ring-2 focus:ring-white dark:text-gray-400 hover:bg-blue-600 ${
@@ -275,6 +279,7 @@ function Header() {
                 />
               </svg>
             </button>
+            </div>
 
             <div
               className={`w-full md:flex md:w-auto  ${
@@ -366,7 +371,11 @@ function Header() {
             </div>
           </ul>
             </div>
-            <div className="btns hidden font-medium md:flex space-x-2">
+            
+            <div className="btns hidden justify-center items-center font-medium md:flex space-x-2">
+            <button onClick={toggleTheme} className="theme-toggle-btn p-2 rounded-full hover:bg-blue-500">
+            <img src={theme === "light" ? moon : sun} alt="Toggle Theme" className="w-10 h-10" />
+          </button>
               {loggedIn ? (
                 <button
                   onClick={handleLogout}
@@ -390,9 +399,7 @@ function Header() {
               )}
             </div>
 
-            <button onClick={toggleTheme} className="theme-toggle-btn p-2 rounded-full hover:bg-gray-200">
-            <img src={theme === "light" ? moon : sun} alt="Toggle Theme" className="w-10 h-10" />
-          </button>
+            
           </div>
         </nav>
       </div>
