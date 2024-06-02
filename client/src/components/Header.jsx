@@ -144,6 +144,7 @@ function Header({ setLoggedIn }) {
         { withCredentials: true }
       );
       if (response.status === 200) {
+        console.log("HERE")
         setLogIn(false);
         setLoggedIn(false);
         //checkLoginStatus();
