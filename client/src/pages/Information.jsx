@@ -14,26 +14,28 @@ const Information = () => {
             <section className="mb-12">
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">Why You Need to Calculate It?</h2>
                 <ul className="list-disc list-inside text-gray-700 mb-4">
-                    <li>Understanding and reducing your carbon footprint is essential for sustainable business practices.</li>
-                    <li>It's not only an ethical responsibility but also a strategic move for enhancing brand reputation and resilience.</li>
-                    <li>Consumers and investors are increasingly focusing on environmentally conscious businesses.</li>
+                <p><li>Understanding and reducing your carbon footprint is essential for sustainable business practices.</li></p>
+                <p><li>It's not only an ethical responsibility but also a strategic move for enhancing brand reputation and resilience.</li></p>
+                <p>  <li>Consumers and investors are increasingly focusing on environmentally conscious businesses.</li></p>
                 </ul>
             </section>
             <section className="mb-12">
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">What Indian Government Says?</h2>
                 <ul className="list-disc list-inside text-gray-700 mb-4">
-                    <li>The Government of India has set ambitious goals for carbon reduction and sustainable development.</li>
-                    <li>India plays a crucial role in the global carbon reduction effort due to its diverse industrial landscape and rapidly growing economy.</li>
+                    <p><li>The Government of India has set ambitious goals for carbon reduction and sustainable development.</li></p>
+                    <p> <li>India plays a crucial role in the global carbon reduction effort due to its diverse industrial landscape and rapidly growing economy.</li></p>
                 </ul>
             </section>
             <section className="mb-12">
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">Our Goals</h2>
+                
                 <ul className="list-disc list-inside text-gray-700 mb-4">
-                    <li>Facilitating Accurate Carbon Calculations</li>
-                    <li>Aligning with National and Global Targets</li>
-                    <li>Empowering Sustainable Decision-Making</li>
-                    <li>Continuous Improvement</li>
+                    <p> <li>Facilitating Accurate Carbon Calculations</li> </p>
+                    <p> <li>Aligning with National and Global Targets</li>  </p>
+                    <p><li>Empowering Sustainable Decision-Making</li></p>
+                    <p><li>Continuous Improvement</li></p>
                 </ul>
+                
             </section>
             <section className="mb-12">
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">Get Started with Prithwe</h2>
