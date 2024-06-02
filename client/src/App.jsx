@@ -12,6 +12,7 @@ import axios from 'axios';
 import Footer2 from './components/Footer2';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import  ScrollToTop  from './components/ScrollToTop';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -36,6 +37,7 @@ function App() {
       <ToastContainer autoClose={2000} position="top-center" newestOnTop />
 
       <Header setLoggedIn={setLoggedIn} />
+      <ScrollToTop/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contactUs" element={<ContactUs />} />
