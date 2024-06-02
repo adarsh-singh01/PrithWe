@@ -250,8 +250,8 @@ function Header({ setLoggedIn }) {
               </a>
             </div>
 
-            <div className="flex items-center justify-center">
-            <button onClick={toggleTheme} className=" md:hidden theme-toggle-btn p-2 rounded-full">
+            <div className=" md:hidden flex items-center justify-center">
+            <button onClick={toggleTheme} className="  theme-toggle-btn p-2 rounded-full">
             <img src={theme === "light" ? moon : sun} alt="Toggle Theme" className="w-10 h-10" />
           </button>
             
