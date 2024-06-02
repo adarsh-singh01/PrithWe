@@ -11,7 +11,7 @@ import cookieParser from 'cookie-parser'; // Import cookie-parser module
 import { query } from './db.js';
 import memorystore from 'memorystore';
 const MemoryStore = memorystore(session);
-import { generateSixDigitOTP, sendOTP } from './sendOtp.js';
+import { generateSixDigitOTP, sendOTP } from './SendOTP.js';
 
 
 
