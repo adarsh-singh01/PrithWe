@@ -14,7 +14,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import VerifyEmail from './pages/VerifyEmail';
 import ResetPassword from './pages/ResetPassword';
+
 import AdminDashBoard from './pages/AdminDashboard';
+
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -35,6 +37,7 @@ function App() {
   }, [loggedIn]);
 
   return (
+
     <Router>
       <ToastContainer autoClose={2000} position="top-center" newestOnTop />
 
@@ -59,6 +62,7 @@ function App() {
           <Route path='/resetPassword' element={ <ResetPassword/>} />
         </Routes>
       </Layout>
+
     </Router>
   );
 }

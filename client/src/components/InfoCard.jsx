@@ -18,8 +18,8 @@ import React from 'react';
 function FeatureCard({ heading, description }) {
   return (
     <div className=" bg-opacity- bg-gray-200 text-center rounded-md px-4 py-6 md:py-12 max-w-sm shadow-md">
-      <h2 className="text-lg md:text-xl text-green-600 font-semibold mb-2 font-Rubik">{heading}</h2>
-      <p className="text-slate-600 text-sm md:text-base font-Rubik">{description}</p>
+      <h1 className="text-lg md:text-xl text-green-600 font-semibold mb-2 font-Rubik">{heading}</h1>
+      <h1 className="text-slate-600 text-sm md:text-base font-Rubik">{description}</h1>
     </div>
   );
 }
@@ -30,7 +30,7 @@ function InfoCard() {
     <p className='text-center font-Rubik pt-12 md:pt-16 text-2xl md:text-4xl'>Why Choose Us?</p>
     <div className="flex flex-col items-center sm:items-stretch space-y-4 sm:space-y-0 sm:flex-row  sm:justify-around p-4 md:p-8 ">
     
-      <FeatureCard
+      <FeatureCard 
         heading="Easy to use"
         description="Our platform offers a user-friendly interface, making it simple for anyone to calculate their carbon footprint effortlessly."
       />
