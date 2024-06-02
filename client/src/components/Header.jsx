@@ -373,7 +373,7 @@ function Header({ setLoggedIn }) {
             </div>
             
             <div className="btns hidden justify-center items-center font-medium md:flex space-x-2">
-            <button onClick={toggleTheme} className="theme-toggle-btn p-2 rounded-full hover:bg-blue-500">
+            <button onClick={toggleTheme} className="theme-toggle-btn p-2 rounded-full">
             <img src={theme === "light" ? moon : sun} alt="Toggle Theme" className="w-10 h-10" />
           </button>
               {loggedIn ? (
