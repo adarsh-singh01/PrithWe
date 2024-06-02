@@ -32,13 +32,13 @@ export function generateSixDigitOTP() {
   return otp;
 }
 
-export const sendOTP = wrapAsync(async (email,otp) => {
+export const sendOTP = wrapAsync(async (email, otp, subject) => {
   try { 
     const mailOptions = {
       from: process.env.MAIL,
       to: email,
-      subject: "Email Verification OTP",
-      text: `Your OTP for email verification is: ${otp}`
+      subject: subject,
+      text: `Your OTP for pritwe is: ${otp}`
     };
 
     await transporter.sendMail(mailOptions);  
