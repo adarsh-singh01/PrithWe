@@ -16,13 +16,13 @@ import VerifyEmail from './pages/VerifyEmail';
 import ResetPassword from './pages/ResetPassword';
 
 import AdminDashBoard from './pages/AdminDashboard';
-
+import Spinner from './components/Spinner';
 // For Custom Scrollbar
 import './Scrollbar.css'
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
@@ -37,7 +37,9 @@ function App() {
 
     checkLoginStatus();
   }, [loggedIn]);
-
+  if (loading) {
+    return <Spinner setLoading={setLoading} />;
+  }
   return (
 
     <Router>
