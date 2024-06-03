@@ -1,3 +1,8 @@
+body {
+  padding: 0;
+  margin: 0; /* Also reset margin to avoid any default spacing */
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
