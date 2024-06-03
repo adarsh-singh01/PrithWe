@@ -17,6 +17,8 @@ import ResetPassword from './pages/ResetPassword';
 
 import AdminDashBoard from './pages/AdminDashboard';
 
+// For Custom Scrollbar
+import './Scrollbar.css'
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
