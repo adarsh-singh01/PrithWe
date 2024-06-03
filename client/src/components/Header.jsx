@@ -114,7 +114,9 @@ function Header({ setLoggedIn }) {
     setShowMenu(!showMenu);
   };
 
-
+const handleMenuClick = () => {
+    setShowMenu(false);
+};
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -133,7 +135,7 @@ function Header({ setLoggedIn }) {
     };
 
     checkLoginStatus();
-});
+},[]);
 
 
   const handleLogout = async () => {
@@ -288,10 +290,11 @@ function Header({ setLoggedIn }) {
               }`}
               id="navbar-default  "
             >
-            <ul
+            <ul onClick={handleMenuClick}
             className={`font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 ${
               theme === "dark" ? "bg-black" : "bg-blue-500"
             }`}
+            
           >
             <li>
               <Link
