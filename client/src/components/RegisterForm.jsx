@@ -30,11 +30,15 @@ function RegisterForm() {
 
       console.log("Registered user:", response.data);
       toast.success("Sign up successful!");
-      toast.success("Redirecting to Login Page")
-      setTimeout(() => navigate("/login"), 4000);
+      toast.success("Redirecting to Verification Page")
+      setTimeout(() => navigate("/verifyEmail"), 4000);
     } catch (error) {
-      console.error("Error registering user:", error);
-      toast.error("Error registering user");
+      console.error("Error registering user:", error.response || error);
+      if (error.response && error.response.data) {
+        toast.error(error.response.data.message || "Error registering user");
+      } else {
+        toast.error("Error registering user");
+      }
     }
   };
 
@@ -68,23 +72,20 @@ function RegisterForm() {
   };
 
   return (
-      <div>
-          <ToastContainer autoClose={4000} position="top-center" newestOnTop />
-          <div className="login m-4 flex justify-center items-center space-x-2 my-16">
-              <div className="loginBox flex flex-col bg-gray-200 p-5 md:p-10 space-y-3 rounded-lg justify-center">
-                  <p className="text-center font-medium text-xl md:text-2xl py-4">
-                      Signup Form
-                  </p>
-                  <div className="inputs flex flex-col space-y-2 ">
-                      <input
-                          type="text"
-                          className="username rounded-lg px-3 p-2 md:px-4 md:p-3"
-                          placeholder="Enter Your Name"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          required
-                      />
-
+    <div>
+      <ToastContainer autoClose={4000} position="top-center" newestOnTop/>
+      <div className="login m-4 flex justify-center items-center space-x-2 my-16">
+        <div className="loginBox flex flex-col bg-gray-200 p-5 md:p-10 space-y-3 rounded-lg justify-center">
+        <h1 className="text-center font-medium text-xl md:text-2xl py-4">Signup Form</h1>
+          <div className="inputs flex flex-col space-y-2 ">
+            <input
+              type="text"
+              className="username rounded-lg px-3 p-2 md:px-4 md:p-3"
+              placeholder="Enter Your Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
 
                       <input
                           type="email"

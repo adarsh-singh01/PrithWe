@@ -22,32 +22,44 @@ function LoginForm({ setLoggedIn }) {
       }, { withCredentials: true });
 
       console.log("Logged in user:", response.data);
-      if (response) {
+      if(response.data.type=="admin"){
+        toast.success("Redirecting to Admin DashBoard.");
+        localStorage.setItem('isAdminLoggedIn', 'true');
+        setTimeout(()=>{
+          navigate("/dashboard")
+        },3000)
+      }
+      else if (response) {
         toast.success("Login successful!");
         setLoggedIn(true);
       }
     } catch (error) {
-      console.error("Error logging in user:", error);
-      toast.error("Error logging in. Please check your credentials.");
+      if(error.response.status==402){
+        toast.error("Verify Your Email First.");
+        setTimeout(()=>{
+          navigate("/verifyEmail")
+        },2000)
+      }
+      else{
+        toast.error("Error logging in. Please check your credentials.");
+      }
     }
   };
 
   return (
-      <div>
-          <ToastContainer autoClose={4000} position="top-center" newestOnTop />
-          <div className="login m-4 flex-grow flex justify-center items-center space-x-2 my-16 ">
-              <div className="loginBox flex flex-col bg-gray-200 p-5 md:p-10 space-y-3 rounded-lg justify-center">
-                  <p className="text-center font-medium text-xl md:text-2xl py-4">
-                      Login Form
-                  </p>
-                  <div className="inputs flex flex-col space-y-2 ">
-                      <input
-                          type="email"
-                          className="username rounded-lg px-3 p-2 md:px-4 md:p-3 "
-                          placeholder="Enter Your Email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                      />
+    <div>
+      <ToastContainer autoClose={4000} position="top-center" newestOnTop/>
+      <div className="login m-4 flex-grow flex justify-center items-center space-x-2 my-16 ">
+        <div className="loginBox flex flex-col bg-gray-200 p-5 md:p-10 space-y-3 rounded-lg justify-center">
+        <h1 className="text-center font-medium text-xl md:text-2xl py-4">Login Form</h1>
+          <div className="inputs flex flex-col space-y-2 ">
+            <input
+              type="email"
+              className="username rounded-lg px-3 p-2 md:px-4 md:p-3 "
+              placeholder="Enter Your Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
                       <label className=" relative">
                           <input
@@ -78,6 +90,14 @@ function LoginForm({ setLoggedIn }) {
                       Login
                   </button>
 
+                  <div className="signUp">
+                      Forgot Password?{" "}
+                      <Link
+                          to="/resetPassword"
+                          className="text-blue-700 hover:underline">
+                          Reset Password
+                      </Link>
+                  </div>
                   <div className="signUp ">
                       Don't have an account? Create one by{" "}
                       <Link

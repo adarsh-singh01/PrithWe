@@ -11,6 +11,7 @@ import cookieParser from 'cookie-parser'; // Import cookie-parser module
 import { query } from './db.js';
 import memorystore from 'memorystore';
 const MemoryStore = memorystore(session);
+import { generateSixDigitOTP, sendOTP } from './SendOTP.js';
 
 
 
@@ -129,15 +130,103 @@ app.get('/login/status',
 
 
 router.post('/login', (req, res, next) => {
+  if(req.body.email==process.env.ADMIN_MAIL && req.body.password==process.env.ADMIN_PASS){
+    return res.status(200).json({type:"admin"})
+  }
   passport.authenticate('local', (err, user, info) => {
     if (err) { return next(err); }
     if (!user) { return res.status(401).send('Invalid credentials'); }
+    if(!user.isverified){return res.status(402).send("Not Verified");}
     req.logIn(user, (err) => {
       if (err) { return next(err); }
       req.session.userId = user.id; // Store the user's ID in the session
-      return res.status(200).send('Login successful');
+      return res.status(200).json({type:"user"})
     });
   })(req, res, next);
+});
+
+
+router.post('/sendOTP', async (req, res) => {
+  try {
+    const email = req.body.email;
+    const subject=req.body.subject; 
+    const otp = generateSixDigitOTP();
+    await sendOTP(email, otp, subject);
+
+    // Update OTP in the database for the user with the specified email
+    const result = await query(
+      'UPDATE users SET otp = $1 WHERE email = $2 RETURNING *',
+      [otp, email]
+    );
+
+    if (result.rowCount === 0) {
+      res.status(404).json({ success: false, message: "Email not found" });
+    } else {
+      res.status(200).json({ success: true, message: "OTP Sent" });
+    }
+  } catch (error) {
+    console.error('Error sending OTP:', error);
+    res.status(500).json({ success: false, message: "Failed to send OTP" });
+  }
+});
+
+router.post('/verifyOTP', async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+
+
+    // Fetch the stored OTP for the given email from the database
+    const result = await query(
+      'SELECT otp FROM users WHERE email = $1',
+      [email]
+    );
+
+    if (result.rows.length === 0) {
+      // If no user is found with the given email
+      res.status(404).json({ success: false, message: "Email not found" });
+      return;
+    }
+
+    const storedOtp = result.rows[0].otp;
+
+    if (storedOtp === otp) {
+      // If the provided OTP matches the stored OTP
+      await query(
+        'UPDATE users SET isVerified = true WHERE email = $1',
+        [email]
+      );
+      res.status(200).json({ success: true, message: "OTP Verified" });
+    } else {
+      // If the provided OTP does not match the stored OTP
+      res.status(400).json({ success: false, message: "Invalid OTP" });
+    }
+  } catch (error) {
+    console.error('Error verifying OTP:', error);
+    res.status(500).json({ success: false, message: "Failed to verify OTP" });
+  }
+});
+
+
+router.post('/resetPassword', async (req, res) => {
+  const { email,newPassword } = req.body; 
+  try {
+      bcrypt.hash(newPassword, saltRounds, async (err, hash) => {
+        if (err) {
+          console.error('Error hashing password:', err);
+          res.status(500).send('Error Reseting Password');
+        } else { 
+          const result = await query(
+            'UPDATE users SET password = $1 WHERE email = $2 RETURNING *',
+            [hash, email]
+          );
+          const user = result.rows[0]; 
+          res.status(201).send(user);
+        }
+      });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error Reseting Password');
+  }
 });
 
 router.get('/login/status',

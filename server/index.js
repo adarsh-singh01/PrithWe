@@ -15,6 +15,7 @@ import householdRouter from "./householdData.js";
 import contactUsRouter from "./contactUs.js";
 import authRouter from "./Authentication.js";
 import businessRouter from "./businessData.js";
+import adminRouter from "./adminData.js";
 import memorystore from 'memorystore';
 const MemoryStore = memorystore(session);
 
@@ -114,6 +115,7 @@ app.use("/api/household", householdRouter);
 app.use("/api/contact", contactUsRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/business", businessRouter);
+app.use("/api/admin", adminRouter);
 
 app.listen(port, () => console.log("App is listening"));
 

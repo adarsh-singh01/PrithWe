@@ -2,7 +2,10 @@ import React from 'react';
 import adarsh from '../assets/adarsh.png'
 import shivam from '../assets/shivam.jpg'
 
+
+
 const AboutUs = () => {
+    
     return (
         <div className="mx-auto flex-grow max-w-screen-xl py-24 p-6 md:px-10 lg:px-20">
         <div className='text-4xl md:text-6xl font-extrabold text-green-500 pb-10 text-center '>About Us</div>
