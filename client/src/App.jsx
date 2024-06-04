@@ -16,6 +16,7 @@ import VerifyEmail from './pages/VerifyEmail';
 import ResetPassword from './pages/ResetPassword';
 
 import AdminDashBoard from './pages/AdminDashboard';
+import Tips from './pages/Tips';
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
           <Route path='/dashboard' element={ <AdminDashBoard/>} />
           <Route path="/information" element={<Information />} />
           <Route path="/aboutUs" element={<AboutUs />} />
+          <Route path="/tips" element={<Tips />} />
           <Route path="/logout" element={<Home />} />
           <Route
             path="/calculator"
