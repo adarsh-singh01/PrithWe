@@ -33,8 +33,12 @@ function RegisterForm() {
       toast.success("Redirecting to Verification Page")
       setTimeout(() => navigate("/verifyEmail"), 4000);
     } catch (error) {
-      console.error("Error registering user:", error);
-      toast.error("Error registering user");
+      console.error("Error registering user:", error.response || error);
+      if (error.response && error.response.data) {
+        toast.error(error.response.data.message || "Error registering user");
+      } else {
+        toast.error("Error registering user");
+      }
     }
   };
 
