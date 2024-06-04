@@ -105,7 +105,7 @@ import sun from "../assets/sun.png";
 import moon from "../assets/moon.png"
 
 function Header({ setLoggedIn }) {
-  const [loggedIn, setLogIn] = useState(false);
+  const [logIn, setLogIn] = useState(false);
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const [theme, setTheme] = useState("light");
@@ -126,10 +126,10 @@ const handleMenuClick = () => {
           { withCredentials: true }
         );
         if (response.status === 200) {
-          setLoggedIn(true);
+          setLogIn(true);
         }
       } catch (error) {
-        setLoggedIn(false);
+        setLogIn(false);
         console.error("Error checking login status:", error);
       }
     };
@@ -317,7 +317,7 @@ const handleMenuClick = () => {
                 Contact Us
               </Link>
             </li>
-            {loggedIn && (
+            {logIn && (
               <li>
                 <Link
                   to="/calculator"
@@ -351,7 +351,7 @@ const handleMenuClick = () => {
             </li>
 
             <div className="btns md:hidden">
-              {loggedIn ? (
+              {logIn ? (
                 <button
                   onClick={handleLogout}
                   className="btn w-full text-start bg-white mt-3 px-3 py-2 font-Rubik rounded-full hover:bg-black hover:text-white"
@@ -380,7 +380,7 @@ const handleMenuClick = () => {
             <button onClick={toggleTheme} className="theme-toggle-btn p-2 rounded-full">
             <img src={theme === "light" ? moon : sun} alt="Toggle Theme" className="w-10 h-10" />
           </button>
-              {loggedIn ? (
+              {logIn ? (
                 <button
                   onClick={handleLogout}
                   className="btn bg-white px-3 py-2 font-Rubik rounded-full hover:bg-black hover:text-white"
