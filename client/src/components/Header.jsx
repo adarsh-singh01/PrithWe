@@ -105,7 +105,7 @@ import sun from "../assets/sun.png";
 import moon from "../assets/moon.png"
 
 function Header({ setLoggedIn }) {
-  const [loggedIn, setLogIn] = useState(false);
+  const [logIn, setLogIn] = useState(false);
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const [theme, setTheme] = useState("light");
@@ -114,7 +114,9 @@ function Header({ setLoggedIn }) {
     setShowMenu(!showMenu);
   };
 
-
+const handleMenuClick = () => {
+    setShowMenu(false);
+};
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -124,10 +126,10 @@ function Header({ setLoggedIn }) {
           { withCredentials: true }
         );
         if (response.status === 200) {
-          setLoggedIn(true);
+          setLogIn(true);
         }
       } catch (error) {
-        setLoggedIn(false);
+        setLogIn(false);
         console.error("Error checking login status:", error);
       }
     };
@@ -288,10 +290,11 @@ function Header({ setLoggedIn }) {
               }`}
               id="navbar-default  "
             >
-            <ul
+            <ul onClick={handleMenuClick}
             className={`font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 ${
               theme === "dark" ? "bg-black" : "bg-blue-500"
             }`}
+            
           >
             <li>
               <Link
@@ -314,7 +317,7 @@ function Header({ setLoggedIn }) {
                 Contact Us
               </Link>
             </li>
-            {loggedIn && (
+            {logIn && (
               <li>
                 <Link
                   to="/calculator"
@@ -358,7 +361,7 @@ function Header({ setLoggedIn }) {
             </li>
 
             <div className="btns md:hidden">
-              {loggedIn ? (
+              {logIn ? (
                 <button
                   onClick={handleLogout}
                   className="btn w-full text-start bg-white mt-3 px-3 py-2 font-Rubik rounded-full hover:bg-black hover:text-white"
@@ -387,7 +390,7 @@ function Header({ setLoggedIn }) {
             <button onClick={toggleTheme} className="theme-toggle-btn p-2 rounded-full">
             <img src={theme === "light" ? moon : sun} alt="Toggle Theme" className="w-10 h-10" />
           </button>
-              {loggedIn ? (
+              {logIn ? (
                 <button
                   onClick={handleLogout}
                   className="btn bg-white px-3 py-2 font-Rubik rounded-full hover:bg-black hover:text-white"

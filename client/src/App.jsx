@@ -12,15 +12,26 @@ import Information from './pages/Information';
 import axios from 'axios';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import  ScrollToTop  from './components/ScrollToTop';
+
 import VerifyEmail from './pages/VerifyEmail';
 import ResetPassword from './pages/ResetPassword';
 
 import AdminDashBoard from './pages/AdminDashboard';
+
 import Tips from './pages/Tips';
+
+import Spinner from './components/Spinner';
+// For Custom Scrollbar
+import './Scrollbar.css'
+
 
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -37,12 +48,17 @@ function App() {
     checkLoginStatus();
   }, [loggedIn]);
 
+  if (loading) {
+    return <Spinner setLoading={setLoading} />;
+  }
   return (
 
     <Router>
       <ToastContainer autoClose={2000} position="top-center" newestOnTop />
 
       <Layout setLoggedIn={setLoggedIn}>
+        <ScrollToTop/>
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/contactUs" element={<ContactUs />} />
@@ -54,7 +70,9 @@ function App() {
           <Route path='/dashboard' element={ <AdminDashBoard/>} />
           <Route path="/information" element={<Information />} />
           <Route path="/aboutUs" element={<AboutUs />} />
+
           <Route path="/tips" element={<Tips />} />
+
           <Route path="/logout" element={<Home />} />
           <Route
             path="/calculator"
@@ -64,7 +82,6 @@ function App() {
           <Route path='/resetPassword' element={ <ResetPassword/>} />
         </Routes>
       </Layout>
-
     </Router>
   );
 }

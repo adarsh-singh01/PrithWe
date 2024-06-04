@@ -22,16 +22,35 @@
       .dark-mode h3 {
         color: white;
       }
-
-      
-      
-      
+      .circle {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        pointer-events: none;
+        transition: transform 0.1s, left 0.1s, top 0.1s;
+      }
       </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PrithWe</title>
   </head>
   <body >
     <div id="root" class="flex flex-col font-Rubik h-screen"></div>
+    <div class="circle-container">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="cursor.js"></script>
   </body>
 </html>
