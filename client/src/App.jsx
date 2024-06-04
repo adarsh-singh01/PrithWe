@@ -49,6 +49,7 @@ function App() {
     <Router>
       <ToastContainer autoClose={2000} position="top-center" newestOnTop />
       <Layout setLoggedIn={setLoggedIn}>
+        <ScrollToTop/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/contactUs" element={<ContactUs />} />
