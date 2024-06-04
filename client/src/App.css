@@ -1,6 +1,7 @@
 body {
   padding: 0;
   margin: 0; /* Also reset margin to avoid any default spacing */
+  overflow-x: hidden;
 }
 
 #root {
