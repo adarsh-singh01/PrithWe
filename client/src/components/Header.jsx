@@ -341,6 +341,16 @@ const handleMenuClick = () => {
             </li>
             <li>
               <Link
+                to="/tips"
+                className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 ${
+                  theme === "dark" ? "text-white hover:text-white" : "text-white md:hover:text-black hover:bg-gray-700"
+                }`}
+              >
+                Tips
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/aboutUs"
                 className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 ${
                   theme === "dark" ? "text-white hover:text-white" : "text-white md:hover:text-black hover:bg-gray-700"
