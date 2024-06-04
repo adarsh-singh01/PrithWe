@@ -135,7 +135,7 @@ const handleMenuClick = () => {
     };
 
     checkLoginStatus();
-},[]);
+});
 
 
   const handleLogout = async () => {
