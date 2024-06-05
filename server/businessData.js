@@ -37,12 +37,12 @@ router.post('/saveData', async (req, res) => {
              VALUES ($1, $2, $3, $4, $5, $6, $7)`,
       values: [
         userId,
-        formData.electricityUsage,
-        formData.waterUsage,
-        formData.paperConsumption,
-        formData.wasteGeneration,
-        formData.fuelConsumption,
-        formData.businessTravel
+        formData.electricity_usage,
+        formData.water_usage,
+        formData.paper_consumption,
+        formData.waste_generation,
+        formData.fuel_consumption,
+        formData.business_travel
       ],
     };
 
