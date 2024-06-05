@@ -318,6 +318,7 @@ const handleMenuClick = () => {
               </Link>
             </li>
             {logIn && (
+              <>   
               <li>
                 <Link
                   to="/calculator"
@@ -328,6 +329,17 @@ const handleMenuClick = () => {
                   Calculator
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/history"
+                  className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 ${
+                    theme === "dark" ? "text-white hover:text-white" : "text-white md:hover:text-black hover:bg-gray-700"
+                  }`}
+                >
+                  History
+                </Link>
+              </li>
+              </>
             )}
             <li>
               <Link

@@ -17,6 +17,7 @@ import  ScrollToTop  from './components/ScrollToTop';
 
 import VerifyEmail from './pages/VerifyEmail';
 import ResetPassword from './pages/ResetPassword';
+import History from './pages/History';
 
 import AdminDashBoard from './pages/AdminDashboard';
 
@@ -77,6 +78,10 @@ function App() {
           <Route
             path="/calculator"
             element={loggedIn ? <Calculator /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/history"
+            element={loggedIn ? <History /> : <Navigate to="/login" />}
           />
           <Route path='/verifyEmail' element={ <VerifyEmail/>} />
           <Route path='/resetPassword' element={ <ResetPassword/>} />
