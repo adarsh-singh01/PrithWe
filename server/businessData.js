@@ -42,7 +42,7 @@ router.post('/saveData', async (req, res) => {
         formData.Water_Usage,
         formData.Paper_Consumption,
         formData.Waste_Generation,
-        formData.Waste_Generation,
+        formData.Fuel_Consumption,
         formData.Business_Travel
       ],
     };
