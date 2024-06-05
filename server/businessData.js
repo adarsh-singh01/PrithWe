@@ -32,6 +32,7 @@ router.post('/saveData', async (req, res) => {
     //const userId = req.session.userId; // Assuming user_id is already stored in the session
 
     // Insert form data into business_common table
+    console.log(formData)
     const insertQuery = {
       text: `INSERT INTO business_common (user_id, electricity_usage, water_usage, paper_consumption, waste_generation, fuel_consumption, business_travel) 
              VALUES ($1, $2, $3, $4, $5, $6, $7)`,
