@@ -5,7 +5,7 @@ import Footer2 from './components/Footer2';
 
 const Layout = ({ setLoggedIn,children }) => {
   const location = useLocation();
-  const isAdminRoute = location.pathname === '/dashboard';
+  const isAdminRoute = location.pathname === '/dashboard' || /^\/admin\/user\/[^\/]+$/.test(location.pathname);
 
   return (
     <>

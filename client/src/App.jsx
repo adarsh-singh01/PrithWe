@@ -22,6 +22,7 @@ import AdminDashBoard from './pages/AdminDashboard';
 
 import Tips from './pages/Tips';
 
+import UserDetails from './pages/UserDetails';
 import Spinner from './components/Spinner';
 // For Custom Scrollbar
 import './Scrollbar.css'
@@ -70,7 +71,7 @@ function App() {
           <Route path='/dashboard' element={ <AdminDashBoard/>} />
           <Route path="/information" element={<Information />} />
           <Route path="/aboutUs" element={<AboutUs />} />
-
+          <Route path="/admin/user/:userId" element={<UserDetails />} />
           <Route path="/tips" element={<Tips />} />
 
           <Route path="/logout" element={<Home />} />
