@@ -1,6 +1,11 @@
 import nodemailer from "nodemailer"
 import dotenv from "dotenv";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config();
 
 const wrapAsync = (fn) => {
@@ -32,13 +37,23 @@ export function generateSixDigitOTP() {
   return otp;
 }
 
+const getHtmlTemplate = (otp) => {
+  const templatePath = path.resolve(__dirname, "EmailTemplate", "emailTemplate.html");
+  let template = fs.readFileSync(templatePath, "utf8");
+  return template.replace("{{otp}}", otp);
+};
+
+
 export const sendOTP = wrapAsync(async (email, otp, subject) => {
   try { 
+    const htmlContent = getHtmlTemplate(otp);
+
     const mailOptions = {
       from: process.env.MAIL,
       to: email,
       subject: subject,
-      text: `Your OTP for pritwe is: ${otp}`
+      text: `Your OTP for pritwe is: ${otp}`,
+      html: htmlContent
     };
 
     await transporter.sendMail(mailOptions);  
