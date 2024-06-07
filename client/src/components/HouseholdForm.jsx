@@ -4,6 +4,10 @@ import PieChart from "./PieChart";
 import DoughnutChart from "./DoughnutChart";
 import HouseholdResult from "./HouseholdResult";
 import { toast } from 'react-toastify';
+import {
+  calculateTotalCarbonFootprint,
+  calculateContributions,
+} from "./CarbonCalculator";
 
 function HouseholdForm() {
   const [formData, setFormData] = useState({
@@ -19,6 +23,7 @@ function HouseholdForm() {
   const [contributions, setContributions] = useState([]);
   const [totalCarbonFootprint, setTotalCarbonFootprint] = useState(null);
   const [showChart, setShowChart] = useState(false); // State to toggle chart visibility
+  const [Recommendation,setRecommendation]=useState();
 
   //const [error, setError] = useState(null); // State to handle errors
   //const [showResults, setShowResults] = useState(false); // State to control showing Results
@@ -146,6 +151,8 @@ function HouseholdForm() {
         userId: await fetchUserId(),
       });
       toast.success("Calculated successfully");
+      const result = response.data;
+      setRecommendation(result)
       setShowChart(true);
     } catch (error) {
       console.error("Error saving data:", error);
@@ -166,149 +173,6 @@ function HouseholdForm() {
     }
   };
 
-  const calculateTotalCarbonFootprint = (formData, familyData) => {
-    const emissionFactors = {
-      electricityUsage: 0.82, // Example emission factor for electricity usage
-      waterUsage: 0.36, // Example emission factor for water usage
-      wasteGeneration: 0.5, // Example emission factor for waste generation
-      gasCylinder: 2.98, // Example emission factor for gas cylinder usage
-      privateVehicle: 2.3, // Example emission factor for private vehicle transportation
-      publicVehicle: 0.015, // Example emission factor for public vehicle transportation
-      airTravel: 0.24, // Example emission factor for air travel
-      vegMeal: 2.5, // Example emission factor for a vegetarian meal
-      nonVegMeal: 7, // Example emission factor for a non-vegetarian meal
-    };
-
-    let commonCarbonFootprint = Object.keys(formData).reduce((total, key) => {
-      return total + parseFloat(formData[key]) * emissionFactors[key];
-    }, 0);
-
-    const familyCarbonFootprints = familyData.map((member) => {
-      const transportationFootprint =
-        parseFloat(member.transportation.privateVehicle) *
-          emissionFactors.privateVehicle +
-        parseFloat(member.transportation.publicVehicle) *
-          emissionFactors.publicVehicle +
-        parseFloat(member.transportation.airTravel) * emissionFactors.airTravel;
-      const foodFootprint =
-        parseFloat(member.food.vegMeals) * emissionFactors.vegMeal +
-        parseFloat(member.food.nonVegMeals) * emissionFactors.nonVegMeal;
-      return transportationFootprint + foodFootprint;
-    });
-
-    const totalCarbonFootprint =
-      commonCarbonFootprint +
-      familyCarbonFootprints.reduce((total, footprint) => total + footprint, 0);
-
-    return totalCarbonFootprint;
-  };
-
-  // Function to calculate contributions
-  // Function to calculate contributions
-  const calculateContributions = (
-    formData,
-    familyData,
-    totalCarbonFootprint
-  ) => {
-    // Define emission factors for each input
-    const emissionFactors = {
-      electricityUsage: 0.82,
-      waterUsage: 0.36,
-      wasteGeneration: 0.5,
-      gasCylinder: 2.98,
-      privateVehicle: 2.3,
-      publicVehicle: 0.015,
-      airTravel: 0.24,
-      vegMeal: 2.5,
-      nonVegMeal: 7,
-    };
-
-    // Calculate contributions for common form data
-    // Calculate contributions for each factor (excluding food and transportation)
-    const electricityContribution =
-      ((parseFloat(formData.electricityUsage) *
-        emissionFactors.electricityUsage) /
-        totalCarbonFootprint) *
-      100;
-    const waterContribution =
-      ((parseFloat(formData.waterUsage) * emissionFactors.waterUsage) /
-        totalCarbonFootprint) *
-      100;
-    const wasteContribution =
-      ((parseFloat(formData.wasteGeneration) *
-        emissionFactors.wasteGeneration) /
-        totalCarbonFootprint) *
-      100;
-    const gasContribution =
-      ((parseFloat(formData.gasCylinder) * emissionFactors.gasCylinder) /
-        totalCarbonFootprint) *
-      100;
-
-    // Calculate contributions for food and transportation
-    //let foodFootprint = 0;
-    let vegFootprint = 0;
-    let nonVegFootprint = 0;
-    //let transportationFootprint=0;
-    let privateFootprint = 0;
-    let publicFootprint = 0;
-    let airFootprint = 0;
-
-    familyData.forEach((member) => {
-      vegFootprint +=
-        ((parseFloat(member.food.vegMeals) * emissionFactors.vegMeal) /
-          totalCarbonFootprint) *
-        100;
-      nonVegFootprint +=
-        ((parseFloat(member.food.nonVegMeals) * emissionFactors.nonVegMeal) /
-          totalCarbonFootprint) *
-        100;
-
-      privateFootprint +=
-        ((parseFloat(member.transportation.privateVehicle) *
-          emissionFactors.privateVehicle) /
-          totalCarbonFootprint) *
-        100;
-      publicFootprint +=
-        ((parseFloat(member.transportation.publicVehicle) *
-          emissionFactors.publicVehicle) /
-          totalCarbonFootprint) *
-        100;
-      airFootprint +=
-        ((parseFloat(member.transportation.airTravel) *
-          emissionFactors.airTravel) /
-          totalCarbonFootprint) *
-        100;
-    });
-
-    // Combine all contributions into an object
-    /* const allContributions = [
-                               { label: "Electricity Usage", value: electricityContribution },
-                               { label: "Water Usage", value: waterContribution },
-                               { label: "Waste Generation", value: wasteContribution },
-                               { label: "Gas Cylinder", value: gasContribution },
-                               { label: "Veg Food", value: vegFootprint },
-                               {label :"NonVeg Food", value:nonVegFootprint},
-                               { label: "Public  Transportation", value:publicFootprint },
-                               {label:"Private Transportation", value:privateFootprint },
-                               {label : "Air Transportation", value:airFootprint}
-                           
-                             ];*/
-    const allContributions2 = [
-      { name: "Electricity", y: electricityContribution },
-      { name: "Water", y: waterContribution },
-      { name: "Waste Generation", y: wasteContribution },
-      { name: "Gas Cylinder", y: gasContribution },
-      { name: "Veg Food", y: vegFootprint },
-      { name: "Non-Veg Food", y: nonVegFootprint },
-      { name: "Public  Transportation", y: publicFootprint },
-      { name: "Private Transportation", y: privateFootprint },
-      { name: "Air Transportation", y: airFootprint },
-    ];
-
-    return allContributions2;
-
-    //return allContributions;
-  };
   return (
     <div className="p-4  m-2 mt-10">
       {/* Render the doughnut chart only if showChart state is true */}
@@ -316,6 +180,7 @@ function HouseholdForm() {
         <HouseholdResult
           totalCarbonFootprint={totalCarbonFootprint}
           contributions={contributions}
+          Recommendation={Recommendation}
         />
       )}
       {/*<PieChart contributions={contributions} />*/}{" "}
