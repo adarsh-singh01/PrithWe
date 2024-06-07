@@ -23,6 +23,7 @@ function HouseholdForm() {
   const [contributions, setContributions] = useState([]);
   const [totalCarbonFootprint, setTotalCarbonFootprint] = useState(null);
   const [showChart, setShowChart] = useState(false); // State to toggle chart visibility
+  const [Recommendation,setRecommendation]=useState();
 
   //const [error, setError] = useState(null); // State to handle errors
   //const [showResults, setShowResults] = useState(false); // State to control showing Results
@@ -150,6 +151,8 @@ function HouseholdForm() {
         userId: await fetchUserId(),
       });
       toast.success("Calculated successfully");
+      const result = response.data;
+      setRecommendation(result)
       setShowChart(true);
     } catch (error) {
       console.error("Error saving data:", error);
@@ -177,6 +180,7 @@ function HouseholdForm() {
         <HouseholdResult
           totalCarbonFootprint={totalCarbonFootprint}
           contributions={contributions}
+          Recommendation={Recommendation}
         />
       )}
       {/*<PieChart contributions={contributions} />*/}{" "}

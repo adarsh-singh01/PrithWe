@@ -19,6 +19,7 @@ function BusinessForm() {
   const [totalCarbonFootprint, setTotalCarbonFootprint] = useState(null);
   const [contributions, setContributions] = useState([]);
   const [showChart, setShowChart] = useState(false);
+  const [Recommendation,setRecommendation]=useState()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -58,6 +59,8 @@ function BusinessForm() {
         userId: await fetchUserId(),
       });
       toast.success("Calculated successfully");
+      const result = response.data;
+      setRecommendation(result)
       setShowChart(true);
     } catch (error) {
       console.error("Error saving data:", error);
@@ -104,6 +107,7 @@ function BusinessForm() {
         <HouseholdResult
           totalCarbonFootprint={totalCarbonFootprint}
           contributions={contributions}
+          Recommendation={Recommendation}
         />
       )}
 
