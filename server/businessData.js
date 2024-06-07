@@ -67,6 +67,7 @@ router.post('/saveData', async (req, res) => {
   }
 });
 
+
 async function recommendation(formData) {
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -102,5 +103,20 @@ Request business recommendations with headings and subheadings for easy organiza
     console.error('Error generating content:', error.message);
   }
 }
+
+router.get("/entries", async (req, res) => {
+  const userId = req.headers["user-id"];
+
+  try {
+    const result = await query(
+      `SELECT * FROM business_common where user_id='${userId}'`
+    );
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 
 export default router;

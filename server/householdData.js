@@ -122,4 +122,30 @@ Request personalized recommendations with headings and subheadings for easy orga
 }
 
 
+router.get("/entries", async (req, res) => {
+  const  userId  = req.headers["user-id"];
+
+  try {
+    const result = await query(`SELECT * FROM household_common where user_id='${userId}'`);
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+router.get("/familyEntries/:entryId", async (req, res) => {
+  const entryId = req.params.entryId;
+
+  try {
+    const result = await query("SELECT * FROM family_members WHERE household_common_id = $1", [
+      entryId,
+    ]);
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 export default router;
