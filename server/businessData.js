@@ -56,4 +56,18 @@ router.post('/saveData', async (req, res) => {
   }
 });
 
+router.get("/entries", async (req, res) => {
+  const userId = req.headers["user-id"];
+
+  try {
+    const result = await query(
+      `SELECT * FROM business_common where user_id='${userId}'`
+    );
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 export default router;

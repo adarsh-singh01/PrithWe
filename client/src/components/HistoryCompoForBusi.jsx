@@ -51,7 +51,7 @@ const HistoryComponent = ({ entry }) => {
       </tr>
       {showChart && (
         <tr className="flex justify-center items-center relative left-56 my-6">
-          <td className="mx-4">
+          <td className="">
             <h3>Total Carbon Footprint</h3>
             <p className="text-xl font-medium">
               {Math.round(carbonFootprint * 100) / 100}

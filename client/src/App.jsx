@@ -17,7 +17,7 @@ import  ScrollToTop  from './components/ScrollToTop';
 
 import VerifyEmail from './pages/VerifyEmail';
 import ResetPassword from './pages/ResetPassword';
-import History from './pages/History';
+import History from "./pages/History";
 
 import AdminDashBoard from './pages/AdminDashboard';
 

@@ -118,3 +118,95 @@ export const calculateContributions = (
 
   return allContributions;
 };
+
+ export const calculateBusinessCarbonFootprint = (formData) => {
+   // Define emission factors for each input
+   const emissionFactors = {
+     Electricity_Usage: 0.82,
+     Water_Usage: 0.36,
+     Paper_Consumption: 0.5,
+     Waste_Generation: 0.5,
+     Fuel_Consumption: 2.98,
+     Business_Travel: 0.24,
+   };
+
+   const conversionFactors = {
+     Water_Usage: 3.78541,
+     Waste_Generation: 1000, // 1 tonne = 1000 kg
+     Fuel_Consumption: 3.78541, // 1 gallon = 3.78541 liters
+   };
+
+   // Calculate carbon footprint
+   /*let totalCarbonFootprint = Object.keys(formData).reduce((total, key) => {
+      return total + (parseFloat(formData[key]) * emissionFactors[key]);
+    }, 0);*/
+   // Calculate carbon footprint
+   let totalCarbonFootprint = Object.keys(formData).reduce((total, key) => {
+     // Apply conversion factor if input is in tonnes or gallons
+     const convertedValue = conversionFactors[key]
+       ? parseFloat(formData[key]) * conversionFactors[key]
+       : parseFloat(formData[key]);
+     return total + convertedValue * emissionFactors[key];
+   }, 0);
+   return totalCarbonFootprint;
+ };
+
+ export const calculateBusinessContributions = (formData, totalCarbonFootprint) => {
+   // Define emission factors for each input
+   const emissionFactors = {
+     Electricity_Usage: 0.82,
+     Water_Usage: 0.36,
+     Paper_Consumption: 0.5,
+     Waste_Generation: 0.5,
+     Fuel_Consumption: 2.98,
+     Business_Travel: 0.24,
+   };
+
+   const conversionFactors = {
+     Water_Usage: 3.78541,
+     Waste_Generation: 1000, // 1 tonne = 1000 kg
+     Fuel_Consumption: 3.78541, // 1 gallon = 3.78541 liters
+   };
+
+   // Calculate the total emissions for each parameter
+   const totalEmissions = {
+     Electricity_Usage:
+       parseFloat(formData.Electricity_Usage) *
+       emissionFactors.Electricity_Usage,
+     Water_Usage:
+       parseFloat(formData.Water_Usage) * emissionFactors.Water_Usage,
+     Paper_Consumption:
+       parseFloat(formData.Paper_Consumption) *
+       emissionFactors.Paper_Consumption,
+     Waste_Generation:
+       parseFloat(formData.Waste_Generation) *
+       emissionFactors.Waste_Generation *
+       conversionFactors.Waste_Generation,
+     Fuel_Consumption:
+       parseFloat(formData.Fuel_Consumption) *
+       emissionFactors.Fuel_Consumption *
+       conversionFactors.Fuel_Consumption,
+     Business_Travel:
+       parseFloat(formData.Business_Travel) * emissionFactors.Business_Travel,
+   };
+   // Calculate the total emissions
+   const totalEmissionsSum = Object.values(totalEmissions).reduce(
+     (sum, value) => sum + value,
+     0
+   );
+
+   // Calculate contributions based on total emissions
+   const allContributions = Object.keys(totalEmissions).map((key) => ({
+     name: key.replace(/_/g, " "), // Replace underscores with spaces for display
+     y: (totalEmissions[key] / totalEmissionsSum) * 100,
+   }));
+
+   return allContributions;
+   // Calculate contributions
+   /*const allContributions = Object.keys(formData).map(key => ({
+      label: key,
+      value: (parseFloat(formData[key]) * emissionFactors[key]) / totalCarbonFootprint * 100
+    }));*/
+
+   /*return allContributions;*/
+ };
