@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,14 +11,32 @@ const ResetPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [timer, setTimer] = useState(0); // Timer state
   const navigate = useNavigate();
 
+  useEffect(() => {
+    let interval;
+    if (otpSent && timer > 0) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+    } else if (timer === 0 && otpSent) {
+      // Reset OTP state when timer runs out
+      setOtpSent(false);
+      setOtp('');
+      setMessage('');
+      setError('OTP expired. Please request a new OTP.');
+    }
+    return () => clearInterval(interval);
+  }, [otpSent, timer]);
+
   const handleSendOtp = async () => {
-    const subject = "Reset Password OTP" 
+    const subject = "Reset Password OTP"; 
     try {
       const response = await axios.post('/api/auth/sendOTP', { email,subject });
       if (response.data.success) {
         setOtpSent(true);
+        setTimer(300); // Setting timer to 5 minutes
         setMessage('OTP sent to your email address');
         setError('');
       } else {
@@ -36,10 +54,11 @@ const ResetPassword = () => {
       const response = await axios.post('/api/auth/verifyOTP', { email, otp });
       if (response.data.success) {
         setResetPassword(true);
+        setOtpSent(false); // Hide the timer
         setMessage('OTP verified successfully. You can now reset your password.');
         setError('');
       } else {
-        setError('Invalid OTP. Please try again.');
+        setError('Invalid OTP or OTP expired. Please try again.');
         setMessage('');
       }
     } catch (err) {
@@ -76,6 +95,12 @@ const ResetPassword = () => {
     }
   };
 
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="max-w-md w-full bg-white p-8 border border-gray-300 rounded-lg shadow-md">
@@ -108,6 +133,7 @@ const ResetPassword = () => {
                 onChange={(e) => setOtp(e.target.value)}
                 required
               />
+              {otpSent && <p className="text-gray-500 text-sm mt-2">Time remaining: {formatTime(timer)}</p>}
             </div>
             <button
               onClick={handleVerifyOtp}
