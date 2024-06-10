@@ -134,6 +134,18 @@ router.get("/entries", async (req, res) => {
   }
 });
 
+router.get("/recommendations", async (req, res) => {
+  const  userId  = req.headers["user-id"];
+  try {
+    const result = await query(`SELECT * FROM recommendations where user_id='${userId}'`);
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+
 router.get("/familyEntries/:entryId", async (req, res) => {
   const entryId = req.params.entryId;
 
