@@ -11,9 +11,9 @@ const VerifyEmail = () => {
   const navigate = useNavigate();
 
   const handleSendOtp = async () => {
-    const subject = "Email Verification OTP"; 
+    const subject = "Email Verification OTP";
     try {
-      const response = await axios.post('/api/auth/sendOTP', { email,subject });
+      const response = await axios.post('/api/auth/sendOTP', { email, subject });
       if (response.data.success) {
         setOtpSent(true);
         setMessage('OTP sent to your email address');
@@ -48,14 +48,16 @@ const VerifyEmail = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="max-w-md w-full bg-white p-8 border border-gray-300 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">Email Verification</h2>
-        <div className="mb-4">
-          <label className="block text-gray-700 mb-2">Email:</label>
+
+    <div className="login m-4 flex-grow flex justify-center items-center space-x-2 my-16 ">
+      <div className="loginBox flex flex-col bg-gray-200 p-5 md:p-10 space-y-5 rounded-lg justify-center w-full max-w-md">
+        <h1 className="text-center font-medium text-xl md:text-2xl py-4">Email Verification</h1>
+        <div className="inputs flex flex-col space-y-2 ">
+
           <input
             type="email"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="username rounded-lg px-3 p-2 md:px-4 md:p-3 "
+            placeholder="Enter Your Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={otpSent}
@@ -67,7 +69,8 @@ const VerifyEmail = () => {
             <label className="block text-gray-700 mb-2">OTP:</label>
             <input
               type="text"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 p-2 md:px-4 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
               required
@@ -77,7 +80,7 @@ const VerifyEmail = () => {
         {!otpSent ? (
           <button
             onClick={handleSendOtp}
-            className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="btn  p-2 rounded-full bg-green-500  hover:bg-green-600"
           >
             Send OTP
           </button>
