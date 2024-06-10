@@ -109,7 +109,15 @@ function Header({ setLoggedIn }) {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const [theme, setTheme] = useState("light");
-
+	const [isClicked, setIsClicked] = useState(false)
+  const byClick=()=>{
+		if(isClicked==false){
+		setIsClicked(true);
+	}else{
+	setIsClicked(false);
+	}
+	handleToggleMenu()
+	}
   const handleToggleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -259,13 +267,13 @@ const handleMenuClick = () => {
           </button>
             
             <button
-              onClick={handleToggleMenu}
-              className={`inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none focus:ring-2 focus:ring-white dark:text-gray-400 hover:bg-blue-600 ${
+              onClick={() => { handleToggleMenu(); byClick();}}
+              className={`inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none focus:ring-2 focus:ring-white dark:text-gray-400 hover:bg-blue-600 fa ${isClicked ? 'fa-times' : 'fa-bars'} ${
                 theme === "dark" ? "bg-black " : "bg-blue-500 "
               }`}
               aria-expanded={showMenu}
             >
-              <span className="sr-only">Open main menu</span>
+              {/* <span className="sr-only">Open main menu</span>
               <svg
                 className="w-5 h-5"
                 aria-hidden="true"
@@ -280,7 +288,7 @@ const handleMenuClick = () => {
                   strokeWidth="2"
                   d="M1 1h15M1 7h15M1 13h15"
                 />
-              </svg>
+              </svg> */}
             </button>
             </div>
 
@@ -318,6 +326,7 @@ const handleMenuClick = () => {
               </Link>
             </li>
             {logIn && (
+              <>   
               <li>
                 <Link
                   to="/calculator"
@@ -328,6 +337,17 @@ const handleMenuClick = () => {
                   Calculator
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/history"
+                  className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 ${
+                    theme === "dark" ? "text-white hover:text-white" : "text-white md:hover:text-black hover:bg-gray-700"
+                  }`}
+                >
+                  History
+                </Link>
+              </li>
+              </>
             )}
             <li>
               <Link

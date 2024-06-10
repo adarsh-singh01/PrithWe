@@ -4,7 +4,9 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+
 import { query } from './db.js';
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config();
 
@@ -38,7 +40,11 @@ export function generateSixDigitOTP() {
 }
 
 const getHtmlTemplate = (otp) => {
+
   const templatePath = path.resolve(__dirname, "EmailTemplates", "SendOtp.html");
+
+  const templatePath = path.resolve(__dirname, "EmailTemplate", "emailTemplate.html");
+
   let template = fs.readFileSync(templatePath, "utf8");
   return template.replace("{{otp}}", otp);
 };

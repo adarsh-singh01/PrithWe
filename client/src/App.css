@@ -1,3 +1,5 @@
+@import 'font-awesome/css/font-awesome.min.css';
+
 body {
   padding: 0;
   margin: 0; /* Also reset margin to avoid any default spacing */
@@ -66,4 +68,54 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+.wrapper .item{
+  border-bottom: 3px solid gray;
+}
+.max-w-screen-lg
+{
+  padding-bottom: 35px;
+  padding-inline:20px;
+}
+.wrapper .title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.wrapper .title h2
+{
+  line-height: 0;
+        margin-bottom: 0;
+}
+
+.wrapper .content
+{
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0,1,0,1);
+  -webkit-transition: all 0.5s cubic-bezier(0,1,0,1);
+  -moz-transition: all 0.5s cubic-bezier(0,1,0,1);
+  -ms-transition: all 0.5s cubic-bezier(0,1,0,1);
+  -o-transition: all 0.5s cubic-bezier(0,1,0,1);
+}
+
+.wrapper .content.show{
+  height: auto;
+  max-height: 9999px;
+  transition: all 0.5s cubic-bezier(1,0,1,0);
+  -webkit-transition: all 0.5s cubic-bezier(1,0,1,0);
+  -moz-transition: all 0.5s cubic-bezier(1,0,1,0);
+  -ms-transition: all 0.5s cubic-bezier(1,0,1,0);
+  -o-transition: all 0.5s cubic-bezier(1,0,1,0);
+}
+
+.wrapper span{
+  font-size: 1.5rem;
+}
+
+.custom-padding {
+  text-align: left;
+  padding: 20px;
 }
