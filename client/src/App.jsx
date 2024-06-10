@@ -27,6 +27,7 @@ import UserDetails from './pages/UserDetails';
 import Spinner from './components/Spinner';
 // For Custom Scrollbar
 import './Scrollbar.css'
+import Error from './pages/Error';
 
 
 
@@ -86,6 +87,7 @@ function App() {
           />
           <Route path='/verifyEmail' element={ <VerifyEmail/>} />
           <Route path='/resetPassword' element={ <ResetPassword/>} />
+          <Route path='*' element={ <Error/>} />
         </Routes>
       </Layout>
     </Router>
