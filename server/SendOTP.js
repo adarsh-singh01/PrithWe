@@ -43,7 +43,7 @@ const getHtmlTemplate = (otp) => {
 
   const templatePath = path.resolve(__dirname, "EmailTemplates", "SendOtp.html");
 
-  const templatePath = path.resolve(__dirname, "EmailTemplate", "emailTemplate.html");
+  //const templatePath = path.resolve(__dirname, "EmailTemplate", "emailTemplate.html");
 
   let template = fs.readFileSync(templatePath, "utf8");
   return template.replace("{{otp}}", otp);
