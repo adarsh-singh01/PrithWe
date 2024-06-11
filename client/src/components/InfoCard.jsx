@@ -17,7 +17,7 @@ import React from 'react';
 
 function FeatureCard({ heading, description }) {
   return (
-    <div className=" bg-opacity- bg-gray-200 text-center rounded-md px-4 py-6 md:py-12 max-w-sm shadow-md">
+    <div className=" bg-opacity- bg-gray-200 text-center rounded-md px-4 py-6 md:py-12 max-w-sm shadow-md hover:-translate-y-4 transition ease-in-out hover:shadow-green-500/40 hover:border-2 border-green-500/40">
       <h1 className="text-lg md:text-xl text-green-600 font-semibold mb-2 font-Rubik">{heading}</h1>
       <h1 className="text-slate-600 text-sm md:text-base font-Rubik">{description}</h1>
     </div>
