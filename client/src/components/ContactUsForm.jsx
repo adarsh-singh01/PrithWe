@@ -10,6 +10,8 @@ function ContactUsForm() {
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (e) => {
+    const subject1="New Contact Data Form"
+    const subject2="Thank You For Reaching Out"
     e.preventDefault();
 
     // Validation
@@ -33,6 +35,8 @@ function ContactUsForm() {
         name,
         email,
         message,
+        subject1,
+        subject2
       });
       toast.success("Message sent successfully");
       setName("");

@@ -268,7 +268,9 @@ const handleMenuClick = () => {
             
             <button
               onClick={() => { handleToggleMenu(); byClick();}}
+
               style={{fontSize:'30px'}}
+
               className={`inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none focus:ring-2 focus:ring-white dark:text-gray-400 hover:bg-blue-600 fa ${isClicked ? 'fa-times' : 'fa-bars'} ${
                 theme === "dark" ? "bg-black " : "bg-blue-500 "
               }`}

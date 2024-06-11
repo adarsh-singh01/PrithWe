@@ -183,11 +183,6 @@ function HouseholdForm() {
           Recommendation={Recommendation}
         />
       )}
-      {/*<PieChart contributions={contributions} />*/}{" "}
-      {/* Pass contributions as props */}
-      {/*<PieChart contributions={contributions} />*/}{" "}
-      {/* Pass contributions as props */}
-      {/*<DoughnutChart contributions={contributions}/>*/}
       {!showChart && (
         <form
           onSubmit={handleCalculateCF}
