@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form Submission</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: #ffffff;
+            text-align: center;
+            padding: 30px 0;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+        .content {
+            padding: 30px;
+            text-align: left;
+        }
+        .content p {
+            font-size: 22px;
+            margin: 15px 0;
+            color: #333333;
+            line-height: 1.6;
+        }
+        .label {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .footer {
+            background-color: #4CAF50;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+        .footer p {
+            margin: 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 style="font-size: 28px; margin: 0;">Contact Form Submission</h1>
+        </div>
+        <div class="content">
+            <p class="label" style="font-size: 20px;">Name:</p>
+            <span style="margin-bottom: 30px; font-size: 20px;">{{name}}</span>
+            
+            <p class="label" style="font-size: 20px;">Email:</p>
+            <p style="margin-bottom: 30px; font-size: 20px;">{{email}}</p>
+            
+            <p class="label" style="font-size: 20px;">Message:</p>
+            <p style="font-size: 20px;">{{message}}</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 PrithWe. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
