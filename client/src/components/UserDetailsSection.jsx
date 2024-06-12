@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import AdminSideChart from './AdminSideChart';
+import { calculateTotalCarbonFootprint } from './CarbonCalculator';
 
 function UserDetailsSection() {
   const { userId } = useParams();
@@ -10,6 +11,7 @@ function UserDetailsSection() {
   const [expandedEntry, setExpandedEntry] = useState(null);
   const [expandedMember, setExpandedMember] = useState(null);
   const [Recommendations, setRecommendations] = useState([]);
+  const [carbonFootprints, setCarbonFootprints] = useState({}); // Step 1
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -35,10 +37,18 @@ function UserDetailsSection() {
           })
         );
 
-        // Sort entries by date in descending order (most recent at the top)
+       
         entriesWithFamily.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
+      
+        const carbonFootprintMap = {};
+        entriesWithFamily.forEach(entry => {
+          const { formData, familyData } = getLastEntryFormData(entry);
+          carbonFootprintMap[entry.id] = calculateTotalCarbonFootprint(formData, familyData);
+        });
+
         setEntries(entriesWithFamily);
+        setCarbonFootprints(carbonFootprintMap);
       } catch (error) {
         console.error('Error fetching entries:', error);
       }
@@ -49,10 +59,7 @@ function UserDetailsSection() {
         const response = await axios.get("api/household/recommendations", {
           headers: { "user-id": userId },
         });
-        const recommendations = response.data;
-        console.log("recommendations")
-        console.log(recommendations)
-        setRecommendations(recommendations);
+        setRecommendations(response.data);
       } catch (error) {
         console.error('Error fetching recommendations:', error);
       }
@@ -63,10 +70,31 @@ function UserDetailsSection() {
     fetchRecommendations();
   }, [userId]);
 
+  const getLastEntryFormData = (entry) => {
+    return {
+      formData: {
+        electricityUsage: entry.electricity_usage,
+        waterUsage: entry.water_usage,
+        wasteGeneration: entry.waste_generation,
+        gasCylinder: entry.gas_cylinder,
+      },
+      familyData: entry.familyEntries.map((ent) => ({
+        name: ent.name,
+        transportation: {
+          privateVehicle: ent.private_vehicle,
+          publicVehicle: ent.public_vehicle,
+          airTravel: ent.air_travel,
+        },
+        food: { vegMeals: ent.veg_meals, nonVegMeals: ent.non_veg_meals },
+      }))
+    };
+  };
+
   if (!userDetails) {
     return <div className="flex justify-center items-center h-screen"><p className="text-lg">Loading...</p></div>;
   }
 
+  // Function to format recommendations
   function formatRecommendations(data) {
     return data
       .replace(/## (.*?):/g, '<h2>$1</h2>')
@@ -96,9 +124,9 @@ function UserDetailsSection() {
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6 space-y-6 mb-28 ">
+    <div className="bg-white shadow-lg rounded-lg p-6 space-y-6 mb-28">
       <div className="flex justify-center items-center">
-        <div className="bg-gray-100 p-6 rounded-lg shadow-md text-center ">
+        <div className="bg-gray-100 p-6 rounded-lg shadow-md text-center">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">Household's Details</h2>
           <p className="text-gray-600"><strong>Email:</strong> household@gmail.com</p>
           <p className="text-gray-600"><strong>Type:</strong> Household</p>
@@ -114,7 +142,7 @@ function UserDetailsSection() {
                   className='mx-auto flex flex-row items-center cursor-pointer w-full justify-between'
                   onClick={() => toggleEntry(entryIndex)}
                 >
-                  <p className="text-gray-600 flex items-center ">
+                  <p className="text-gray-600 flex items-center">
                     <span className="ml-2">Sr No. <strong>{entries.length - entryIndex}</strong></span>
                   </p>
                   <div className='flex gap-6'>
@@ -128,7 +156,7 @@ function UserDetailsSection() {
                     <p className="text-gray-600"><strong>Water Usage:</strong> {entry.water_usage}</p>
                     <p className="text-gray-600"><strong>Waste Generation:</strong> {entry.waste_generation}</p>
                     <p className="text-gray-600"><strong>Gas Cylinder:</strong> {entry.gas_cylinder}</p>
-                    <div className="flex justify-center items-center text-center m-2 ">
+                    <div className="flex justify-center items-center text-center m-2">
                       <h3 className="text-2xl font-semibold text-gray-800 m-2 rounded-lg shadow-md bg-gray-200 px-4 py-2">Family Members</h3>
                     </div>
                     {entry.familyEntries.length > 0 ? (
@@ -154,17 +182,15 @@ function UserDetailsSection() {
                     ) : (
                       <p className="text-gray-600">No family members data available.</p>
                     )}
-                    <div className="flex justify-center items-center text-center m-2 ">
-                      <h3 className="text-2xl font-semibold text-gray-800 m-5 rounded-lg shadow-md bg-gray-200 px-4 py-2">Total Carbon Footprints</h3>
+                    <div className="flex justify-center items-center text-center m-2">
+                      <h3 className="text-2xl font-semibold text-gray-800 m-5 rounded-lg shadow-md bg-gray-200 px-4 py-2">
+                        Total Carbon Footprints : {Math.round(carbonFootprints[entry.id] * 100) / 100} KgCO<sub>2</sub> {/* Step 3 */}
+                      </h3>
                     </div>
-
-
                     <AdminSideChart entry={entry} />
-                    <div className="flex justify-center items-center text-center m-2 ">
+                    <div className="flex justify-center items-center text-center m-2">
                       <h3 className="text-2xl font-semibold text-gray-800 m-5 rounded-lg shadow-md bg-gray-200 px-4 py-2">Recommendations</h3>
                     </div>
-
-
                     {Recommendations.map((item, index) => (
                       item.household_common_id === entry.id && (
                         <div
