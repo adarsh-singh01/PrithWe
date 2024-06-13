@@ -2,13 +2,16 @@ import React from "react";
 
 function BelowHero() {
   return (
-    <div>
-      <div className="flex bg-gray-200 bg-opacity-50 flex-col justify-center items-center space-y-8 py-28 md:py-40">
-        <h1 className="text-2xl md:text-4xl font-Rubik">What is Carbon Footprint?</h1>
-        <p className={`text-slate-600 text-base m-2 md:text-xl text-center font-Rubik `} >
-        Just like an actual footprint it is a mark you leave upon the environment <br />(not with your shoes 😅) but with every action that releases carbon.         
-        </p>
+    <div class="flex bg-gray-200 bg-opacity-50 py-28 md:py-40 container">
+      <div class="flex-none">
+        <img src="src/assets/homeimg.jpeg" alt="" class="img-fluid custom-rounded  ml-20" width="400" height="400"  />
       </div>
+      <div class="flex flex-col justify-center items-center flex-grow px-8 md:px-16">
+        <h1 class="text-2xl md:text-4xl font-Rubik">What is Carbon Footprint?</h1>
+        <p class="text-slate-600 text-base md:text-xl text-center font-Rubik mt-8">
+            Just like an actual footprint it is a mark you leave upon the environment <br />(not with your shoes 😅) but with every action that releases carbon.         
+        </p>
+    </div>
     </div>
   );
 }
