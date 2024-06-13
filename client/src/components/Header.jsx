@@ -102,21 +102,22 @@ import "react-toastify/dist/ReactToastify.css";
 import logo from "../assets/headerlogo.png";
 import leaf from "../assets/leaf.png";
 import sun from "../assets/sun.png";
-import moon from "../assets/moon.png";
+import moon from "../assets/moon.png"
 
 function Header({ setLoggedIn }) {
   const [logIn, setLogIn] = useState(false);
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const [theme, setTheme] = useState("light");
-
+  
   const handleToggleMenu = () => {
     setShowMenu(!showMenu);
+  
   };
 
-  const handleMenuClick = () => {
+const handleMenuClick = () => {
     setShowMenu(false);
-  };
+};
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -135,7 +136,8 @@ function Header({ setLoggedIn }) {
     };
 
     checkLoginStatus();
-  });
+});
+
 
   const handleLogout = async () => {
     try {
@@ -145,7 +147,7 @@ function Header({ setLoggedIn }) {
         { withCredentials: true }
       );
       if (response.status === 200) {
-        console.log("HERE");
+        console.log("HERE")
         setLogIn(false);
         setLoggedIn(false);
         //checkLoginStatus();
@@ -157,19 +159,19 @@ function Header({ setLoggedIn }) {
       toast.error("Error logging out");
     }
   };
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "light";
-    setTheme(savedTheme);
-    document.body.classList.toggle("dark-mode", savedTheme === "dark");
-  }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.body.classList.toggle("dark-mode", newTheme === "dark");
-  };
+  
+    useEffect(() => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      setTheme(savedTheme);
+      document.body.classList.toggle('dark-mode', savedTheme === 'dark');
+    }, []);
+  
+    const toggleTheme = () => {
+      const newTheme = theme === 'light' ? 'dark' : 'light';
+      setTheme(newTheme);
+      localStorage.setItem('theme', newTheme);
+      document.body.classList.toggle('dark-mode', newTheme === 'dark');
+    };
 
   return (
     <div>
@@ -240,7 +242,9 @@ function Header({ setLoggedIn }) {
             theme === "dark" ? "bg-black " : "bg-blue-500 "
           }fixed top-0 left-0 right-0 z-50 `}
         >
-          <div className={` flex flex-wrap items-center justify-between  p-2 `}>
+          <div
+            className={` flex flex-wrap items-center justify-between  p-2 `}
+          >
             <div className="logo flex space-x-2 items-center ">
               <a href="#">
                 <img className="h-12" src={leaf} />
@@ -251,28 +255,21 @@ function Header({ setLoggedIn }) {
             </div>
 
             <div className=" md:hidden flex items-center justify-center">
-              <button
-                onClick={toggleTheme}
-                className="  theme-toggle-btn p-2 rounded-full"
-              >
-                <img
-                  src={theme === "light" ? moon : sun}
-                  alt="Toggle Theme"
-                  className="w-10 h-10"
-                />
-              </button>
+            <button onClick={toggleTheme}  className="  theme-toggle-btn p-2 rounded-full">
+            <img src={theme === "light" ? moon : sun} alt="Toggle Theme" className="w-10 h-10" />
+          </button>
+            
+            <button
 
-              <button
-                onClick={() => {
-                  handleToggleMenu();
-                }}
-                style={{ fontSize: "30px" }}
-                className={`inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none focus:ring-2 focus:ring-white dark:text-gray-400 hover:bg-blue-600 fa ${
-                  showMenu ? "fa-times" : "fa-bars"
-                } ${theme === "dark" ? "bg-black " : "bg-blue-500 "}`}
-                aria-expanded={showMenu}
-              >
-                {/* <span className="sr-only">Open main menu</span>
+              onClick={() => { handleToggleMenu();}}
+              style={{fontSize:'30px'}}
+              className={`inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none focus:ring-2 focus:ring-white dark:text-gray-400 hover:bg-blue-600 fa ${showMenu ? 'fa-times' : 'fa-bars'} ${
+
+                theme === "dark" ? "bg-black " : "bg-blue-500 "
+              }`}
+              aria-expanded={showMenu}
+            >
+              {/* <span className="sr-only">Open main menu</span>
               <svg
                 className="w-5 h-5"
                 aria-hidden="true"
@@ -288,7 +285,7 @@ function Header({ setLoggedIn }) {
                   d="M1 1h15M1 7h15M1 13h15"
                 />
               </svg> */}
-              </button>
+            </button>
             </div>
 
             <div
@@ -297,139 +294,118 @@ function Header({ setLoggedIn }) {
               }`}
               id="navbar-default  "
             >
-              <ul
-                onClick={handleMenuClick}
-                className={`font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 ${
-                  theme === "dark" ? "bg-black" : "bg-blue-500"
+            <ul onClick={handleMenuClick}
+            className={`font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 ${
+              theme === "dark" ? "bg-black" : "bg-blue-500"
+            }`}
+            
+          >
+            <li>
+              <Link
+                to="/"
+                className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 ${
+                  theme === "dark" ? "text-white hover:text-white" : "text-white md:hover:text-black hover:bg-gray-700"
+                }`}
+                aria-current="page"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/contactUs"
+                className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 ${
+                  theme === "dark" ? "text-white hover:text-white" : "text-white md:hover:text-black hover:bg-gray-700"
                 }`}
               >
-                <li>
-                  <Link
-                    to="/"
-                    className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 ${
-                      theme === "dark"
-                        ? "text-white hover:text-white"
-                        : "text-white md:hover:text-black hover:bg-gray-700"
-                    }`}
-                    aria-current="page"
-                  >
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/contactUs"
-                    className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 ${
-                      theme === "dark"
-                        ? "text-white hover:text-white"
-                        : "text-white md:hover:text-black hover:bg-gray-700"
-                    }`}
-                  >
-                    Contact Us
-                  </Link>
-                </li>
-                {logIn && (
-                  <>
-                    <li>
-                      <Link
-                        to="/calculator"
-                        className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 ${
-                          theme === "dark"
-                            ? "text-white hover:text-white"
-                            : "text-white md:hover:text-black hover:bg-gray-700"
-                        }`}
-                      >
-                        Calculator
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/history"
-                        className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 ${
-                          theme === "dark"
-                            ? "text-white hover:text-white"
-                            : "text-white md:hover:text-black hover:bg-gray-700"
-                        }`}
-                      >
-                        History
-                      </Link>
-                    </li>
-                  </>
-                )}
-                <li>
-                  <Link
-                    to="/information"
-                    className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 ${
-                      theme === "dark"
-                        ? "text-white hover:text-white"
-                        : "text-white md:hover:text-black hover:bg-gray-700"
-                    }`}
-                  >
-                    Information
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/tips"
-                    className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 ${
-                      theme === "dark"
-                        ? "text-white hover:text-white"
-                        : "text-white md:hover:text-black hover:bg-gray-700"
-                    }`}
-                  >
-                    Tips
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/aboutUs"
-                    className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 ${
-                      theme === "dark"
-                        ? "text-white hover:text-white"
-                        : "text-white md:hover:text-black hover:bg-gray-700"
-                    }`}
-                  >
-                    About Us
-                  </Link>
-                </li>
-
-                <div className="btns md:hidden">
-                  {logIn ? (
-                    <button
-                      onClick={handleLogout}
-                      className="btn w-full text-start bg-white mt-3 px-3 py-2 font-Rubik rounded-full hover:bg-black hover:text-white"
-                    >
-                      Logout
-                    </button>
-                  ) : (
-                    <>
-                      <Link to="/login">
-                        <li className="btn bg-white px-3 py-1 mb-2 mt-3 font-Rubik rounded-full hover:bg-black hover:text-white">
-                          Login
-                        </li>
-                      </Link>
-                      <Link to="/register">
-                        <li className="btn bg-white flex px-3 py-1 font-Rubik rounded-full hover:bg-black hover:text-white">
-                          Sign Up
-                        </li>
-                      </Link>
-                    </>
-                  )}
-                </div>
-              </ul>
-            </div>
-
-            <div className="btns hidden justify-center items-center font-medium md:flex space-x-2">
-              <button
-                onClick={toggleTheme}
-                className="theme-toggle-btn p-2 rounded-full"
+                Contact Us
+              </Link>
+            </li>
+            {logIn && (
+              <>   
+              <li>
+                <Link
+                  to="/calculator"
+                  className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 ${
+                    theme === "dark" ? "text-white hover:text-white" : "text-white md:hover:text-black hover:bg-gray-700"
+                  }`}
+                >
+                  Calculator
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/history"
+                  className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 ${
+                    theme === "dark" ? "text-white hover:text-white" : "text-white md:hover:text-black hover:bg-gray-700"
+                  }`}
+                >
+                  History
+                </Link>
+              </li>
+              </>
+            )}
+            <li>
+              <Link
+                to="/information"
+                className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 ${
+                  theme === "dark" ? "text-white hover:text-white" : "text-white md:hover:text-black hover:bg-gray-700"
+                }`}
               >
-                <img
-                  src={theme === "light" ? moon : sun}
-                  alt="Toggle Theme"
-                  className="w-10 h-10"
-                />
-              </button>
+                Information
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/tips"
+                className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 ${
+                  theme === "dark" ? "text-white hover:text-white" : "text-white md:hover:text-black hover:bg-gray-700"
+                }`}
+              >
+                Tips
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/aboutUs"
+                className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 ${
+                  theme === "dark" ? "text-white hover:text-white" : "text-white md:hover:text-black hover:bg-gray-700"
+                }`}
+              >
+                About Us
+              </Link>
+            </li>
+
+            <div className="btns md:hidden">
+              {logIn ? (
+                <button
+                  onClick={handleLogout}
+                  className="btn w-full text-start bg-white mt-3 px-3 py-2 font-Rubik rounded-full hover:bg-black hover:text-white"
+                >
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <Link to="/login">
+                    <li className="btn bg-white px-3 py-1 mb-2 mt-3 font-Rubik rounded-full hover:bg-black hover:text-white">
+                      Login
+                    </li>
+                  </Link>
+                  <Link to="/register">
+                    <li className="btn bg-white flex px-3 py-1 font-Rubik rounded-full hover:bg-black hover:text-white">
+                      Sign Up
+                    </li>
+                  </Link>
+                </>
+              )}
+            </div>
+          </ul>
+            </div>
+            
+            <div className="btns hidden justify-center items-center font-medium md:flex space-x-2">
+            <button onClick={toggleTheme} className="theme-toggle-btn p-2 rounded-full">
+            <img src={theme === "light" ? moon : sun} alt="Toggle Theme" className="w-10 h-10" />
+          </button>
               {logIn ? (
                 <button
                   onClick={handleLogout}
@@ -452,6 +428,8 @@ function Header({ setLoggedIn }) {
                 </>
               )}
             </div>
+
+            
           </div>
         </nav>
       </div>
