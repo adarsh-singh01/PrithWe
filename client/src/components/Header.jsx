@@ -109,17 +109,10 @@ function Header({ setLoggedIn }) {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const [theme, setTheme] = useState("light");
-	const [isClicked, setIsClicked] = useState(false)
-  const byClick=()=>{
-		if(isClicked==false){
-		setIsClicked(true);
-	}else{
-	setIsClicked(false);
-	}
-	handleToggleMenu()
-	}
+  
   const handleToggleMenu = () => {
     setShowMenu(!showMenu);
+  
   };
 
 const handleMenuClick = () => {
@@ -267,11 +260,11 @@ const handleMenuClick = () => {
           </button>
             
             <button
-              onClick={() => { handleToggleMenu(); byClick();}}
 
+              onClick={() => { handleToggleMenu();}}
               style={{fontSize:'30px'}}
+              className={`inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none focus:ring-2 focus:ring-white dark:text-gray-400 hover:bg-blue-600 fa ${showMenu ? 'fa-times' : 'fa-bars'} ${
 
-              className={`inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none focus:ring-2 focus:ring-white dark:text-gray-400 hover:bg-blue-600 fa ${isClicked ? 'fa-times' : 'fa-bars'} ${
                 theme === "dark" ? "bg-black " : "bg-blue-500 "
               }`}
               aria-expanded={showMenu}
