@@ -78,7 +78,7 @@ Follow these steps to set up the project locally:
     APP_PASSWORD=your_app_password
     ADMIN_MAIL=admin_mail
     ADMIN_PASS=admin_password
-    
+    GEMINI_API_KEY=your_api_key
     ```
 
 6. Start the backend server:
