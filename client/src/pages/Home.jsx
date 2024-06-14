@@ -7,7 +7,7 @@ import Accordian from "../components/Accordian/Accordian"
 
 function Home() {
   return (
-    <div className='flex-grow'>
+    <div className='flex-grow mt-20'>
         <Hero />
         <BelowHero />
         <InfoCard />

@@ -4,7 +4,7 @@ import image from "../assets/error.png";
 const NotFound = () => {
   return (
     <div 
-      className="relative flex items-center justify-center min-h-screen bg-cover bg-center"
+      className="relative flex items-center justify-center min-h-screen bg-cover bg-center mt-20"
       style={{ backgroundImage: `url(${image})` }}
     >
       {/* Content */}

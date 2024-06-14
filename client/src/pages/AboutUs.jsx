@@ -7,7 +7,7 @@ import shivam from '../assets/shivam.jpg'
 const AboutUs = () => {
     
     return (
-        <div className="mx-auto flex-grow max-w-screen-xl py-24 p-6 md:px-10 lg:px-20">
+        <div className="mx-auto flex-grow max-w-screen-xl py-24 p-6 md:px-10 lg:px-20 mt-20">
         <div className='text-4xl md:text-6xl font-extrabold text-green-500 pb-10 text-center '>About Us</div>
             <section className="mb-12">
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">About PrithWe</h2>

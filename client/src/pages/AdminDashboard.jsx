@@ -12,7 +12,7 @@ function AdminDashBoard() {
   };    
 
   return (
-    <div className="flex-grow">
+    <div className="flex-grow mt-20">
       <nav className="border-gray-200 bg-blue-500">
         <div className="flex flex-wrap items-center justify-between p-2">
           <div className="logo flex space-x-2 items-center">
