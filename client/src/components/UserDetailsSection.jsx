@@ -108,7 +108,6 @@ function UserDetailsSection() {
   const { user, household, business, familyMembers } = userDetails;
   const isHouseholdUser = user.type === 'Household';
   const isBusinessUser = user.type === 'Business';
-
   const toggleEntry = (index) => {
     setExpandedEntry(expandedEntry === index ? null : index);
   };
@@ -127,10 +126,10 @@ function UserDetailsSection() {
     <div className="bg-white shadow-lg rounded-lg p-6 space-y-6 mb-28">
       <div className="flex justify-center items-center">
         <div className="bg-gray-100 p-6 rounded-lg shadow-md text-center">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">Household's Details</h2>
-          <p className="text-gray-600"><strong>Email:</strong> household@gmail.com</p>
-          <p className="text-gray-600"><strong>Type:</strong> Household</p>
-          <p className="text-gray-600"><strong>Verified:</strong> Yes</p>
+          <h2 className="text-3xl font-bold text-gray-800 mb-4">{user.type} Details</h2>
+          <p className="text-gray-600"><strong>Email:</strong>{user.email}</p>
+          <p className="text-gray-600"><strong>Type:</strong> {user.type}</p>
+          <p className="text-gray-600"><strong>Verified:</strong> {user.isverified && "Yes"} {!user.isverified && "No"}</p>
         </div>
       </div>
       {isHouseholdUser && (

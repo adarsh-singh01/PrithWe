@@ -1,0 +1,31 @@
+
+    
+
+
+
+
+
+
+
+
+
+
+       <div>
+          <h3 className="text-2xl font-semibold text-gray-800 mb-2">Business Common</h3>
+          {business.length > 0 ? (
+            <ul className="space-y-4">
+              {business.map((item, index) => (
+                <li key={index} className="text-left bg-gray-50 p-4 rounded-lg shadow-md">
+                  <p className="text-gray-600"><strong>Electricity Usage:</strong> {item.electricity_usage}</p>
+                  <p className="text-gray-600"><strong>Water Usage:</strong> {item.water_usage}</p>
+                  <p className="text-gray-600"><strong>Paper Consumption:</strong> {item.paper_consumption}</p>
+                  <p className="text-gray-600"><strong>Waste Generation:</strong> {item.waste_generation}</p>
+                  <p className="text-gray-600"><strong>Fuel Consumption:</strong> {item.fuel_consumption}</p>
+                  <p className="text-gray-600"><strong>Business Travel:</strong> {item.business_travel}</p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-600">No business data available.</p>
+          )}
+        </div>
