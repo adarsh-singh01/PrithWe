@@ -2,9 +2,10 @@ import React from 'react'
 import UserDetailsSection from '../components/UserDetailsSection';
 import leaf from '../assets/leaf.png';
 import logo from '../assets/headerlogo.png';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 function UserDetails() {
+    const navigate = useNavigate();
     const handleLogout = async () => {
         localStorage.setItem('isAdminLoggedIn', 'false')
         navigate("/")
