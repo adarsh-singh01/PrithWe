@@ -103,7 +103,7 @@ async function recommendation(commonFormData, familyFormData, userId) {
   
   personalized recommendations to reduce the carbon footprint, formatted for easy display on the frontend.
 
-Request personalized recommendations with headings and subheadings for easy organization and readability on the frontend.
+Request personalized recommendations with headings and subheadings for easy organization and readability on the frontend (in 100 words)
 `;
 
 
