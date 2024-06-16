@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import HistoryComponent from "./HistoryCompoForBusi";
+import AdminSideChart from './AdminSideChart'; // Import the chart component
+import { calculateTotalCarbonFootprint } from './CarbonCalculator'; // Import if necessary
 
 const CarbonFootprintHistory = () => {
   const [entries, setEntries] = useState([]);
+  const [expandedEntry, setExpandedEntry] = useState(null);
+  const [Recommendations, setRecommendations] = useState([]);
+  const [businessCarbonFootPrint, setBusinessCarbonFootPrint] = useState();
 
   useEffect(() => {
     const fetchEntries = async () => {
@@ -12,7 +16,9 @@ const CarbonFootprintHistory = () => {
         const response = await axios.get("/api/business/entries", {
           headers: { "user-id": id },
         });
-        setEntries(response.data);
+        const businessData = response.data;
+        businessData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        setEntries(businessData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -23,7 +29,6 @@ const CarbonFootprintHistory = () => {
         const response = await axios.get("/api/auth/login/status", {
           withCredentials: true,
         });
-        console.log("trying to fetch id from household form");
         return response.data.id;
       } catch (error) {
         console.error("Error fetching user ID:", error);
@@ -31,48 +36,96 @@ const CarbonFootprintHistory = () => {
       }
     };
 
+    const fetchRecommendations = async () => {
+      const id = await fetchUserId();
+      try {
+        const response = await axios.get("api/household/recommendations", {
+          headers: { "user-id": id },
+        });
+        setRecommendations(response.data);
+      } catch (error) {
+        console.error("Error fetching recommendations:", error);
+      }
+    };
+
     fetchEntries();
+    fetchRecommendations();
   }, []);
 
+  const toggleEntry = (index) => {
+    setExpandedEntry(expandedEntry === index ? null : index);
+  };
+
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    const formattedDate = date.toLocaleString();
+    return formattedDate;
+  };
+
+  // Function to format recommendations
+  function formatRecommendations(data) {
+    return data
+      .replace(/## (.*?):/g, '<h2>$1</h2>')
+      .replace(/### (.*?):/g, '<h3>$1</h3>')
+      .replace(/#### (.*?):/g, '<h4>$1</h4>')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/\- (.*?):/g, '<li>$1</li>')
+      .replace(/\n/g, '<br />'); // Add line breaks for better readability
+  }
+
   return (
-    <div className="container m-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Business Footprint History</h1>
-      <div className="bg-white shadow-md rounded-lg p-4">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead>
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                ID
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Electricity Usage
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Water Usage
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Paper Consumption
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Waste Generation
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Fuel Consumption
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Business Travel
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Preview
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {entries.map((entry) => (
-              <HistoryComponent entry={entry} key={entry.id} />
-            ))}
-          </tbody>
-        </table>
+    <div className="bg-white shadow-lg rounded-lg p-6 space-y-6 mb-28">
+       <h1 className="text-2xl font-bold mb-4 text-center">Carbon Footprint History</h1>
+      <div className='flex flex-col gap-10'>
+        {entries.length > 0 ? (
+          entries.map((entry, entryIndex) => (
+            <div key={entryIndex} className="bg-gray-50 p-4 rounded-lg shadow-md space-y-4">
+              <div
+                className='mx-auto flex flex-row items-center cursor-pointer w-full justify-between'
+                onClick={() => toggleEntry(entryIndex)}
+              >
+                <p className="text-gray-600 flex items-center">
+                  <span className="ml-2">Sr No. <strong>{entries.length - entryIndex}</strong></span>
+                </p>
+                <div className='flex gap-6'>
+                  <p className="text-gray-600">Date. <strong>{formatDate(entry.created_at)}</strong></p>
+                  <span className='mr-4'>{expandedEntry === entryIndex ? '▲' : '▼'}</span>
+                </div>
+              </div>
+              {expandedEntry === entryIndex && (
+                <div className="mt-4">
+                  <p className="text-gray-600"><strong>Electricity Usage:</strong> {entry.electricity_usage}</p>
+                  <p className="text-gray-600"><strong>Water Usage:</strong> {entry.water_usage}</p>
+                  <p className="text-gray-600"><strong>Paper Consumption:</strong> {entry.paper_consumption}</p>
+                  <p className="text-gray-600"><strong>Waste Generation:</strong> {entry.waste_generation}</p>
+                  <p className="text-gray-600"><strong>Fuel Consumption:</strong> {entry.fuel_consumption}</p>
+                  <p className="text-gray-600"><strong>Business Travel:</strong> {entry.business_travel}</p>
+
+                  <div className="flex justify-center items-center text-center m-2">
+                    <h3 className="text-2xl font-semibold text-gray-800 m-5 rounded-lg shadow-md bg-gray-200 px-4 py-2">
+                      Total Carbon Footprints : {businessCarbonFootPrint} KgCO<sub>2</sub>
+                    </h3>
+                  </div>
+                  <AdminSideChart entry={entry} setBusinessCarbonFootPrint={setBusinessCarbonFootPrint} />
+                  <div className="flex justify-center items-center text-center m-2">
+                    <h3 className="text-2xl font-semibold text-gray-800 m-5 rounded-lg shadow-md bg-gray-200 px-4 py-2">Recommendations</h3>
+                  </div>
+                  {Recommendations.map((item, index) => (
+                    item.business_common_id === entry.id && (
+                      <div
+                        key={index}
+                        className="p-4 bg-blue-50 rounded-lg shadow-md"
+                        dangerouslySetInnerHTML={{ __html: formatRecommendations(item.recommendation) }}
+                      />
+                    )
+                  ))}
+                </div>
+              )}
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-600">No business data available.</p>
+        )}
       </div>
     </div>
   );
