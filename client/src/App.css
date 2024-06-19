@@ -1,3 +1,5 @@
+@import "font-awesome/css/font-awesome.min.css";
+
 body {
   padding: 0;
   margin: 0; /* Also reset margin to avoid any default spacing */
@@ -9,7 +11,6 @@ body {
 }
 
 .logo {
-  
   will-change: filter;
   transition: filter 300ms;
 }
@@ -41,11 +42,11 @@ body {
 
 .read-the-docs {
   color: #888;
-} 
+}
 .dark-mode p {
   color: white;
 }
-.loader-container{
+.loader-container {
   display: flex;
   height: 100vh;
   align-items: center;
@@ -53,7 +54,7 @@ body {
 }
 .loader {
   border: 8px solid #f3f3f3;
-  border-top: 8px solid #3B82F6;
+  border-top: 8px solid #3b82f6;
   border-radius: 50%;
   width: 60px;
   height: 60px;
@@ -67,49 +68,45 @@ body {
     transform: rotate(360deg);
   }
 }
-.wrapper .item{
+.wrapper .item {
   border-bottom: 3px solid gray;
 }
-.max-w-screen-lg
-{
+.max-w-screen-lg {
   padding-bottom: 35px;
-  padding-inline:20px;
+  padding-inline: 20px;
 }
-.wrapper .title{
+.wrapper .title {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
 }
 
-.wrapper .title h2
-{
-  line-height: 0;
-        margin-bottom: 0;
+.wrapper .title h2 {
+  /* line-height: 0; */
+  margin-bottom: 0;
 }
 
-.wrapper .content
-{
+.wrapper .content {
   max-height: 0;
   overflow: hidden;
-  transition: all 0.5s cubic-bezier(0,1,0,1);
-  -webkit-transition: all 0.5s cubic-bezier(0,1,0,1);
-  -moz-transition: all 0.5s cubic-bezier(0,1,0,1);
-  -ms-transition: all 0.5s cubic-bezier(0,1,0,1);
-  -o-transition: all 0.5s cubic-bezier(0,1,0,1);
+  transition: all 0.5s cubic-bezier(0, 1, 0, 1);
+  -webkit-transition: all 0.5s cubic-bezier(0, 1, 0, 1);
+  -moz-transition: all 0.5s cubic-bezier(0, 1, 0, 1);
+  -ms-transition: all 0.5s cubic-bezier(0, 1, 0, 1);
+  -o-transition: all 0.5s cubic-bezier(0, 1, 0, 1);
 }
 
-.wrapper .content.show{
+.wrapper .content.show {
   height: auto;
   max-height: 9999px;
-  transition: all 0.5s cubic-bezier(1,0,1,0);
-  -webkit-transition: all 0.5s cubic-bezier(1,0,1,0);
-  -moz-transition: all 0.5s cubic-bezier(1,0,1,0);
-  -ms-transition: all 0.5s cubic-bezier(1,0,1,0);
-  -o-transition: all 0.5s cubic-bezier(1,0,1,0);
+  transition: all 0.5s cubic-bezier(1, 0, 1, 0);
+  -webkit-transition: all 0.5s cubic-bezier(1, 0, 1, 0);
+  -moz-transition: all 0.5s cubic-bezier(1, 0, 1, 0);
+  -ms-transition: all 0.5s cubic-bezier(1, 0, 1, 0);
+  -o-transition: all 0.5s cubic-bezier(1, 0, 1, 0);
 }
 
-.wrapper span{
+.wrapper span {
   font-size: 1.5rem;
 }
 

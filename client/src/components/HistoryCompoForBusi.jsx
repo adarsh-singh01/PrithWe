@@ -25,11 +25,15 @@ const HistoryComponent = ({ entry }) => {
   return (
     <>
       <tr>
-        <td className="px-6 py-4 whitespace-nowrap">{entry.id}</td>
+        <td className="px-6 py-4 whitespace-nowrap">
+          {entry.id}
+          </td>
         <td className="px-6 py-4 whitespace-nowrap">
           {entry.electricity_usage}
         </td>
-        <td className="px-6 py-4 whitespace-nowrap">{entry.water_usage}</td>
+        <td className="px-6 py-4 whitespace-nowrap">
+          {entry.water_usage}
+          </td>
         <td className="px-6 py-4 whitespace-nowrap">
           {entry.paper_consumption}
         </td>
@@ -39,7 +43,9 @@ const HistoryComponent = ({ entry }) => {
         <td className="px-6 py-4 whitespace-nowrap">
           {entry.fuel_consumption}
         </td>
-        <td className="px-6 py-4 whitespace-nowrap">{entry.business_travel}</td>
+        <td className="px-6 py-4 whitespace-nowrap">
+          {entry.business_travel}
+          </td>
         <td className="px-6 py-4 whitespace-nowrap">
           <button
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
