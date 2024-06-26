@@ -2,7 +2,7 @@ import React from 'react';
 
 const Information = () => {
     return (
-        <div className="mx-auto flex-grow py-24 max-w-screen-xl p-6 md:px-10 lg:px-20">
+        <div className="mx-auto flex-grow py-24 max-w-screen-xl p-6 md:px-10 lg:px-20 mt-20">
             <div className='text-4xl md:text-6xl font-extrabold text-green-500 pb-10 text-center '>Information</div>
             <section className="mb-12">
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">What is Carbon Footprint?</h2>

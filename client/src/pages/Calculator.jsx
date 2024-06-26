@@ -54,7 +54,7 @@ function Calculator() {
   }; */
 
   return (
-    <div className='flex-grow'>
+    <div className='flex-grow mt-20'>
     {userType === 'Business' ? <BusinessForm /> : <HouseholdForm />}
   </div>
   );

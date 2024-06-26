@@ -26,7 +26,7 @@ function History() {
 
   
   return (
-    <div className="flex-grow">
+    <div className="flex-grow mt-20">
       {userType === "Business" ? <HistoryForBusiness /> : <HistoryForHousehold />}
     </div>
   );
