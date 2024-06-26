@@ -17,9 +17,9 @@ function Hero() {
             calculate their environmental impact accurately with easy-to-use
             tools and insightful data. 
           </div>
-          <div className="btn w-fit bg-green-500 font-Rubik p-2 md:py-3 px-3 rounded-2xl  hover:bg-green-600">
-            <Link to="/calculator">Track Your Carbon Footprint</Link>
-          </div>
+          <Link to="/calculator"><div className="btn w-fit bg-green-500 font-Rubik p-2 md:py-3 px-3 rounded-2xl  hover:bg-green-600">
+            Track Your Carbon Footprint
+          </div></Link>
         </div>
         <div className="gif">
           <img className="rounded-lg hidden sm:block md:max-w-sm" src={giffy} />

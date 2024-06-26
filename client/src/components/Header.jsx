@@ -246,12 +246,12 @@ const handleMenuClick = () => {
             className={` flex flex-wrap items-center justify-between  p-2 `}
           >
             <div className="logo flex space-x-2 items-center ">
-              <a href="#">
-                <img className="h-12" src={leaf} />
-              </a>
-              <a href="#">
-                <img className="h-7" src={logo} />
-              </a>
+              <Link to="/">
+                  <img className="h-12" src={leaf} />
+              </Link>
+              <Link to="/">
+                  <img className="h-7" src={logo} />
+              </Link>
             </div>
 
             <div className=" md:hidden flex items-center justify-center">
