@@ -1,7 +1,39 @@
 import React from 'react';
 import DoughnutChart from './DoughnutChart';
+import html2canvas from 'html2canvas';
+
 
 const HouseholdResult = ({ totalCarbonFootprint, contributions, Recommendation }) => {
+  const ToCaptureRef = React.useRef();
+
+  function captureScreenshot() {
+    var canvasPromise = html2canvas(ToCaptureRef.current, {
+      useCORS: true,
+      width: document.documentElement.scrollWidth,  // Full page width
+      height: document.documentElement.scrollHeight // Full page height
+    });
+    canvasPromise.then((canvas)=> {
+      var dataURL = canvas.toDataURL("image/png");
+      // Create an image element from the data URL
+      var img = new Image();
+      img.src = dataURL;
+      img.download = dataURL;
+      // Create a link element
+      var a = document.createElement("a");
+      a.innerHTML = "DOWNLOAD";
+      a.target = "_blank";
+      // Set the href of the link to the data URL of the image
+      a.href = img.src;
+      // Set the download attribute of the link
+      a.download = img.download;
+      // Append the link to the page
+      document.body.appendChild(a);
+      // Click the link to trigger the download
+      a.click();
+    });
+
+  }
+
   function formatRecommendations(data) {
     return data
       .replace(/## (.*?):/g, '<h2>$1</h2>')
@@ -15,7 +47,7 @@ const HouseholdResult = ({ totalCarbonFootprint, contributions, Recommendation }
   const formattedRecommendations = formatRecommendations(Recommendation);
 
   return (
-    <div className="mt-4 mb-16 space-y-16">
+    <div ref={ToCaptureRef} className="mt-4 mb-16 space-y-16">
       {totalCarbonFootprint !== null && (
         <div className="mt-4 flex flex-col justify-center items-center">
           <h3 className="text-lg md:text-xl font-medium mb-2 mx-4">Total Carbon Footprint</h3>
@@ -23,6 +55,12 @@ const HouseholdResult = ({ totalCarbonFootprint, contributions, Recommendation }
             {Math.round(totalCarbonFootprint * 100) / 100} 
             <span className='font-thin'> KgCO<sub>2</sub></span>
           </p>
+          <button
+                  onClick={() => captureScreenshot()}
+                  className="btn w-10px text-start bg-black mt-3 px-3 py-2 font-Rubik rounded-full text-white"
+                >
+                  Download report
+                </button>
         </div>
       )}
       {/* Render Doughnut Chart */}
