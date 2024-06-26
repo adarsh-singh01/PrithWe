@@ -103,6 +103,9 @@ import logo from "../assets/headerlogo.png";
 import leaf from "../assets/leaf.png";
 import sun from "../assets/sun.png";
 import moon from "../assets/moon.png"
+//aos animation
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function Header({ setLoggedIn }) {
   const [logIn, setLogIn] = useState(false);
@@ -172,7 +175,11 @@ const handleMenuClick = () => {
       localStorage.setItem('theme', newTheme);
       document.body.classList.toggle('dark-mode', newTheme === 'dark');
     };
-
+    useEffect(()=>{
+      AOS.init({
+        duration: 1000,
+      })
+    })
   return (
     <div>
       <div>
@@ -241,6 +248,7 @@ const handleMenuClick = () => {
           className={`border-gray-200 ${
             theme === "dark" ? "bg-black " : "bg-blue-500 "
           } `}
+          data-aos="fade-down"
         >
           <div
             className={` flex flex-wrap items-center justify-between  p-2 `}
