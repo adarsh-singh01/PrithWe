@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import logo2 from '../assets/footerlogo.png'
-
+import Visit from './Visitor';
 
 const Footer2 = () =>{
 
@@ -38,6 +38,7 @@ const Footer2 = () =>{
           </ul>
         </div>
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <Visit />
         <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="#" className="hover:underline">PrithWe™</a>. All Rights Reserved.</span>
       </div>
     </footer>
