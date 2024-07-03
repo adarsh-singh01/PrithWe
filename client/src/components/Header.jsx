@@ -104,7 +104,7 @@ import leaf from "../assets/leaf.png";
 import sun from "../assets/sun.png";
 import moon from "../assets/moon.png"
 
-function Header({ setLoggedIn, loggedIn }) {
+function Header({ setLoggedIn }) {
   const [logIn, setLogIn] = useState(false);
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
@@ -136,7 +136,7 @@ const handleMenuClick = () => {
     };
 
     checkLoginStatus();
-},[loggedIn]);
+});
 
 
   const handleLogout = async () => {
