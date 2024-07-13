@@ -4,7 +4,7 @@ import axios from 'axios';
 import AdminSideChart from './AdminSideChart';
 import { calculateTotalCarbonFootprint } from './CarbonCalculator';
 
-function UserDetailsSection() {
+function UserDetailsSection(props) {
   const { userId } = useParams();
   const [userDetails, setUserDetails] = useState(null);
   const [entries, setEntries] = useState([]);
@@ -141,9 +141,9 @@ function UserDetailsSection() {
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6 space-y-6 mb-28">
+    <div className={`shadow-lg rounded-lg p-6 space-y-6 mb-28 ${props.theme === 'dark' ? 'dark-mode' : ''} `}>
       <div className="flex justify-center items-center">
-        <div className="bg-gray-100 p-6 rounded-lg shadow-md text-center">
+        <div className={`bg-gray-100 p-6 rounded-lg shadow-md text-center ${props.theme === 'dark' ? 'bg-gray-800' : ''}`}>
           <h2 className="text-3xl font-bold text-gray-800 mb-4">{user.type} Details</h2>
           <p className="text-gray-600"><strong>Email:</strong> {user.email}</p>
           <p className="text-gray-600"><strong>Type:</strong>{user.type}</p>
@@ -154,7 +154,7 @@ function UserDetailsSection() {
         <div className='flex flex-col gap-10'>
           {entries.length > 0 ? (
             entries.map((entry, entryIndex) => (
-              <div key={entryIndex} className="bg-gray-50 p-4 rounded-lg shadow-md space-y-4">
+              <div key={entryIndex} className={`bg-gray-50 p-4 rounded-lg shadow-md space-y-4 ${props.theme === 'dark' ? 'bg-gray-800' : ''}`}>
                 <div
                   className='mx-auto flex flex-row items-center cursor-pointer w-full justify-between'
                   onClick={() => toggleEntry(entryIndex)}
@@ -174,12 +174,12 @@ function UserDetailsSection() {
                     <p className="text-gray-600"><strong>Waste Generation:</strong> {entry.waste_generation}</p>
                     <p className="text-gray-600"><strong>Gas Cylinder:</strong> {entry.gas_cylinder}</p>
                     <div className="flex justify-center items-center text-center m-2">
-                      <h3 className="text-2xl font-semibold text-gray-800 m-2 rounded-lg shadow-md bg-gray-200 px-4 py-2">Family Members</h3>
+                      <h3 className={`text-2xl font-semibold text-gray-800 m-2 rounded-lg shadow-md bg-gray-200 px-4 py-2 ${props.theme === 'dark' ? 'bg-gray-950' : ''}`}>Family Members</h3>
                     </div>
                     {entry.familyEntries.length > 0 ? (
                       <ul className="space-y-4">
                         {entry.familyEntries.map((member, memberIndex) => (
-                          <li key={memberIndex} className="text-left bg-gray-50 p-4 rounded-lg shadow-md">
+                          <li key={memberIndex} className={`text-left bg-gray-50 p-4 rounded-lg shadow-md ${props.theme === 'dark' ? 'bg-gray-950' : ''}`}>
                             <div onClick={() => toggleMember(`${entryIndex}-${memberIndex}`)} className="cursor-pointer flex justify-between">
                               <p className="text-gray-600"><strong>Name:</strong> {member.name}</p>
                               <span>{expandedMember === `${entryIndex}-${memberIndex}` ? '▲' : '▼'}</span>
@@ -200,13 +200,13 @@ function UserDetailsSection() {
                       <p className="text-gray-600">No family members data available.</p>
                     )}
                     <div className="flex justify-center items-center text-center m-2">
-                      <h3 className="text-2xl font-semibold text-gray-800 m-5 rounded-lg shadow-md bg-gray-200 px-4 py-2">
+                      <h3 className={`text-2xl font-semibold text-gray-800 m-5 rounded-lg shadow-md bg-gray-200 px-4 py-2 ${props.theme === 'dark' ? 'bg-gray-950' : ''}`}>
                         Total Carbon Footprints : {Math.round(carbonFootprints[entry.id] * 100) / 100} KgCO<sub>2</sub> {/* Step 3 */}
                       </h3>
                     </div>
                     <AdminSideChart entry={entry} />
                     <div className="flex justify-center items-center text-center m-2">
-                      <h3 className="text-2xl font-semibold text-gray-800 m-5 rounded-lg shadow-md bg-gray-200 px-4 py-2">Recommendations</h3>
+                      <h3 className={`text-2xl font-semibold text-gray-800 m-5 rounded-lg shadow-md bg-gray-200 px-4 py-2 ${props.theme === 'dark' ? 'bg-gray-950' : ''}`}>Recommendations</h3>
                     </div>
                     {Recommendations.map((item, index) => (
                       item.household_common_id === entry.id && (
@@ -231,7 +231,7 @@ function UserDetailsSection() {
         <div className='flex flex-col gap-10'>
           {businessEntries.length > 0 ? (
             businessEntries.map((entry, entryIndex) => (
-              <div key={entryIndex} className="bg-gray-50 p-4 rounded-lg shadow-md space-y-4">
+              <div key={entryIndex} className={`bg-gray-50 p-4 rounded-lg shadow-md space-y-4 ${props.theme === 'dark' ? 'bg-gray-800' : ''}`}>
                 <div
                   className='mx-auto flex flex-row items-center cursor-pointer w-full justify-between'
                   onClick={() => toggleEntry(entryIndex)}
@@ -254,13 +254,13 @@ function UserDetailsSection() {
                     <p className="text-gray-600"><strong>Business Travel:</strong> {entry.business_travel}</p>
                     
                     <div className="flex justify-center items-center text-center m-2">
-                      <h3 className="text-2xl font-semibold text-gray-800 m-5 rounded-lg shadow-md bg-gray-200 px-4 py-2">
+                      <h3 className={`text-2xl font-semibold text-gray-800 m-5 rounded-lg shadow-md bg-gray-200 px-4 py-2 ${props.theme === 'dark' ? 'bg-gray-950' : ''}`}>
                         Total Carbon Footprints : {businessCarbonFootPrint} KgCO<sub>2</sub> {/* Step 3 */}
                       </h3>
                     </div>
                     <AdminSideChart entry={entry} setBusinessCarbonFootPrint={setBusinessCarbonFootPrint} />
                     <div className="flex justify-center items-center text-center m-2">
-                      <h3 className="text-2xl font-semibold text-gray-800 m-5 rounded-lg shadow-md bg-gray-200 px-4 py-2">Recommendations</h3>
+                      <h3 className={`text-2xl font-semibold text-gray-800 m-5 rounded-lg shadow-md bg-gray-200 px-4 py-2 ${props.theme === 'dark' ? 'bg-gray-950' : ''}`}>Recommendations</h3>
                     </div>
                     {Recommendations.map((item, index) => (
                       item.business_common_id === entry.id && (

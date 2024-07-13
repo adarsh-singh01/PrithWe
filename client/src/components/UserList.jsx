@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const UsersList = ({ setSelectedUser }) => {
+const UsersList = ({ setSelectedUser, props }) => {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
@@ -20,7 +20,6 @@ const UsersList = ({ setSelectedUser }) => {
     setSelectedUser(userId);
     navigate(`/admin/user/${userId}`);
   };
-
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4">Users</h2>
@@ -28,10 +27,10 @@ const UsersList = ({ setSelectedUser }) => {
         {users && users.map(user => (
           <div
             key={user.id}
-            className="bg-white shadow-md rounded-lg p-4 cursor-pointer hover:shadow-lg"
+            className={` shadow-md rounded-lg p-4 cursor-pointer hover:shadow-lg ${props.theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}
             onClick={() => handleUserClick(user.id)}
           >
-            <h3 className="text-xl font-semibold">{user.name}</h3>
+            <h3 className="text-xl font-semibold ">{user.name}</h3>
             <p className="text-gray-600">{user.email}</p>
             <p className="text-gray-600">Type: {user.type}</p>
             <p className="text-sm">
