@@ -1,4 +1,3 @@
-// server.js (Node.js/Express backend)
 
 import express from "express";
 import bodyParser from "body-parser";
@@ -7,24 +6,21 @@ import bcrypt from "bcrypt";
 import session from "express-session";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
-import cors from "cors"; // Import cors module
-//import env from "dotenv";
-import cookieParser from "cookie-parser"; // Import cookie-parser module
-//import { query } from './db.js';
+import cors from "cors";
+import cookieParser from "cookie-parser";
 import householdRouter from "./householdData.js";
 import contactUsRouter from "./contactUs.js";
 import authRouter from "./Authentication.js";
 import businessRouter from "./businessData.js";
 import adminRouter from "./adminData.js";
 import memorystore from 'memorystore';
+import path from "path";
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+
 const MemoryStore = memorystore(session);
-
-
 const app = express();
-//const port = 3001;
 const port = process.env.PORT || 3001;
 
-//env.config();
 
 // Enable CORS
 app.use(
@@ -33,6 +29,7 @@ app.use(
     credentials: true,
   })
 );
+
 app.use(cookieParser()); // Add cookie-parser middleware
 
 // Middleware setup
@@ -41,8 +38,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }, // Set secure to false for development
-    cookie: { maxAge: 86400000 },
+    cookie: { secure: false, maxAge: 86400000 },
     store: new MemoryStore({
       checkPeriod: 86400000 // prune expired entries every 24h
     }),
@@ -55,7 +51,6 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-//app.use(routes)
 
 // PostgreSQL database connection
 const db = new pg.Client({
@@ -66,6 +61,8 @@ const db = new pg.Client({
   port: process.env.PG_PORT,
 });
 db.connect();
+
+
 
 passport.use(
   new LocalStrategy(
@@ -111,6 +108,54 @@ passport.use(
   )
 );
 
+async function findOrCreateUser(googleId, profile) {
+  try {
+    let result = await db.query("SELECT * FROM users WHERE google_id = $1", [googleId]);
+
+    if (result.rows.length > 0) {
+      return result.rows[0]; // User found
+    } else {
+      const defaultPassword = await bcrypt.hash('defaultpassword', 10); // Generate a hashed default password
+      const newUser = await db.query(
+        "INSERT INTO users (google_id, email, name, password, type, isVerified) VALUES ($1, $2, $3, $4, $5, true) RETURNING *",
+        [googleId, profile.emails[0].value, profile.displayName, defaultPassword, 'user']
+      );
+      return newUser.rows[0]; // New user created
+    }
+  } catch (err) {
+    throw new Error(`Error finding or creating user: ${err.message}`);
+  }
+}
+
+
+passport.use(
+  new GoogleStrategy({
+    clientID: process.env.OAUTH_CLIENT_ID,
+    clientSecret: process.env.OAUTH_SECRET,
+    callbackURL: "http://localhost:3001/auth/google/prithwe",
+    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
+  },
+  async function(accessToken, refreshToken, profile, cb) {
+    try {
+      const user = await findOrCreateUser(profile.id, profile);
+      return cb(null, user);
+    } catch (err) {
+      return cb(err);
+    }
+  }
+));
+
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+app.get('/auth/google/prithwe', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('http://localhost:5173'); // Adjust the redirect URL as needed
+  });
+
+// Other routes
 app.use("/api/household", householdRouter);
 app.use("/api/contact", contactUsRouter);
 app.use("/api/auth", authRouter);
@@ -119,8 +164,6 @@ app.use("/api/admin", adminRouter);
 
 app.listen(port, () => console.log("App is listening"));
 
-
-import path from "path"
 const __dirname1 = path.resolve();
 
 if (process.env.NODE_ENV === "production") {
@@ -133,3 +176,12 @@ if (process.env.NODE_ENV === "production") {
     res.send("App is under development!");
   });
 }
+
+
+
+
+
+
+
+
+
