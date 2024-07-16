@@ -13,11 +13,17 @@ function InfoCard() {
 
 export default InfoCard;*/
 
-import React from 'react';
-
+import React,{useEffect} from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 function FeatureCard({ heading, description }) {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
+  }, []);
   return (
-    <div className=" bg-opacity- bg-gray-200 text-center rounded-md px-4 py-6 md:py-12 max-w-sm shadow-md">
+    <div className=" bg-opacity- bg-gray-200 text-center rounded-md px-4 py-6 md:py-12 max-w-sm shadow-md" data-aos={"fade-up"} data-aos-duration="1100">
       <h1 className="text-lg md:text-xl text-green-600 font-semibold mb-2 font-Rubik">{heading}</h1>
       <h1 className="text-slate-600 text-sm md:text-base font-Rubik">{description}</h1>
     </div>
@@ -27,7 +33,7 @@ function FeatureCard({ heading, description }) {
 function InfoCard() {
   return (
     <div>
-    <p className='text-center font-Rubik pt-12 md:pt-16 text-2xl md:text-4xl'>Why Choose Us?</p>
+    <p className='text-center font-Rubik pt-12 md:pt-16 text-2xl md:text-4xl' data-aos={"fade-up"}>Why Choose Us?</p>
     <div className="flex flex-col items-center sm:items-stretch space-y-4 sm:space-y-0 sm:flex-row  sm:justify-around p-4 md:p-8 ">
     
       <FeatureCard 
