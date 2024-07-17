@@ -110,6 +110,7 @@ passport.use(
 
 async function findOrCreateUser(googleId, profile) {
   try {
+ 
     let result = await db.query("SELECT * FROM users WHERE google_id = $1", [googleId]);
 
     if (result.rows.length > 0) {
@@ -138,20 +139,33 @@ passport.use(
   async function(accessToken, refreshToken, profile, cb) {
     try {
       const user = await findOrCreateUser(profile.id, profile);
-      return cb(null, user);
+      return cb(null, user); 
     } catch (err) {
       return cb(err);
     }
   }
 ));
 
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+
+// app.get('/auth/google',
+//   passport.authenticate('google', { scope: ['profile', 'email'] }));
+app.get('/auth/google', async (req, res, next) => {
+  const {userType} = req.query;
+  res.cookie('userType', userType) 
+
+  passport.authenticate('google', {
+    scope: ['profile', 'email'],
+  })(req, res, next);
+ 
+});
+
 
 app.get('/auth/google/prithwe', 
   passport.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
+  async function (req, res) {
+    let result = await db.query("UPDATE users SET type = $1 WHERE email = $2", [req.cookies.userType, req.user.email]);
+    res.clearCookie('userType');
     res.redirect('http://localhost:5173'); // Adjust the redirect URL as needed
   });
 

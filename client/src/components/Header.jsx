@@ -154,7 +154,7 @@ const handleMenuClick = () => {
         setLogIn(false);
         setLoggedIn(false);
         //checkLoginStatus();
-        toast.success("Logout successful!");
+        // toast.success("Logout successful!");
         navigate("/logout");
       }
     } catch (error) {

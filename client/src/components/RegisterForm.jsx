@@ -73,8 +73,16 @@ function RegisterForm() {
     return true;
   };
 
-  const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:3001/auth/google';
+  // const handleGoogleLogin = () => {
+  //   // window.location.href = 'http://localhost:3001/auth/google';
+  //     window.location.href = `http://localhost:3001/auth/google?userType=Business`;
+  // };
+  const handleGoogleLogin = () => { 
+    if (!(type === "Household" || type === "Business")) {
+      toast.warn("Please select Household or Business to sign up with Google");
+      return;
+    }
+    window.location.href = `http://localhost:3001/auth/google?userType=${type}`;
   };
 
   return (
