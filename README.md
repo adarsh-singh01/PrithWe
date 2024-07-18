@@ -79,6 +79,8 @@ Follow these steps to set up the project locally:
    ADMIN_MAIL=admin_mail
    ADMIN_PASS=admin_password
    GEMINI_API_KEY=your_api_key
+   OAUTH_CLIENT_ID=your_client_id
+   OAUTH_SECRET=your_secret
    ```
 
 6. Setting up App Password
@@ -190,6 +192,29 @@ CREATE TABLE recommendations (
    ```
 
 10. Open your browser and navigate to `http://localhost:5173`.
+
+11. Getting OAuth Client ID and Secret
+
+   Steps to follow
+   1. Go to the [Google Developers Console.](https://console.cloud.google.com/projectselector2/apis/dashboard?pli=1&supportedpurview=project)
+   2. Click Select a project ➝ New Project ➝ the Create button.
+   ![](https://www.balbooa.com/images/docs/gridbox/integrations/google-client-id-project.webp)
+   3. Enter your Project name ➝ click the Create button.
+   ![](https://www.balbooa.com/images/docs/gridbox/integrations/google-client-id-new-project.webp)
+   4. Click OAuth consent screen in the left side menu ➝ choose User Type ➝ click the Create button.
+   ![](https://www.balbooa.com/images/docs/gridbox/integrations/google-client-id-choose-user-type.webp)
+   5.Add Application name ➝ Support email ➝ Authorized domain ➝ Developer content information ➝ click the Save and Continue button.
+   ![](https://www.balbooa.com/images/docs/gridbox/integrations/google-client-id-oauth-consent-screen.webp)
+   6.Complete all 4 steps in OAuth consent screen ➝ click the Back to Dashboard button.
+   ![](https://www.balbooa.com/images/docs/gridbox/integrations/google-client-id-edit-app-registration.webp)
+   7.. Go to Credentials ➝ click Create Credentials ➝ select OAuth client ID from the dropdown list.
+   ![](https://www.balbooa.com/images/docs/gridbox/integrations/google-client-id-creating.webp)
+   8.Open the dropdown list Application type ➝ select Web application ➝ enter the name of your OAuth 2.0 client.
+   ![](https://www.balbooa.com/images/docs/gridbox/integrations/google-client-id-select-application-type.webp)
+   9.Enter your site URL in Authorized JavaScript origins ➝ in Authorized redirect URIs, enter the page URL where you wanted your users    redirected back after they have authenticated with Google ➝ click the Create button.
+   ![](https://www.balbooa.com/images/docs/gridbox/integrations/google-client-id-create-button.webp)
+   10.Copy your Client ID and Client Secret.
+   ![](https://www.balbooa.com/images/docs/gridbox/integrations/copy-google-client-id-and-client-secret.webp)
 
 ## Usage
 
