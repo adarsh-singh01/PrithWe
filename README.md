@@ -79,6 +79,8 @@ Follow these steps to set up the project locally:
    ADMIN_MAIL=admin_mail
    ADMIN_PASS=admin_password
    GEMINI_API_KEY=your_api_key
+   OAUTH_CLIENT_ID=your_client_id
+   OAUTH_SECRET=your_secret
    ```
 
 6. Setting up App Password
@@ -110,13 +112,14 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE users (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    google_id VARCHAR(255);
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     type VARCHAR(50) NOT NULL,
     otp VARCHAR(20) DEFAULT '000000',
     otp_timestamp BIGINT,
-    isVerified BOOLEAN DEFAULT false
+    isVerified BOOLEAN DEFAULT false,
 );
 
 CREATE TABLE contact (
@@ -190,6 +193,41 @@ CREATE TABLE recommendations (
    ```
 
 10. Open your browser and navigate to `http://localhost:5173`.
+
+11. Getting OAuth Client ID and Secret
+
+      Steps to follow -
+   
+     Go to the [Google Developers Console.](https://console.cloud.google.com/projectselector2/apis/dashboard?pli=1&supportedpurview=project)
+     Click Select a project ➝ New Project ➝ the Create button.
+     ![](https://www.balbooa.com/images/docs/gridbox/integrations/google-client-id-project.webp)
+    
+     Enter your Project name ➝ click the Create button.
+     ![](https://www.balbooa.com/images/docs/gridbox/integrations/google-client-id-new-project.webp)
+    
+     Click OAuth consent screen in the left side menu ➝ choose User Type ➝ click the Create button.
+     ![](https://www.balbooa.com/images/docs/gridbox/integrations/google-client-id-choose-user-type.webp)
+    
+     Add Application name ➝ Support email ➝ Authorized domain ➝ Developer content information ➝ click the Save and Continue button.
+     ![](https://www.balbooa.com/images/docs/gridbox/integrations/google-client-id-oauth-consent-screen.webp)
+    
+     Complete all 4 steps in OAuth consent screen ➝ click the Back to Dashboard button.
+     ![](https://www.balbooa.com/images/docs/gridbox/integrations/google-client-id-edit-app-registration.webp)
+    
+     Go to Credentials ➝ click Create Credentials ➝ select OAuth client ID from the dropdown list.
+     ![](https://www.balbooa.com/images/docs/gridbox/integrations/google-client-id-creating.webp)
+    
+     Open the dropdown list Application type ➝ select Web application ➝ enter the name of your OAuth 2.0 client.
+     ![](https://www.balbooa.com/images/docs/gridbox/integrations/google-client-id-select-application-type.webp)
+    
+     Enter your site URL in Authorized JavaScript origins ➝ in Authorized redirect URIs, enter the page URL where you wanted your users redirected back after they have authenticated with Google ➝ click the 
+     Create button.
+     ![](https://www.balbooa.com/images/docs/gridbox/integrations/google-client-id-create-button.webp)
+    
+     Copy your Client ID and Client Secret.
+     ![](https://www.balbooa.com/images/docs/gridbox/integrations/copy-google-client-id-and-client-secret.webp)
+    
+     Then go to `.env` file and paste client id & secret in `OAUTH_CLIENT_ID` `OAUTH_SECRET`
 
 ## Usage
 
