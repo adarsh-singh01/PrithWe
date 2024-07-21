@@ -107,7 +107,7 @@ import moon from "../assets/moon.png"
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-function Header({ setLoggedIn }) {
+function Header({ loggedIn, setLoggedIn }) {
   const [logIn, setLogIn] = useState(false);
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
@@ -139,7 +139,7 @@ const handleMenuClick = () => {
     };
 
     checkLoginStatus();
-});
+}, [loggedIn]);
 
 
   const handleLogout = async () => {
