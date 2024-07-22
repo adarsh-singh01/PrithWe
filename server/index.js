@@ -133,7 +133,7 @@ passport.use(
   new GoogleStrategy({
     clientID: process.env.OAUTH_CLIENT_ID,
     clientSecret: process.env.OAUTH_SECRET,
-    callbackURL: "http://localhost:3001/auth/google/prithwe",
+    callbackURL: "https://prithwe.onrender.com/auth/google/prithwe",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
   },
   async function(accessToken, refreshToken, profile, cb) {
@@ -166,7 +166,7 @@ app.get('/auth/google/prithwe',
   async function (req, res) {
     let result = await db.query("UPDATE users SET type = $1 WHERE email = $2", [req.cookies.userType, req.user.email]);
     res.clearCookie('userType');
-    res.redirect('http://localhost:5173'); // Adjust the redirect URL as needed
+    res.redirect('https://prithwe.onrender.com'); // Adjust the redirect URL as needed
   });
 
 // Other routes
