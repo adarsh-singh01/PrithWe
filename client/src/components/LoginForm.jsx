@@ -48,7 +48,7 @@ function LoginForm({ setLoggedIn }) {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:3001/auth/google';
+    window.location.href = 'https://prithwe.onrender.com/#/auth/google';
   };
 
   return (
