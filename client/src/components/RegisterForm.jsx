@@ -82,7 +82,7 @@ function RegisterForm() {
       toast.warn("Please select Household or Business to sign up with Google");
       return;
     }
-    window.location.href = `https://prithwe.onrender.com/#/auth/google?userType=${type}`;
+    window.location.href = `https://prithwe.onrender.com/auth/google?userType=${type}`;
   };
 
   return (
