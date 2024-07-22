@@ -5,6 +5,8 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import Logo from '../assets/google.png'; 
+
 
 
 function RegisterForm() {
@@ -71,12 +73,24 @@ function RegisterForm() {
     return true;
   };
 
+  // const handleGoogleLogin = () => {
+  //   // window.location.href = 'http://localhost:3001/auth/google';
+  //     window.location.href = `http://localhost:3001/auth/google?userType=Business`;
+  // };
+  const handleGoogleLogin = () => { 
+    if (!(type === "Household" || type === "Business")) {
+      toast.warn("Please select Household or Business to sign up with Google");
+      return;
+    }
+    window.location.href = `http://localhost:3001/auth/google?userType=${type}`;
+  };
+
   return (
     <div>
-      <ToastContainer autoClose={4000} position="top-center" newestOnTop/>
+      <ToastContainer autoClose={4000} position="top-center" newestOnTop />
       <div className="login m-4 flex justify-center items-center space-x-2 my-16">
         <div className="loginBox flex flex-col bg-gray-200 p-5 md:p-10 space-y-3 rounded-lg justify-center">
-        <h1 className="text-center font-medium text-xl md:text-2xl py-4">Signup Form</h1>
+          <h1 className="text-center font-medium text-xl md:text-2xl py-4">Signup Form</h1>
           <div className="inputs flex flex-col space-y-2 ">
             <input
               type="text"
@@ -87,100 +101,112 @@ function RegisterForm() {
               required
             />
 
-                      <input
-                          type="email"
-                          className="username rounded-lg px-3 p-2 md:px-4 md:p-3"
-                          placeholder="Enter Your Email ID"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          required
-                      />
-                      <label className=" relative">
-                          <input
-                              type={showCreatePass ? "text" : "password"}
-                              className="w-full password rounded-lg px-3 p-2 md:px-4 md:p-3 "
-                              placeholder="Create a Password"
-                              value={password}
-                              onChange={(e) => setPassword(e.target.value)}
-                              required
-                          />
-                          <span
-                              onClick={() => setShowCreatePass(!showCreatePass)}
-                              className="absolute right-3 top-3 cursor-pointer z-10">
-                              {showCreatePass ? (
-                                  <AiOutlineEyeInvisible
-                                      fontSize={24}
-                                      fill="#AFB2BF"
-                                  />
-                              ) : (
-                                  <AiOutlineEye fontSize={24} fill="#AFB2BF" />
-                              )}
-                          </span>
-                      </label>
+            <input
+              type="email"
+              className="username rounded-lg px-3 p-2 md:px-4 md:p-3"
+              placeholder="Enter Your Email ID"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <label className=" relative">
+              <input
+                type={showCreatePass ? "text" : "password"}
+                className="w-full password rounded-lg px-3 p-2 md:px-4 md:p-3 "
+                placeholder="Create a Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <span
+                onClick={() => setShowCreatePass(!showCreatePass)}
+                className="absolute right-3 top-3 cursor-pointer z-10">
+                {showCreatePass ? (
+                  <AiOutlineEyeInvisible
+                    fontSize={24}
+                    fill="#AFB2BF"
+                  />
+                ) : (
+                  <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+                )}
+              </span>
+            </label>
 
-                      <label className="relative">
-                          <input
-                              type={showConfirmPass ? "text" : "password"}
-                              className="w-full password rounded-lg px-3 p-2 md:px-4 md:p-3 "
-                              placeholder="Confirm Password"
-                              value={confirmPassword}
-                              onChange={(e) =>
-                                  setConfirmPassword(e.target.value)
-                              }
-                              required
-                          />
-                          <span
-                              onClick={() =>
-                                  setShowConfirmPass(!showConfirmPass)
-                              }
-                              className="absolute right-3 top-3 cursor-pointer z-10">
-                              {showConfirmPass ? (
-                                  <AiOutlineEyeInvisible
-                                      fontSize={24}
-                                      fill="#AFB2BF"
-                                  />
-                              ) : (
-                                  <AiOutlineEye fontSize={24} fill="#AFB2BF" />
-                              )}
-                          </span>
-                      </label>
-                      <div className="radioButtons  p-3">
-                          I need to Calculate CF for : <br />
-                          <input
-                              type="radio"
-                              name="option"
-                              value="Household"
-                              onChange={(e) => setType(e.target.value)}
-                              required
-                          />{" "}
-                          Household
-                          <br />
-                          <input
-                              type="radio"
-                              name="option"
-                              value="Business"
-                              onChange={(e) => setType(e.target.value)}
-                              required
-                          />{" "}
-                          Business
-                      </div>
-                  </div>
-                  <button
-                      onClick={handleRegister}
-                      className="btn  p-2 rounded-full bg-green-500 hover:bg-green-600">
-                      Sign Up
-                  </button>
-                  <div className="signUp">
-                      Already have an account? Login by{" "}
-                      <Link
-                          to="/login"
-                          className="text-blue-700  hover:underline">
-                          Clicking here
-                      </Link>
-                  </div>
-              </div>
+            <label className="relative">
+              <input
+                type={showConfirmPass ? "text" : "password"}
+                className="w-full password rounded-lg px-3 p-2 md:px-4 md:p-3 "
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) =>
+                  setConfirmPassword(e.target.value)
+                }
+                required
+              />
+              <span
+                onClick={() =>
+                  setShowConfirmPass(!showConfirmPass)
+                }
+                className="absolute right-3 top-3 cursor-pointer z-10">
+                {showConfirmPass ? (
+                  <AiOutlineEyeInvisible
+                    fontSize={24}
+                    fill="#AFB2BF"
+                  />
+                ) : (
+                  <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+                )}
+              </span>
+            </label>
+            <div className="radioButtons  p-3">
+              I need to Calculate CF for : <br />
+              <input
+                type="radio"
+                name="option"
+                value="Household"
+                onChange={(e) => setType(e.target.value)}
+                required
+              />{" "}
+              Household
+              <br />
+              <input
+                type="radio"
+                name="option"
+                value="Business"
+                onChange={(e) => setType(e.target.value)}
+                required
+              />{" "}
+              Business
+            </div>
           </div>
+          <button
+            onClick={handleRegister}
+            className="btn  p-2 rounded-full bg-green-500 hover:bg-green-600">
+            Sign Up
+          </button>
+          <div className="relative flex py-5 items-center">
+            <div className="flex-grow border-t border-gray-400"></div>
+            <span className="flex-shrink mx-4 text-gray-400">or</span>
+            <div className="flex-grow border-t border-gray-400"></div>
+          </div>
+          <button
+            onClick={handleGoogleLogin}
+            className="btn flex items-center justify-center p-2 rounded-full bg-blue-400 hover:bg-blue-600 mt-4"
+          >
+            <img src={Logo} alt="Google logo" className="w-6 h-6 mr-2" />
+            Sign Up with Google
+          </button>
+          <div className="signUp">
+            Already have an account? Login by{" "}
+            <Link
+              to="/login"
+              className="text-blue-700  hover:underline">
+              Clicking here
+            </Link>
+          </div>
+        </div>
       </div>
+    </div>
   );
 }
 
