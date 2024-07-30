@@ -2,6 +2,11 @@ import React from "react";
 import { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import "./accordian.css";
+import { FaChevronUp } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
+
+
 const Accordian = () => {
   const [selected, setSelected] = useState(null);
 
@@ -11,17 +16,17 @@ const Accordian = () => {
     }
     setSelected(i);
   };
-  useEffect(()=>{
+  useEffect(() => {
     AOS.init({
       duration: 1000,
     });
-  
+
   })
   return (
     <>
       <div className="wrapper bg-gray-200 bg-opacity-50">
         <div className="Faq-container max-w-screen-lg w-full mx-auto">
-          <p className="text-center font-Rubik pt-12 md:pt-16 text-2xl md:text-4xl" data-aos="fade-up">
+          <p className="text-center font-Rubik pt-12 md:pt-17 text-3xl md:text-5xl font" data-aos="fade-up">
             FAQs
           </p>
           {data.map((item, i) => (
@@ -31,7 +36,9 @@ const Accordian = () => {
                   <h2 className=" text-lg md:text-xl text-green-600 font-semibold mb-2 font-Rubik" >
                     {item.question}
                   </h2>
-                  <span>{selected === i ? "-" : "+"}</span>
+                  <span className={`ibtn${selected === i ? "rotateup" : ""}`}>
+                    {selected === i ? <FaChevronUp /> : <FaChevronDown />}
+                  </span>
                 </div>
                 <div className={selected === i ? "content show" : "content"}>
                   <div className="">
