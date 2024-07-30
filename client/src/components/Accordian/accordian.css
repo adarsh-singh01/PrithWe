@@ -1,0 +1,30 @@
+.item{
+    background-color: #dfe2e4;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+.ibtn{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+}
+.rotateup{
+    transform: rotate(180deg);
+}
+.font{
+    height: 137px;
+    font-size: 42px;
+
+}
+.ss {
+    padding-bottom: 20px; 
+    padding: 5px;
+  }
+  
+  .item {
+    margin-bottom: 5px; /* Adds space between each item */
+  }
+.title{
+    cursor: pointer;
+}
