@@ -119,7 +119,8 @@ CREATE TABLE users (
     type VARCHAR(50) NOT NULL,
     otp VARCHAR(20) DEFAULT '000000',
     otp_timestamp BIGINT,
-    isVerified BOOLEAN DEFAULT false
+    isVerified BOOLEAN DEFAULT false,
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE contact (
