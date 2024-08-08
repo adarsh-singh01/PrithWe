@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, BrowserRouter } from 'react-router-dom';
 import Layout from './Layout';
 import Home from './pages/Home';
 import ContactUs from './pages/ContactUs';
@@ -56,7 +56,7 @@ function App() {
   }
   return (
 
-    <Router>
+    <BrowserRouter>
       <ToastContainer autoClose={2000} position="top-center" newestOnTop />
 
       <Layout setLoggedIn={setLoggedIn}>
@@ -90,7 +90,7 @@ function App() {
           <Route path='*' element={ <Error/>} />
         </Routes>
       </Layout>
-    </Router>
+    </BrowserRouter>
   );
 }
 
