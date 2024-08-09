@@ -1,6 +1,7 @@
 import React from "react";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 const Accordian = () => {
   const [selected, setSelected] = useState(null);
 
@@ -10,19 +11,24 @@ const Accordian = () => {
     }
     setSelected(i);
   };
-
+  useEffect(()=>{
+    AOS.init({
+      duration: 1000,
+    });
+  
+  })
   return (
     <>
       <div className="wrapper bg-gray-200 bg-opacity-50">
         <div className="Faq-container max-w-screen-lg w-full mx-auto">
-          <p className="text-center font-Rubik pt-12 md:pt-16 text-2xl md:text-4xl">
+          <p className="text-center font-Rubik pt-12 md:pt-16 text-2xl md:text-4xl" data-aos="fade-up">
             FAQs
           </p>
           {data.map((item, i) => (
             <div className="ss" key={i}>   {/* key = {i} should be here */}
-              <div className="item py-2">
+              <div className="item py-2" data-aos="fade-up" data-aos-dealy="100">
                 <div className="title" onClick={() => toggle(i)}>
-                  <h2 className=" text-lg md:text-xl text-green-600 font-semibold mb-2 font-Rubik">
+                  <h2 className=" text-lg md:text-xl text-green-600 font-semibold mb-2 font-Rubik" >
                     {item.question}
                   </h2>
                   <span className="cursor-pointer">{selected === i ? "-" : "+"}</span>
