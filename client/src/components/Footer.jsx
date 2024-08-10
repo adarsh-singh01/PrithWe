@@ -1,6 +1,8 @@
 import React from 'react';
 
 const Footer = () => (
+  const today = new Date();
+  const year = today.getFullYear();
   <footer className="footer bg-green-400">
     <div className="strips flex list-none space-x-4 justify-evenly p-4 font-light">
       {[
@@ -17,7 +19,7 @@ const Footer = () => (
       ))}
     </div>
     <div className="copyright flex font-light justify-center">
-      &copy; 2024
+      &copy; {year}
     </div>
   </footer>
 );
