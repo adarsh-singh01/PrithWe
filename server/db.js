@@ -24,6 +24,14 @@ const db = new pg.Client({
   },
 });
 
+// Log SSL configuration
+console.log("SSL Configuration:", {
+  require: db.options.ssl.require,
+  rejectUnauthorized: db.options.ssl.rejectUnauthorized,
+  ca: db.options.ssl.ca ? "Loaded" : "Not Loaded",
+});
+
+
 // Connect to the database
 (async () => {
   try {
