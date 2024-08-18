@@ -3,6 +3,9 @@ import env from "dotenv";
 
 env.config();
 
+console.log("Certificate:", process.env.PG_CERTIFICATE); 
+
+
 const db = new pg.Client({
   user: process.env.PG_USER,
   host: process.env.PG_HOST,
