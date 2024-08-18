@@ -21,10 +21,18 @@ const db = new pg.Client({
 });
 
 // Connect to the database
-db.connect()
+;(async () => {
+  try {
+    await db.connect();
+    console.log("Connected to the database successfully!");
+  } catch (error) {
+    console.error("Database connection error:", error);
+  }
+})();
+{/*db.connect()
   .then(() => console.log("Connected to the database successfully"))
   .catch((err) => console.error('Connection error:', err.stack));
-
+*/}
 // Function to perform a query
 const query = async (text, params) => {
   try {
