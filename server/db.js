@@ -12,8 +12,9 @@ const db = new pg.Client({
   //connectionString:process.env.CON_STRING,
   //ssl:false
   ssl: {
-    rejectUnauthorized: false, 
-  },
+        rejectUnauthorized: true,
+        ca: process.env.PG_CERTIFICATE,
+    },
 });
 
 await db.connect();
