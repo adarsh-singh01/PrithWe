@@ -14,7 +14,7 @@ const db = new pg.Client({
   port: process.env.PG_PORT,
   ssl: {
     require:true,
-    rejectUnauthorized: false,
+    rejectUnauthorized: true,
     ca: process.env.PG_CERTIFICATE, 
   },
   //sslmode: 'require',  // This enforces SSL connection
