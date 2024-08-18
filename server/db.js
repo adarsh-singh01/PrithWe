@@ -40,9 +40,12 @@ const db = new pg.Client({
       line: error.line,
       routine: error.routine,
     });
+    console.error("SSL Configuration:", {
+      rejectUnauthorized: db.options.ssl.rejectUnauthorized,
+      ca: db.options.ssl.ca ? "Loaded" : "Not Loaded",
+    });
   }
 })();
-
 // Function to perform a query
 const query = async (text, params) => {
   try {
