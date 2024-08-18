@@ -13,10 +13,11 @@ const db = new pg.Client({
   password: process.env.PG_PASSWORD,
   port: process.env.PG_PORT,
   ssl: {
+    require:true,
     rejectUnauthorized: false,
     ca: process.env.PG_CERTIFICATE, 
   },
-  sslmode: 'require',  // This enforces SSL connection
+  //sslmode: 'require',  // This enforces SSL connection
 });
 
 // Connect to the database
