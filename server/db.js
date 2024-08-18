@@ -11,7 +11,7 @@ const db = new pg.Client({
   port: process.env.PG_PORT,
   ssl: {
     rejectUnauthorized: true,
-    ca: process.env.PG_CERTIFICATE,
+    ca: `${process.env.PG_CERTIFICATE}`,
   },
 });
 
