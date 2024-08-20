@@ -4,12 +4,12 @@ import env from 'dotenv';
 env.config();
 
 // Log the certificate and other connection details
-console.log("Certificate:", process.env.PG_CERTIFICATE);
-console.log("Database Connection Details:");
-console.log("Host:", process.env.PG_HOST);
-console.log("User:", process.env.PG_USER);
-console.log("Database:", process.env.PG_DATABASE);
-console.log("Port:", process.env.PG_PORT);
+// console.log("Certificate:", process.env.PG_CERTIFICATE);
+// console.log("Database Connection Details:");
+// console.log("Host:", process.env.PG_HOST);
+// console.log("User:", process.env.PG_USER);
+// console.log("Database:", process.env.PG_DATABASE);
+// console.log("Port:", process.env.PG_PORT);
 
 const db = new pg.Client({
   user: process.env.PG_USER,
