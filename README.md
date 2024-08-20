@@ -1,4 +1,4 @@
-# PrithWe (Service is Down !! for few days due to maintenance) 
+# PrithWe (Service is Up and Running) 
 
 PrithWe is a full-stack web application built on the PERN stack (PostgreSQL, Express, React, Node.js) designed to help households and businesses calculate their carbon footprints. This project was developed as a college project to promote environmental awareness and action.
 
