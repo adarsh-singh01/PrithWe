@@ -25,13 +25,13 @@ const Accordian = () => {
             FAQs
           </p>
           {data.map((item, i) => (
-            <div className="ss">
-              <div className="item py-2" key={i} data-aos="fade-up" data-aos-dealy="100">
+            <div className="ss" key={i}>   {/* key = {i} should be here */}
+              <div className="item py-2" data-aos="fade-up" data-aos-dealy="100">
                 <div className="title" onClick={() => toggle(i)}>
                   <h2 className=" text-lg md:text-xl text-green-600 font-semibold mb-2 font-Rubik" >
                     {item.question}
                   </h2>
-                  <span>{selected === i ? "-" : "+"}</span>
+                  <span className="cursor-pointer">{selected === i ? "-" : "+"}</span>
                 </div>
                 <div className={selected === i ? "content show" : "content"}>
                   <div className="">

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Information = () => {
     return (
@@ -42,7 +43,7 @@ const Information = () => {
                 <p className="text-gray-700 mb-4">
                     Take the first step towards a sustainable future with PrithWe. Empower your business to make informed decisions, reduce your carbon footprint, and contribute to a greener and more resilient world.
                 </p>
-                <a href='#'><button className="bg-green-500 text-white py-2 px-6 rounded-lg hover:bg-green-600">Get Started with PrithWe</button></a>
+                <Link to='/'><button className="bg-green-500 text-white py-2 px-6 rounded-lg hover:bg-green-600">Get Started with PrithWe</button></Link>
             </section>
         </div>
     );
