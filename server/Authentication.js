@@ -40,6 +40,38 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+router.post('/register', async (req, res) => {
+  const { name,email, password,type } = req.body;
+
+  try {
+    const checkResult = await query('SELECT * FROM users WHERE email = $1', [
+      email,
+    ]);//db.query
+
+    if (checkResult.rows.length > 0) {
+      res.status(400).send('User already exists');
+    } else {
+      bcrypt.hash(password, saltRounds, async (err, hash) => {
+        if (err) {
+          console.error('Error hashing password:', err);
+          res.status(500).send('Error registering user');
+        } else {
+          const result = await query(
+            'INSERT INTO users (name,email, password,type) VALUES ($1, $2, $3,$4) RETURNING *',
+            [name,email, hash,type]
+          );
+          const user = result.rows[0];
+          res.status(201).send(user);
+        }
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error registering user');
+  }
+});
+
 router.post('/login', (req, res, next) => {
   if(req.body.email==process.env.ADMIN_MAIL && req.body.password ==process.env.ADMIN_PASS)
       return res.status(200).json({type:"admin"});
