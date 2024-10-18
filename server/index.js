@@ -199,7 +199,7 @@ if (process.env.NODE_ENV === "production") {
 
 
 const url = `https://prithwe.onrender.com/`; 
-const interval = 300000; // Interval in milliseconds (3min)
+const interval = 800000; // Interval in milliseconds (8min)
 
 function reloadWebsite() {
   axios.get(url)
