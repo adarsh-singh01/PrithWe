@@ -1,7 +1,7 @@
-import pg from 'pg';
-import env from 'dotenv';
+// import pg from 'pg';
+// import env from 'dotenv';
 
-env.config();
+// env.config();
 
 // Log the certificate and other connection details
 // console.log("Certificate:", process.env.PG_CERTIFICATE);
