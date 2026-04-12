@@ -11,18 +11,31 @@ env.config();
 // console.log("Database:", process.env.PG_DATABASE);
 // console.log("Port:", process.env.PG_PORT);
 
+import pg from "pg";
+import env from "dotenv";
+
+env.config();
+
 const db = new pg.Client({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT,
+  connectionString: process.env.CON_STRING,
   ssl: {
-    require: true,
-    rejectUnauthorized: true,
-    ca: process.env.PG_CERTIFICATE,
+    rejectUnauthorized: false, // IMPORTANT for Aiven
   },
 });
+
+(async () => {
+  try {
+    console.log("Connecting using CON_STRING...");
+    await db.connect();
+    console.log("Connected to DB ✅");
+  } catch (error) {
+    console.error("DB ERROR ❌", error);
+  }
+})();
+
+export const query = async (text, params) => {
+  return db.query(text, params);
+};
 
 // Log SSL configuration
 console.log("SSL Configuration:", {
@@ -49,10 +62,13 @@ console.log("SSL Configuration:", {
       line: error.line,
       routine: error.routine,
     });
+    // console.error("SSL Configuration:", {
+    //   rejectUnauthorized: db.options.ssl.rejectUnauthorized,
+    //   ca: db.options.ssl.ca ? "Loaded" : "Not Loaded",
+    // });
     console.error("SSL Configuration:", {
-      rejectUnauthorized: db.options.ssl.rejectUnauthorized,
-      ca: db.options.ssl.ca ? "Loaded" : "Not Loaded",
-    });
+  rejectUnauthorized: db.options.ssl.rejectUnauthorized,
+});
   }
 })();
 // Function to perform a query
@@ -64,6 +80,7 @@ const query = async (text, params) => {
     console.error('Error executing query:', error);
   }
 };
+console.log("CON_STRING:", process.env.CON_STRING);
 
 export { query };
 
