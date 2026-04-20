@@ -59,7 +59,7 @@ function App() {
     <Router>
       <ToastContainer autoClose={2000} position="top-center" newestOnTop />
 
-      <Layout setLoggedIn={setLoggedIn}>
+      <Layout loggedIn={loggedIn} setLoggedIn={setLoggedIn}>
         <ScrollToTop/>
 
         <Routes>
